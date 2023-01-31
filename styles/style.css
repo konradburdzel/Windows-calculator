@@ -1,0 +1,16 @@
+:root {
+  --dark-grey: rgba(32, 33, 36, 1);
+  --dark-light-grey: rgba(50, 50, 50, 1);
+  --grey: rgba(59, 59, 59, 1);
+  --light-blue: rgba(140, 231, 237, 1);
+  --border: rgba(24, 187, 197, 1);
+}
+
+body {
+  background-color: var(--grey);
+}
+
+#calculator {
+  background-color: var(--dark-grey);
+  border: 3px solid var(--border);
+}
