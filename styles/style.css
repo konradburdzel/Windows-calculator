@@ -1,16 +1,55 @@
 :root {
-  --dark-grey: rgba(32, 33, 36, 1);
-  --dark-light-grey: rgba(50, 50, 50, 1);
-  --grey: rgba(59, 59, 59, 1);
+  --dark-grey-key: rgba(32, 33, 36, 1);
+  --grey-key: rgba(50, 50, 50, 1);
+  --light-grey-key: rgba(59, 59, 59, 1);
+  --key-click: rgba(40, 40, 40, 1);
   --light-blue: rgba(140, 231, 237, 1);
   --border: rgba(24, 187, 197, 1);
+  --fonts: rgba(255, 255, 255, 1);
+  --fonts-grey: rgba(113, 113, 133, 1);
+  --white: rgba(255, 255, 255, 1);
+  --equal-sign: rgba(39, 64, 66, 1);
+  --equal-background: rgba(140, 231, 237, 1);
+  --equal-background-click: rgba(129, 210, 216);
+  --exit: rgba(232, 17, 35, 1);
 }
 
 body {
-  background-color: var(--grey);
+  background-color: var(--light-grey-key);
 }
 
 #calculator {
-  background-color: var(--dark-grey);
-  border: 3px solid var(--border);
+  background-color: var(--dark-grey-key);
+  border: 1px solid var(--border);
+}
+
+#top-bar {
+  background-color: var(--dark-grey-key);
+}
+
+h1 {
+  color: var(--fonts);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.minimalize {
+  background-color: var(--white);
+}
+
+.nav-button:hover {
+  background-color: var(--light-grey-key);
+}
+
+.windowed {
+  border: 1px solid var(--white);
+}
+
+.exit:hover {
+  background-color: var(--exit);
+}
+
+.exit1,
+.exit2 {
+  background-color: var(--white);
 }
