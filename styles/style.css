@@ -16,6 +16,7 @@
 
 body {
   background-color: var(--light-grey-key);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 #calculator {
@@ -53,4 +54,21 @@ h1 {
 .exit1,
 .exit2 {
   background-color: var(--white);
+}
+
+.menu-icon-bar {
+  background-color: var(--white);
+}
+
+.calculator-type {
+  color: var(--fonts);
+  font-weight: 500;
+}
+
+.history {
+  color: var(--fonts);
+}
+
+p {
+  color: var(--white);
 }
