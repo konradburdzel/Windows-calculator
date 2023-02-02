@@ -38,6 +38,7 @@ h1 {
 }
 
 .nav-button:hover {
+  cursor: pointer;
   background-color: var(--light-grey-key);
 }
 

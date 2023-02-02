@@ -13,14 +13,25 @@ body {
 #calculator {
   width: 100vw;
   height: 100vh;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  grid-template-rows: 30px 30px 200px 30px;
+  grid-template-areas:
+    "top-bar top-bar"
+    "menu history"
+    "results results"
+    "memory history-memory"
+    "keys keys";
 }
 
 #top-bar {
+  grid-area: top-bar;
   width: 100%;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: violet;
 }
 
 .title {
@@ -74,4 +85,34 @@ body {
 
 .exit2 {
   transform: rotate(-45deg);
+}
+
+.menu {
+  grid-area: menu;
+  background-color: aqua;
+}
+
+.history {
+  grid-area: history;
+  background-color: black;
+}
+
+.display-result {
+  grid-area: results;
+  background-color: blue;
+}
+
+.memory {
+  grid-area: memory;
+  background-color: blueviolet;
+}
+
+.history-memory {
+  grid-area: history-memory;
+  background-color: brown;
+}
+
+.keys {
+  grid-area: keys;
+  background-color: yellow;
 }
