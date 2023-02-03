@@ -69,6 +69,9 @@ h1 {
   color: var(--fonts);
 }
 
-p {
-  color: var(--white);
+.memory {
+  color: var(--fonts);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

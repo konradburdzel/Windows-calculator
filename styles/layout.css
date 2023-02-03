@@ -130,6 +130,9 @@ body {
 .history-memory {
   grid-area: history-memory;
   background-color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .keys {
