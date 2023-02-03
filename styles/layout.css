@@ -138,4 +138,18 @@ body {
 .keys {
   grid-area: keys;
   background-color: yellow;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.key {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.key:hover {
+  background-color: aqua;
 }
