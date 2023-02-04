@@ -17,8 +17,9 @@
 
 body {
   background-color: var(--light-grey-key);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--fonts);
+  font-size: 14px;
 }
 
 #calculator {
@@ -58,12 +59,7 @@ h1 {
   background-color: var(--white);
 }
 
-.menu-icon {
-  cursor: pointer;
-}
-
 .menu-icon:hover {
-  background-color: brown;
   border-radius: 2px;
 }
 
@@ -76,13 +72,20 @@ h1 {
   font-weight: 500;
 }
 
+.key {
+  font-size: 1.1rem;
+}
+
+.memory-key,
+.history-memory {
+  font-size: 0.9rem;
+}
+
 .history {
-  cursor: pointer;
   color: var(--fonts);
 }
 
 .history span:hover {
-  background-color: brown;
   border-radius: 5px;
 }
 
@@ -98,7 +101,38 @@ h1 {
   color: var(--fonts);
 }
 
-.key:hover {
+.key {
+  background-color: var(--grey-key);
+}
+
+.memory-key {
+  background-color: var(--dark-grey-key);
+}
+
+.memory-key:hover,
+.menu-icon:hover,
+.history span:hover {
   cursor: pointer;
+  background-color: var(--grey-key);
+}
+
+.number {
   background-color: var(--light-grey-key);
+}
+
+.number:hover {
+  background-color: var(--grey-key);
+}
+
+.operator:hover {
+  background-color: var(--light-grey-key);
+}
+
+.equal {
+  background-color: var(--equal-background);
+  color: var(--equal-sign);
+}
+
+.equal:hover {
+  background-color: var(--equal-background-click);
 }

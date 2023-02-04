@@ -22,6 +22,7 @@ body {
     "results results"
     "memory history-memory"
     "keys keys";
+  gap: 2px;
 }
 
 #top-bar {
@@ -150,7 +151,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  gap: 1px;
+  gap: 2px;
 }
 
 .key {
