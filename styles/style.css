@@ -56,6 +56,15 @@ h1 {
   background-color: var(--white);
 }
 
+.menu-icon {
+  cursor: pointer;
+}
+
+.menu-icon:hover {
+  background-color: brown;
+  border-radius: 2px;
+}
+
 .menu-icon-bar {
   background-color: var(--white);
 }
@@ -66,12 +75,20 @@ h1 {
 }
 
 .history {
+  cursor: pointer;
   color: var(--fonts);
+}
+
+.history span:hover {
+  background-color: brown;
+  border-radius: 5px;
 }
 
 .memory {
   color: var(--fonts);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+}
+
+.key:hover {
+  cursor: pointer;
+  background-color: var(--light-grey-key);
 }

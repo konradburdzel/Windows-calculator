@@ -31,7 +31,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: violet;
 }
 
 .title {
@@ -89,7 +88,6 @@ body {
 
 .menu {
   grid-area: menu;
-  background-color: aqua;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -101,7 +99,8 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 40px;
-  height: 15px;
+  height: 30px;
+  padding: 7.5px 0;
 }
 
 .menu-icon-bar {
@@ -114,42 +113,39 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+}
+
+.history span {
+  padding: 3px;
 }
 
 .display-result {
   grid-area: results;
-  background-color: blue;
 }
 
 .memory {
   grid-area: memory;
-  background-color: blueviolet;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
 }
 
 .history-memory {
   grid-area: history-memory;
-  background-color: brown;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
 }
 
 .keys {
   grid-area: keys;
-  background-color: yellow;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
+  gap: 1px;
 }
 
 .key {
-  cursor: pointer;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.key:hover {
-  background-color: aqua;
 }
