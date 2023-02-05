@@ -1,14 +1,14 @@
 class Display {
-    constructor(input, operation) {
+    constructor(input, inputStorage) {
         this.input = input;
-        this.operation = operation;
+        this.inputStorage = inputStorage;
     }
 
     display() {
         let displayInput = document.querySelector('.input-data');
-        let displayOperation = document.querySelector('.operation');
+        let displayInputStorage = document.querySelector('.input-storage');
 
         displayInput.textContent = this.input;
-        displayOperation.textContent = this.operation;
+        displayInputStorage.textContent = this.inputStorage;
     }
 }
