@@ -3,20 +3,20 @@
 // import {} from './js/Buttons.js';
 
 
-class Game {
-    constructor() {
-        this.display = new Display();
-        this.operations = new Operations();
-        this.buttons = new Buttons();
-        this.show();
-    }
-    show() {
-        console.log('Działa!!!');
-    }
+// class Game {
+//     constructor() {
+//         this.display = new Display();
+//         this.operations = new Operations();
+//         this.buttons = new Buttons();
+//         this.show();
+//     }
+//     show() {
+//         console.log('Działa!!!');
+//     }
 
-}
+// }
 
-const game = new Game();
+const calc = new Calculator();
 
 // const inputData = document.querySelector('.input-data');
 // const operation = document.querySelector('.operation');
