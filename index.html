@@ -9,10 +9,6 @@
       content="Windows Calculator make amanzing things if We thought about infinity posibilities what do Math!"
     />
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    /> -->
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
 
     <title>Calculator</title>
@@ -70,46 +66,48 @@
         <span class="key memory-key ms">Mv</span>
       </section>
       <section id="keys">
-        <span class="key operator">%</span>
-        <span class="key operator">CE</span>
-        <span class="key operator">C</span>
-        <span class="key operator">
-          <!-- <span class="material-symbols-outlined"> backspace </span> -->
+        <span class="key operator" data-operation="%">%</span>
+        <span class="key operator" data-operation="CE">CE</span>
+        <span class="key operator" data-operation="C">C</span>
+        <span class="key operator" data-operation="backspace">
           <iconify-icon
             icon="material-symbols:backspace-outline"
             class="icon-key"
           ></iconify-icon>
         </span>
-        <span class="key operator">1/x</span>
-        <span class="key operator">^2</span>
-        <span class="key operator">
-          <!-- &#8730; -->
-
+        <span class="key operator" data-operation="reciprocal">1/x</span>
+        <span class="key operator" data-operation="squared">^2</span>
+        <span class="key operator" data-operation="square-root">
           <iconify-icon icon="mdi:square-root" class="icon-key"></iconify-icon>
         </span>
-        <span class="key operator">/</span>
-        <span class="key number">7</span>
-        <span class="key number">8</span>
-        <span class="key number">9</span>
-        <span class="key operator">x</span>
-        <span class="key number">4</span>
-        <span class="key number">5</span>
-        <span class="key number">6</span>
-        <span class="key operator">-</span>
-        <span class="key number">1</span>
-        <span class="key number">2</span>
-        <span class="key number">3</span>
-        <span class="key operator">+</span>
-        <span class="key number">
+        <span class="key operator" data-operation="division">/</span>
+        <span class="key number" data-operation="number">7</span>
+        <span class="key number" data-operation="number">8</span>
+        <span class="key number" data-operation="number">9</span>
+        <span class="key operator" data-operation="multiplication">x</span>
+        <span class="key number" data-operation="number">4</span>
+        <span class="key number" data-operation="number">5</span>
+        <span class="key number" data-operation="number">6</span>
+        <span class="key operator" data-operation="subtraction">-</span>
+        <span class="key number" data-operation="number">1</span>
+        <span class="key number" data-operation="number">2</span>
+        <span class="key number" data-operation="number">3</span>
+        <span
+          class="key operator"
+          data-operation="change-sign"
+          data-operation="addition"
+        >
+          +
+        </span>
+        <span class="key number plus-minus">
           <iconify-icon
             icon="ic:outline-plus-minus-alt"
             class="icon-key"
           ></iconify-icon>
-          <!-- &#8723; -->
         </span>
-        <span class="key number">0</span>
-        <span class="key number">,</span>
-        <span class="key equal">=</span>
+        <span class="key number" data-operation="number">0</span>
+        <span class="key number" data-operation="comma">,</span>
+        <span class="key equal" data-operation="equal">=</span>
       </section>
     </main>
     <script src="/js/Display.js"></script>
