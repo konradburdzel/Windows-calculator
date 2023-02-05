@@ -76,6 +76,10 @@ h1 {
   font-size: 1.1rem;
 }
 
+.icon-key {
+  font-size: 1.5rem;
+}
+
 .memory-key,
 .history-memory {
   font-size: 0.9rem;
