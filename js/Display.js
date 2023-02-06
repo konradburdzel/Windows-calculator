@@ -1,7 +1,6 @@
 class Display {
     constructor(input, inputStorage) {
-        this.input = input;
-        this.inputStorage = inputStorage;
+
     }
 
     display() {

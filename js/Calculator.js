@@ -16,18 +16,24 @@ class Calculator {
     }
 
     display() {
+
         if (this.button.operation === 'number') {
             if (this.firstValue === false && this.secondValue === false) {
                 this.input.textContent = '';
             };
-            
             this.firstValue = true;
             this.input.textContent += this.button.value;
         };  
 
+        // adding one comma to input
         if (this.button.operation === 'comma' && this.comma === false) {
             this.input.textContent += this.button.value;
             this.comma = true;
+        };
+
+        if (this.button.operation === 'backspace') {
+            this.input.textContent = this.input.textContent.slice(0,-1);
+            console.log(this.input.textContent.length);
         };
         
         // displayInputStorage.textContent = this.inputStorage;
