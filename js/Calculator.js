@@ -37,6 +37,9 @@ class Calculator {
                 this.input.textContent = '0';
                 this.firstValue = false;
             };
+            if (this.input.textContent.indexOf(',') === -1) {
+                this.comma = false;
+            };  
         };
         
         // displayInputStorage.textContent = this.inputStorage;
