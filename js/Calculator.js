@@ -33,7 +33,10 @@ class Calculator {
 
         if (this.button.operation === 'backspace') {
             this.input.textContent = this.input.textContent.slice(0,-1);
-            console.log(this.input.textContent.length);
+            if (this.input.textContent.length === 0) {
+                this.input.textContent = '0';
+                this.firstValue = false;
+            };
         };
         
         // displayInputStorage.textContent = this.inputStorage;
