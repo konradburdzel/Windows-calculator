@@ -3,7 +3,9 @@ class Calculator {
         document.querySelector('#keys').addEventListener('click', e => this.startCalculator(e));
         this.input = document.querySelector('.input-data');
         this.inputStorage = document.querySelector('.input-storage');
-        this.firstValue = true;
+        this.firstValue = false;
+        this.secondValue = false;
+        this.comma = false;
     }
 
     startCalculator(e) {
@@ -15,8 +17,18 @@ class Calculator {
 
     display() {
         if (this.button.operation === 'number') {
+            if (this.firstValue === false && this.secondValue === false) {
+                this.input.textContent = '';
+            };
+            
+            this.firstValue = true;
             this.input.textContent += this.button.value;
         };  
+
+        if (this.button.operation === 'comma' && this.comma === false) {
+            this.input.textContent += this.button.value;
+            this.comma = true;
+        };
         
         // displayInputStorage.textContent = this.inputStorage;
 
