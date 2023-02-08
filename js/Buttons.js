@@ -6,7 +6,7 @@ class Buttons {
     }
 
     test(v, o) {
-        console.log(v, o);
+        // console.log(v, o);
     }
 
     valueButton() {

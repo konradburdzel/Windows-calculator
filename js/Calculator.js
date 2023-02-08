@@ -16,6 +16,9 @@ class Calculator {
     }
 
     display() {
+        if (Buttons.operationButton === 'division' || Buttons.operationButton
+        ) {
+        };
 
         if (this.button.operationButton() === 'number') {
             if (this.firstValue === false && this.secondValue === false) {
