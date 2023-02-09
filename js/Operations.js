@@ -1,8 +1,12 @@
 class Operations {
-    constructor(firstVariable, secondVariable) {
+    constructor(firstVariable, secondVariable, operation) {
         this.firstVariable = firstVariable;
         this.secondVariable = secondVariable;
+        this.operation = operation;
+        // this.choise();
     }
+
+
 
     addition() {
        if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {

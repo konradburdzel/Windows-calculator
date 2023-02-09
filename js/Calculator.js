@@ -23,26 +23,48 @@ class Calculator {
     }
 
     display() {
-        if (this.operations.includes(this.button.operationButton()) && this.secondValueFlag === false) {
-            if (this.operator) {
+        if (this.operations.includes(this.button.operationButton())) {
+            console.log(this.firstValueFlag);
+            console.log(this.secondValueFlag);
+            if (this.operator && this.firstValueFlag !== true && this.secondValueFlag !== true) {
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
-            this.firstValue = parseFloat(this.input.textContent);
-            this.operator = this.button.operationButton();
-            this.commaFlag = false;
-            console.log(this.inputStorage.textContent);
-            this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
-            console.log(this.inputStorage);
-            // this.secondValueFlag = true;
+
+            if (this.secondValueFlag === false) {
+                this.firstValue = parseFloat(this.input.textContent);
+                this.operator = this.button.operationButton();
+                this.commaFlag = false;
+                this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
+                this.secondValueFlag = true;
+                this.firstValueFlag = false;
+            };
+
+            if (this.firstValueFlag === true && this.secondValueFlag === true) {
+                console.log('bedzie wykonywane działanie');
+                this.secondValue = parseFloat(this.input.textContent);
+                this.results = new Operations(this.firstValue, this.secondValue, this.operator);
+                console.log(this.results);
+                // this.input.textContent = 
+            };
         };
         
-        if (this.button.operationButton() === 'number') {
+        // entry firstValue 
+        if (this.button.operationButton() === 'number' && this.secondValueFlag === false) {
             if (this.firstValueFlag === false && this.secondValueFlag === false) {
                 this.input.textContent = '';
             };
             this.firstValueFlag = true;
             this.input.textContent += this.button.valueButton();
         };  
+
+        // entry second value
+        if (this.button.operationButton() === 'number' && this.secondValueFlag === true) {
+            if (this.firstValueFlag === false && this.secondValueFlag === true) {
+                this.input.textContent = '';
+            };
+            this.firstValueFlag = true;
+            this.input.textContent += this.button.valueButton();
+        };
 
         // adding one comma to input
         if (this.button.operationButton() === 'comma' && this.commaFlag === false) {
