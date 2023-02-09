@@ -7,11 +7,18 @@ class Calculator {
         // firstValue - true and secondValue - false => firstValue is entering and secondValue is not enter
         // firstValue - true and secondValue - true => firstValue is ready and secondValue is entering - after equal is done and transfer data to Operations with firstValue and secondValue and operator
         this.operations = ['division', 'multiplication', 'addition', 'subtraction'];
-        this.firstValue = false;
-        this.secondValueFlag = false;
-        this.firstValue = 0;
-        this.secondValue = 0;
-        this.operator = '';
+        this.firstValue = {
+            value: 0,
+            flag: false
+        };
+        this.secondValue = {
+            value: 0,
+            flag: false
+        };
+        this.operator = {
+            value: '',
+            name: ''
+        };
         this.commaFlag = false;
     }
 
@@ -20,13 +27,16 @@ class Calculator {
         const operation = e.target.dataset.operation;
         this.button = new Buttons(valueButton, operation);
         this.display();
+        if (operation !== 'number') {
+            this.operator.value = valueButton;
+        };
     }
 
     display() {
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
-            this.inputStorage.textContent = `${this.firstValue} ${this.operator} ${this.secondValue} =`
-            this.results = new Operations(this.firstValue, this.secondValue, this.operator);
+            this.inputStorage.textContent = `${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`
+            this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             console.log(this.results);
             this.input.textContent = this.results.choice();
         };
@@ -37,23 +47,23 @@ class Calculator {
             // console.log(this.secondValueFlag);
 
             //do operations by click multipe time on operation button
-            if (this.operator && this.firstValueFlag !== true && this.secondValueFlag !== true) {
+            if (this.operator.name && this.firstValue.flag !== true && this.secondValue.flag !== true) {
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
 
-            if (this.secondValueFlag === false) {
-                this.firstValue = parseFloat(this.input.textContent);
-                this.operator = this.button.operationButton();
+            if (this.secondValue.flag === false) {
+                this.firstValue.value = parseFloat(this.input.textContent);
+                this.operator.name = this.button.operationButton();
                 this.commaFlag = false;
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
-                this.secondValueFlag = true;
-                this.firstValueFlag = false;
+                this.secondValue.flag = true;
+                this.firstValue.flag = false;
             };
 
-            if (this.firstValueFlag === true && this.secondValueFlag === true) {
+            if (this.firstValue.flag === true && this.secondValue.flag === true) {
                 console.log('bedzie wykonywane działanie');
                 // this.secondValue = parseFloat(this.input.textContent);
-                this.results = new Operations(this.firstValue, this.secondValue, this.operator);
+                this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
                 //try no working right
                 try {
                     this.input.textContent = this.results.choice();
@@ -62,28 +72,28 @@ class Calculator {
                 }
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()}`;
                 this.commaFlag = false;
-                this.firstValueFlag = false;
-                this.secondValueFlag == false;
+                this.firstValue.flag = false;
+                this.secondValue.flag == false;
             };
         };
         
         // entry firstValue 
-        if (this.button.operationButton() === 'number' && this.secondValueFlag === false) {
-            if (this.firstValueFlag === false && this.secondValueFlag === false) {
+        if (this.button.operationButton() === 'number' && this.secondValue.flag === false) {
+            if (this.firstValue.flag === false && this.secondValue.flag === false) {
                 this.input.textContent = '';
             };
-            this.firstValueFlag = true;
+            this.firstValue.flag = true;
             this.input.textContent += this.button.valueButton();
         };  
 
         // entry second value
-        if (this.button.operationButton() === 'number' && this.secondValueFlag === true) {
-            if (this.firstValueFlag === false && this.secondValueFlag === true) {
+        if (this.button.operationButton() === 'number' && this.secondValue.flag === true) {
+            if (this.firstValue.flag === false && this.secondValue.flag === true) {
                 this.input.textContent = '';
             };
-            this.firstValueFlag = true;
+            this.firstValue.flag = true;
             this.input.textContent += this.button.valueButton();
-            this.secondValue = parseFloat(this.input.textContent);
+            this.secondValue.value = parseFloat(this.input.textContent);
         };
 
         // adding one comma to input
