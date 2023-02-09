@@ -7,7 +7,7 @@ class Calculator {
         // firstValue - true and secondValue - false => firstValue is entering and secondValue is not enter
         // firstValue - true and secondValue - true => firstValue is ready and secondValue is entering - after equal is done and transfer data to Operations with firstValue and secondValue and operator
         this.operations = ['division', 'multiplication', 'addition', 'subtraction'];
-        this.firstValueFlag = false;
+        this.firstValue = false;
         this.secondValueFlag = false;
         this.firstValue = 0;
         this.secondValue = 0;
@@ -23,9 +23,20 @@ class Calculator {
     }
 
     display() {
+        // when press equal sign
+        if (this.button.operationButton() === 'equal') {
+            this.inputStorage.textContent = `${this.firstValue} ${this.operator} ${this.secondValue} =`
+            this.results = new Operations(this.firstValue, this.secondValue, this.operator);
+            console.log(this.results);
+            this.input.textContent = this.results.choice();
+        };
+
+        // when press some operation buttons
         if (this.operations.includes(this.button.operationButton())) {
             // console.log(this.firstValueFlag);
             // console.log(this.secondValueFlag);
+
+            //do operations by click multipe time on operation button
             if (this.operator && this.firstValueFlag !== true && this.secondValueFlag !== true) {
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
@@ -41,9 +52,9 @@ class Calculator {
 
             if (this.firstValueFlag === true && this.secondValueFlag === true) {
                 console.log('bedzie wykonywane działanie');
-                this.secondValue = parseFloat(this.input.textContent);
+                // this.secondValue = parseFloat(this.input.textContent);
                 this.results = new Operations(this.firstValue, this.secondValue, this.operator);
-                //its no working right
+                //try no working right
                 try {
                     this.input.textContent = this.results.choice();
                 } catch (e) {
@@ -72,6 +83,7 @@ class Calculator {
             };
             this.firstValueFlag = true;
             this.input.textContent += this.button.valueButton();
+            this.secondValue = parseFloat(this.input.textContent);
         };
 
         // adding one comma to input
@@ -94,6 +106,6 @@ class Calculator {
         
         // displayInputStorage.textContent = this.inputStorage;
 
-        // console.log(this.button);
+        console.log(this.button);
     }
 }
