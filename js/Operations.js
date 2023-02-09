@@ -47,7 +47,6 @@ class Operations {
     }
 
     division() {
-        console.log('weszlo w dzielenie');
         if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
             if (!(this.secondVariable === 0)) {return this.firstVariable / this.secondVariable;} else {
                 throw new Error ('Niewolno dzielić przez 0');

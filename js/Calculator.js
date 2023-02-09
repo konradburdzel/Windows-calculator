@@ -24,8 +24,8 @@ class Calculator {
 
     display() {
         if (this.operations.includes(this.button.operationButton())) {
-            console.log(this.firstValueFlag);
-            console.log(this.secondValueFlag);
+            // console.log(this.firstValueFlag);
+            // console.log(this.secondValueFlag);
             if (this.operator && this.firstValueFlag !== true && this.secondValueFlag !== true) {
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
@@ -43,11 +43,16 @@ class Calculator {
                 console.log('bedzie wykonywane działanie');
                 this.secondValue = parseFloat(this.input.textContent);
                 this.results = new Operations(this.firstValue, this.secondValue, this.operator);
+                //its no working right
                 try {
                     this.input.textContent = this.results.choice();
                 } catch (e) {
                     this.input.textContent = e;
                 }
+                this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()}`;
+                this.commaFlag = false;
+                this.firstValueFlag = false;
+                this.secondValueFlag == false;
             };
         };
         
