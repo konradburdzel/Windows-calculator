@@ -43,8 +43,11 @@ class Calculator {
                 console.log('bedzie wykonywane działanie');
                 this.secondValue = parseFloat(this.input.textContent);
                 this.results = new Operations(this.firstValue, this.secondValue, this.operator);
-                console.log(this.results);
-                // this.input.textContent = 
+                try {
+                    this.input.textContent = this.results.choice();
+                } catch (e) {
+                    this.input.textContent = e;
+                }
             };
         };
         
@@ -86,6 +89,6 @@ class Calculator {
         
         // displayInputStorage.textContent = this.inputStorage;
 
-        console.log(this.button);
+        // console.log(this.button);
     }
 }

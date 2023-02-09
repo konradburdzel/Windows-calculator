@@ -3,10 +3,24 @@ class Operations {
         this.firstVariable = firstVariable;
         this.secondVariable = secondVariable;
         this.operation = operation;
-        // this.choise();
+        this.choice();
     }
 
-
+    choice() {
+        switch (this.operation) {
+            case 'division':
+                return this.division(this.firstValue, this.secondValue);
+            case 'multiplication':
+                return this.multiplication(this.firstValue, this.secondValue);
+            case 'addition':
+                return this.addition(this.firstValue, this.secondValue);
+            case 'subtraction':
+                return this.subtraction(this.firstValue, this.secondValue);
+            default:
+                console.log('Something went wrong! Check out this!');
+                break;
+        }
+    }
 
     addition() {
        if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
@@ -33,6 +47,7 @@ class Operations {
     }
 
     division() {
+        console.log('weszlo w dzielenie');
         if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
             if (!(this.secondVariable === 0)) {return this.firstVariable / this.secondVariable;} else {
                 throw new Error ('Niewolno dzielić przez 0');
