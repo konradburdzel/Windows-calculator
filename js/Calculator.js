@@ -37,27 +37,26 @@ class Calculator {
         if (this.button.operationButton() === 'equal') {
             this.inputStorage.textContent = `${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-            console.log(this.results);
             this.input.textContent = this.results.choice();
         };
 
         // when press some operation buttons
         if (this.operations.includes(this.button.operationButton())) {
-            // console.log(this.firstValueFlag);
-            // console.log(this.secondValueFlag);
+            console.log(this.firstValue.flag);
+            console.log(this.secondValue.flag);
 
             //do operations by click multipe time on operation button
             if (this.operator.name && this.firstValue.flag !== true && this.secondValue.flag !== true) {
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
 
-            if (this.secondValue.flag === false) {
+            if (this.firstValue.flag === true && this.secondValue.flag === false) {
                 this.firstValue.value = parseFloat(this.input.textContent);
                 this.operator.name = this.button.operationButton();
                 this.commaFlag = false;
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
-                this.secondValue.flag = true;
-                this.firstValue.flag = false;
+                // this.secondValue.flag = true;
+                // this.firstValue.flag = false;
             };
 
             if (this.firstValue.flag === true && this.secondValue.flag === true) {
@@ -71,10 +70,13 @@ class Calculator {
                     this.input.textContent = e;
                 }
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()}`;
+                this.firstValue.value = parseFloat(this.input.textContent);
                 this.commaFlag = false;
-                this.firstValue.flag = false;
-                this.secondValue.flag == false;
+                // this.firstValue.flag = false;
+                this.secondValue.flag = false;
             };
+            console.log(this.firstValue.flag);
+            console.log(this.secondValue.flag);
         };
         
         // entry firstValue 
@@ -87,11 +89,11 @@ class Calculator {
         };  
 
         // entry second value
-        if (this.button.operationButton() === 'number' && this.secondValue.flag === true) {
-            if (this.firstValue.flag === false && this.secondValue.flag === true) {
+        if (this.button.operationButton() === 'number' && this.operator.name !== '') {
+            if (this.firstValue.flag === true && this.secondValue.flag === false) {
                 this.input.textContent = '';
             };
-            this.firstValue.flag = true;
+            this.secondValue.flag = true;
             this.input.textContent += this.button.valueButton();
             this.secondValue.value = parseFloat(this.input.textContent);
         };

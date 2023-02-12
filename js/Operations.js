@@ -7,6 +7,7 @@ class Operations {
     }
 
     choice() {
+        console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
             case 'division':
                 return this.division(this.firstValue, this.secondValue);
