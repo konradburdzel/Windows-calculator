@@ -1,4 +1,4 @@
-// Zrobić obliczenia związane z przecinkami
+// Poprawić obliczenia za pomocą operation button 8 / 7 + 6 = 21
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -48,11 +48,13 @@ class Calculator {
             // console.log(this.firstValue.flag);
             // console.log(this.secondValue.flag);
 
-            //do operations by click multipe time on operation button
-            if (this.operator.name && this.firstValue.flag !== true && this.secondValue.flag !== true) {
+            //do change operation when only first Value is enter
+            if (this.operator.name && this.firstValue.flag === true && this.secondValue.flag === false) {
+                this.operator.name = this.button.operationButton();
                 return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
             };
 
+            // first select operation
             if (this.firstValue.flag === true && this.secondValue.flag === false) {
                 this.firstValue.value = this.input.textContent;
                 this.operator.name = this.button.operationButton();
@@ -62,8 +64,8 @@ class Calculator {
                 // this.firstValue.flag = false;
             };
 
+            // do operation when choice two Value are complete
             if (this.firstValue.flag === true && this.secondValue.flag === true) {
-                // console.log('bedzie wykonywane działanie');
                 // this.secondValue = parseFloat(this.input.textContent);
                 this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
                 //try no working right
@@ -77,6 +79,7 @@ class Calculator {
                 this.commaFlag = false;
                 // this.firstValue.flag = false;
                 this.secondValue.flag = false;
+                this.operator.name = this.button.operationButton();
             };
             // console.log(this.firstValue.flag);
             // console.log(this.secondValue.flag);
