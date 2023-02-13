@@ -87,7 +87,7 @@ class Calculator {
         
         // entry second value
         if (this.button.operationButton() === 'number' && this.operator.name !== '' && this.firstValue.flag === true) {
-            if (this.firstValue.flag === true && this.secondValue.flag === false) {
+            if (this.firstValue.flag === true && this.secondValue.flag === false || this.input.textContent === '0') {
                 this.input.textContent = '';
             };
             this.secondValue.flag = true;
@@ -97,7 +97,7 @@ class Calculator {
 
         // entry firstValue 
         if (this.button.operationButton() === 'number' && this.secondValue.flag === false) {
-            if (this.firstValue.flag === false && this.secondValue.flag === false) {
+            if (this.input.textContent === '0') {
                 this.input.textContent = '';
             };
             if (this.inputStorage) {
@@ -137,6 +137,10 @@ class Calculator {
             this.secondValue.flag = false;
         };  
         
+        // CE
+        if (this.button.operationButton() === 'CE') {
+        this.input.textContent = '0';
+        };
 
         console.log(this.button);
     }
