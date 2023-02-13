@@ -7,6 +7,8 @@ class Operations {
     }
 
     comma() {
+        console.log(this.firstVariable);
+        console.log(this.secondVariable);
         this.firstVariable = parseFloat(this.firstVariable.replace(',', '.'));
         this.secondVariable = parseFloat(this.secondVariable.replace(',', '.'));
         this.choice();

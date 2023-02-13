@@ -1,4 +1,4 @@
-// Poprawić obliczenia za pomocą operation button 8 / 7 + 6 = 21
+// Dodanie opcji C oraz CE
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -105,6 +105,7 @@ class Calculator {
             };
             this.firstValue.flag = true;
             this.input.textContent += this.button.valueButton();
+            this.firstValue.value = this.input.textContent;
             console.log('pierwsza wartość wprowadzona');
         };  
 
@@ -125,8 +126,17 @@ class Calculator {
                 this.commaFlag = false;
             };  
         };
+
+        // C
+        if (this.button.operationButton() === 'C') {
+            this.input.textContent = '0';
+            this.inputStorage.textContent = '';
+            this.firstValue.value = 0;
+            this.secondValue.value = 0;
+            this.firstValue.flag = false;
+            this.secondValue.flag = false;
+        };  
         
-        // displayInputStorage.textContent = this.inputStorage;
 
         console.log(this.button);
     }
