@@ -3,7 +3,16 @@ class Operations {
         this.firstVariable = firstVariable;
         this.secondVariable = secondVariable;
         this.operation = operation;
-        this.choice();
+        this.comma();
+        // this.choice();
+    }
+
+    comma() {
+        this.firstVariable = parseFloat(this.firstVariable.replace(',', '.'));
+        this.secondVariable = parseFloat(this.secondVariable.replace(',', '.'));
+
+        console.log(this.firstVariable);
+        console.log(this.secondVariable);
     }
 
     choice() {

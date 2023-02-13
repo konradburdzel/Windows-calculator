@@ -1,3 +1,4 @@
+// Zrobić obliczenia związane z przecinkami
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -53,7 +54,7 @@ class Calculator {
             };
 
             if (this.firstValue.flag === true && this.secondValue.flag === false) {
-                this.firstValue.value = parseFloat(this.input.textContent);
+                this.firstValue.value = this.input.textContent;
                 this.operator.name = this.button.operationButton();
                 this.commaFlag = false;
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
@@ -72,7 +73,7 @@ class Calculator {
                     this.input.textContent = e;
                 }
                 this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()}`;
-                this.firstValue.value = parseFloat(this.input.textContent);
+                this.firstValue.value = this.input.textContent;
                 this.commaFlag = false;
                 // this.firstValue.flag = false;
                 this.secondValue.flag = false;
@@ -88,7 +89,7 @@ class Calculator {
             };
             this.secondValue.flag = true;
             this.input.textContent += this.button.valueButton();
-            this.secondValue.value = parseFloat(this.input.textContent);
+            this.secondValue.value = this.input.textContent;
         };
 
         // entry firstValue 
