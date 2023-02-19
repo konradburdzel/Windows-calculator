@@ -130,19 +130,14 @@ class Calculator {
 
         // C
         if (this.button.operationButton() === 'C') {
-            this.firstValue.value = '';
-            this.secondValue.value = '';
-            this.firstValue.flag = false;
-            this.secondValue.flag = false;
-            this.dis.displayInput('0');
-            this.dis.displayStorage('');
-            this.commaFlag = false;
-            this.operator.name = '';
-            this.operator.value = '';
+            this.clear();
         };  
         
         // CE
         if (this.button.operationButton() === 'CE') {
+            if (this.dis.inputStorage.textContent.includes('=')) {
+                this.clear();
+            };
             if (this.secondValue.flag) {
             this.secondValue.value = '';
             this.dis.displayInput('0');
@@ -168,5 +163,17 @@ class Calculator {
             console.log(this.input.textContent);
         };
 
+    }
+
+    clear() {
+        this.firstValue.value = '';
+        this.secondValue.value = '';
+        this.firstValue.flag = false;
+        this.secondValue.flag = false;
+        this.dis.displayInput('0');
+        this.dis.displayStorage('');
+        this.commaFlag = false;
+        this.operator.name = '';
+        this.operator.value = '';
     }
 }
