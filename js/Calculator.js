@@ -1,4 +1,5 @@
 // Dodanie opcji zmiany znaku
+// poprawic ce
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -42,8 +43,11 @@ class Calculator {
             this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             this.dis.displayInput(this.results.choice());
-            this.firstValue.flag = false;
+            this.firstValue.value = `${this.results.choice()}`;
+            this.secondValue.value = '';
+            // this.firstValue.flag = false;
             this.secondValue.flag = false;
+            this.operator.name = '';
         };
 
         // when press some operation buttons
@@ -56,7 +60,7 @@ class Calculator {
             };
 
             // first select operation
-            if (!this.operator.name && this.firstValue.flag && !this.secondValue.flag) {
+            if (this.operator.name === '' && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
                 this.commaFlag = false;
                 this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
@@ -87,7 +91,7 @@ class Calculator {
         };
 
         // entry firstValue 
-        if (this.button.operationButton() === 'number' && !this.operator.name && !this.secondValue.flag) {
+        if (this.button.operationButton() === 'number' && this.operator.name === '' && !this.secondValue.flag) {
             if (!this.firstValue.flag) {
                 this.dis.displayInput('');
             };
@@ -139,7 +143,15 @@ class Calculator {
         
         // CE
         if (this.button.operationButton() === 'CE') {
-        this.input.textContent = '0';
+            if (this.secondValue.flag) {
+            this.secondValue.value = '';
+            this.dis.displayInput('0');
+            };
+            if (!this.secondValue.flag) {
+            this.firstValue.value = '';
+            this.dis.displayInput('0');
+            };
+
         };
 
         // change sign
