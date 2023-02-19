@@ -120,7 +120,7 @@ class Calculator {
             this.input.textContent = this.input.textContent.slice(0,-1);
             if (this.input.textContent.length === 0) {
                 this.input.textContent = '0';
-                this.firstValueFlag = false;
+                return this.firstValueFlag = false;
             };
             if (this.input.textContent.indexOf(',') === -1) {
                 this.commaFlag = false;
@@ -135,15 +135,15 @@ class Calculator {
         // CE
         if (this.button.operationButton() === 'CE') {
             if (this.dis.inputStorage.textContent.includes('=')) {
-                this.clear();
+                return this.clear();
             };
             if (this.secondValue.flag) {
-            this.secondValue.value = '';
-            this.dis.displayInput('0');
+                this.secondValue.value = '';
+                return this.dis.displayInput('0');
             };
             if (!this.secondValue.flag) {
-            this.firstValue.value = '0';
-            this.dis.displayInput('0');
+                this.firstValue.value = '0';
+                return this.dis.displayInput('0');
             };
 
         };
