@@ -31,7 +31,7 @@ class Calculator {
         this.button = new Buttons(valueButton, operation);
         this.display();
         // console.log(typeof(this.button.value));
-        if (operation !== 'number' && operation !== 'change-sign' && operation !== 'equal') {
+        if (operation !== 'number' && operation !== 'change-sign' && operation !== 'equal' && operation !== 'comma' && operation !== 'backspace') {
             this.operator.value = valueButton;
         };
     }
