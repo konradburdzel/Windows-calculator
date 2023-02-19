@@ -7,10 +7,12 @@ class Operations {
     }
 
     comma() {
-        console.log(this.firstVariable);
-        console.log(this.secondVariable);
-        this.firstVariable = parseFloat(this.firstVariable.replace(',', '.'));
-        this.secondVariable = parseFloat(this.secondVariable.replace(',', '.'));
+        if (this.firstVariable.includes(',') || this.secondVariable.includes(',')) {
+            this.firstVariable.replace(',', '.');
+            this.secondVariable.replace(',', '.');
+        };
+        this.firstVariable = parseFloat(this.firstVariable);
+        this.secondVariable = parseFloat(this.secondVariable);
         this.choice();
     }
 

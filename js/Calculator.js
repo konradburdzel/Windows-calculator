@@ -1,19 +1,19 @@
-// Dodanie opcji C oraz CE
+// Dodanie opcji zmiany znaku
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
-        this.input = document.querySelector('.input-data');
-        this.inputStorage = document.querySelector('.input-storage');
+        // this.input = document.querySelector('.input-data');
+        // this.inputStorage = document.querySelector('.input-storage');
         // firstValue - false and secondValue - false => before enter firstValue use to delete default 0 and when backspace all sign enter 0
         // firstValue - true and secondValue - false => firstValue is entering and secondValue is not enter
         // firstValue - true and secondValue - true => firstValue is ready and secondValue is entering - after equal is done and transfer data to Operations with firstValue and secondValue and operator
         this.operations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
-            value: 0,
+            value: '',
             flag: false
         };
         this.secondValue = {
-            value: 0,
+            value: '',
             flag: false
         };
         this.operator = {
@@ -21,6 +21,8 @@ class Calculator {
             name: ''
         };
         this.commaFlag = false;
+
+        this.dis = new Display();
     }
 
     Calculator(e) {
@@ -28,7 +30,8 @@ class Calculator {
         const operation = e.target.dataset.operation;
         this.button = new Buttons(valueButton, operation);
         this.display();
-        if (operation !== 'number') {
+        // console.log(typeof(this.button.value));
+        if (operation !== 'number' && operation !== 'change-sign' && operation !== 'equal') {
             this.operator.value = valueButton;
         };
     }
@@ -36,82 +39,76 @@ class Calculator {
     display() {
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
-            this.inputStorage.textContent = `${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`
+            this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-            this.input.textContent = this.results.choice();
+            this.dis.displayInput(this.results.choice());
             this.firstValue.flag = false;
             this.secondValue.flag = false;
         };
 
         // when press some operation buttons
         if (this.operations.includes(this.button.operationButton())) {
-            // console.log(this.firstValue.flag);
-            // console.log(this.secondValue.flag);
 
             //do change operation when only first Value is enter
-            if (this.operator.name && this.firstValue.flag === true && this.secondValue.flag === false) {
+            if (this.operator.name && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
-                return this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
+                return this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
             };
 
             // first select operation
-            if (this.firstValue.flag === true && this.secondValue.flag === false) {
-                this.firstValue.value = this.input.textContent;
+            if (!this.operator.name && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
                 this.commaFlag = false;
-                this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()} `;
-                // this.secondValue.flag = true;
-                // this.firstValue.flag = false;
+                this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
             };
 
             // do operation when choice two Value are complete
-            if (this.firstValue.flag === true && this.secondValue.flag === true) {
-                // this.secondValue = parseFloat(this.input.textContent);
+            if (this.firstValue.flag && this.secondValue.flag) {
                 this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-                //try no working right
-                try {
-                    this.input.textContent = this.results.choice();
-                } catch (e) {
-                    this.input.textContent = e;
-                }
-                this.inputStorage.textContent = `${this.input.textContent} ${this.button.valueButton()}`;
-                this.firstValue.value = this.input.textContent;
+                this.firstValue.value = `${this.results.choice()}`; 
+                this.dis.displayInput(this.firstValue.value);
+                this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()}`);
                 this.commaFlag = false;
-                // this.firstValue.flag = false;
+                console.log(typeof(this.firstValue.value));
+                this.secondValue.value = '';
                 this.secondValue.flag = false;
                 this.operator.name = this.button.operationButton();
             };
-            // console.log(this.firstValue.flag);
-            // console.log(this.secondValue.flag);
         };
         
         // entry second value
-        if (this.button.operationButton() === 'number' && this.operator.name !== '' && this.firstValue.flag === true) {
-            if (this.firstValue.flag === true && this.secondValue.flag === false || this.input.textContent === '0') {
-                this.input.textContent = '';
+        if (this.button.operationButton() === 'number' && this.operator.name !== '' && this.firstValue.flag) {
+            if (this.firstValue.flag && !this.secondValue.flag) {
+                this.dis.displayInput('');
             };
             this.secondValue.flag = true;
-            this.input.textContent += this.button.valueButton();
-            this.secondValue.value = this.input.textContent;
+            this.secondValue.value += this.button.valueButton();
+            this.dis.displayInput(this.secondValue.value)
         };
 
         // entry firstValue 
-        if (this.button.operationButton() === 'number' && this.secondValue.flag === false) {
-            if (this.input.textContent === '0') {
-                this.input.textContent = '';
-            };
-            if (this.inputStorage) {
-                this.inputStorage.textContent = '';
+        if (this.button.operationButton() === 'number' && !this.operator.name && !this.secondValue.flag) {
+            if (!this.firstValue.flag) {
+                this.dis.displayInput('');
             };
             this.firstValue.flag = true;
-            this.input.textContent += this.button.valueButton();
-            this.firstValue.value = this.input.textContent;
-            console.log('pierwsza wartość wprowadzona');
+            this.firstValue.value += this.button.valueButton();
+            this.dis.displayInput(this.firstValue.value);
         };  
 
         // adding one comma to input
         if (this.button.operationButton() === 'comma' && this.commaFlag === false) {
-            this.input.textContent += this.button.valueButton();
+            if (!this.secondValue.flag) {
+                console.log(typeof(this.button.valueButton()));
+                this.firstValue.value += this.button.valueButton();
+                this.dis.displayInput(this.firstValue.value);
+            };
+
+            if (this.secondValue.flag) {
+                this.secondValue.value += this.button.valueButton();
+                this.dis.displayStorage(this.secondValue.value);
+            };
+            console.log('commas');
             this.commaFlag = true;
         };
 
@@ -142,6 +139,19 @@ class Calculator {
         this.input.textContent = '0';
         };
 
-        console.log(this.button);
+        // change sign
+        if (this.button.operationButton() === 'change-sign' && this.input.textContent !== '0') {
+            if (this.input.textContent[0] !== '-') {
+               this.input.textContent = '-' + this.input.textContent;
+               if (this.firstValue.flag) {
+                    this.secondValue.value = this.input.textContent;
+               } else {
+                    this.firstValue.value = this.input.textContent;
+               };
+               
+            };
+            console.log(this.input.textContent);
+        };
+
     }
 }
