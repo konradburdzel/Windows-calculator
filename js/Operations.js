@@ -8,8 +8,8 @@ class Operations {
 
     comma() {
         if (this.firstVariable.includes(',') || this.secondVariable.includes(',')) {
-            this.firstVariable.replace(',', '.');
-            this.secondVariable.replace(',', '.');
+            this.firstVariable = this.firstVariable.replace(/,/g, ".");
+            this.secondVariable = this.secondVariable.replace("," , ".");
         };
         this.firstVariable = parseFloat(this.firstVariable);
         this.secondVariable = parseFloat(this.secondVariable);

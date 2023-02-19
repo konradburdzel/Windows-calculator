@@ -1,4 +1,4 @@
-// Dodanie opcji zmiany znaku
+// Fix adding comma
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -100,19 +100,16 @@ class Calculator {
         };  
 
         // adding one comma to input
-        if (this.button.operationButton() === 'comma' && this.commaFlag === false) {
-            if (!this.secondValue.flag) {
-                console.log(typeof(this.button.valueButton()));
-                this.firstValue.value += this.button.valueButton();
+        if (this.button.operationButton() === 'comma') {
+            if (!this.secondValue.flag && !this.firstValue.value.includes(',')) {
+                this.firstValue.value += ',';
                 this.dis.displayInput(this.firstValue.value);
             };
 
-            if (this.secondValue.flag) {
-                this.secondValue.value += this.button.valueButton();
-                this.dis.displayStorage(this.secondValue.value);
+            if (this.secondValue.flag && !this.secondValue.value.includes(',')) {
+                this.secondValue.value += ',';
+                this.dis.displayInput(this.secondValue.value);
             };
-            console.log('commas');
-            this.commaFlag = true;
         };
 
         //backspace
