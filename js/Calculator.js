@@ -117,14 +117,21 @@ class Calculator {
 
         //backspace
         if (this.button.operationButton() === 'backspace') {
-            this.input.textContent = this.input.textContent.slice(0,-1);
-            if (this.input.textContent.length === 0) {
-                this.input.textContent = '0';
-                return this.firstValueFlag = false;
+            if (this.secondValue.flag) {
+                this.secondValue.value = this.secondValue.value.slice(0, -1);
+                this.dis.displayInput(this.secondValue.value);
+                if (!this.secondValue.value) {
+                    this.dis.displayInput('0');
+                };
             };
-            if (this.input.textContent.indexOf(',') === -1) {
-                this.commaFlag = false;
-            };  
+
+            if (!this.secondValue.flag) {
+                this.firstValue.value = this.firstValue.value.slice(0, -1);
+                this.dis.displayInput(this.firstValue.value);
+                if (!this.firstValue.value) {
+                    this.dis.displayInput('0');
+                };
+            };
         };
 
         // C
