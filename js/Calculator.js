@@ -143,7 +143,7 @@ class Calculator {
             this.dis.displayInput('0');
             };
             if (!this.secondValue.flag) {
-            this.firstValue.value = '';
+            this.firstValue.value = '0';
             this.dis.displayInput('0');
             };
 
