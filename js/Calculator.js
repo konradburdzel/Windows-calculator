@@ -1,5 +1,4 @@
 // Dodanie opcji zmiany znaku
-// poprawic ce
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
@@ -150,17 +149,16 @@ class Calculator {
         };
 
         // change sign
-        if (this.button.operationButton() === 'change-sign' && this.input.textContent !== '0') {
-            if (this.input.textContent[0] !== '-') {
-               this.input.textContent = '-' + this.input.textContent;
-               if (this.firstValue.flag) {
-                    this.secondValue.value = this.input.textContent;
-               } else {
-                    this.firstValue.value = this.input.textContent;
-               };
-               
+        if (this.button.operationButton() === 'change-sign') {
+            if (!this.secondValue.flag && this.firstValue.value[0] !== '-') {
+               this.firstValue.value = '-' + this.firstValue.value;
+               this.dis.displayInput(this.firstValue.value);
             };
-            console.log(this.input.textContent);
+            if (this.secondValue.flag && this.secondValue.value[0] !== '-') {
+                this.secondValue.value = '-' + this.secondValue.value;
+                this.dis.displayInput(this.secondValue.value);
+            };
+            console.log(this.dis.input.textContent);
         };
 
     }
