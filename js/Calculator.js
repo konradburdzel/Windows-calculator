@@ -126,12 +126,15 @@ class Calculator {
 
         // C
         if (this.button.operationButton() === 'C') {
-            this.input.textContent = '0';
-            this.inputStorage.textContent = '';
-            this.firstValue.value = 0;
-            this.secondValue.value = 0;
+            this.firstValue.value = '';
+            this.secondValue.value = '';
             this.firstValue.flag = false;
             this.secondValue.flag = false;
+            this.dis.displayInput('0');
+            this.dis.displayStorage('');
+            this.commaFlag = false;
+            this.operator.name = '';
+            this.operator.value = '';
         };  
         
         // CE
