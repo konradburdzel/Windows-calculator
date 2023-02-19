@@ -99,14 +99,16 @@ class Calculator {
             this.dis.displayInput(this.firstValue.value);
         };  
 
-        // adding one comma to input
+        // adding comma to input
         if (this.button.operationButton() === 'comma') {
             if (!this.secondValue.flag && !this.firstValue.value.includes(',')) {
+                if (!this.firstValue.value) this.firstValue.value = '0';
                 this.firstValue.value += ',';
-                this.dis.displayInput(this.firstValue.value);
+                return this.dis.displayInput(this.firstValue.value);
             };
 
-            if (this.secondValue.flag && !this.secondValue.value.includes(',')) {
+            if (!this.secondValue.value.includes(',') && (this.secondValue.flag || (!this.secondValue.flag && this.firstValue.flag && this.operator.name !== ''))) {
+                if (!this.secondValue.value) this.secondValue.value = '0';
                 this.secondValue.value += ',';
                 this.dis.displayInput(this.secondValue.value);
             };
