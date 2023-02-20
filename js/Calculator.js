@@ -91,6 +91,7 @@ class Calculator {
 
         // entry firstValue 
         if (this.button.operationButton() === 'number' && this.operator.name === '' && !this.secondValue.flag) {
+            if (this.dis.inputStorage.textContent.includes('=')) this.clear();
             if (!this.firstValue.flag) {
                 this.dis.displayInput('');
             };
