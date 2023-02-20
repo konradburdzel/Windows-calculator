@@ -1,7 +1,7 @@
 // Fix adding comma
 class Calculator {
     constructor() {
-        document.querySelector('#keys').addEventListener('click', e => this.Calculator(e));
+        document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
         // this.input = document.querySelector('.input-data');
         // this.inputStorage = document.querySelector('.input-storage');
         // firstValue - false and secondValue - false => before enter firstValue use to delete default 0 and when backspace all sign enter 0
@@ -25,18 +25,18 @@ class Calculator {
         this.dis = new Display();
     }
 
-    Calculator(e) {
+    buttonCreate(e) {
         const valueButton = e.target.textContent;
         const operation = e.target.dataset.operation;
         this.button = new Buttons(valueButton, operation);
-        this.display();
+        this.calculator();
         // console.log(typeof(this.button.value));
         if (operation !== 'number' && operation !== 'change-sign' && operation !== 'equal' && operation !== 'comma' && operation !== 'backspace') {
             this.operator.value = valueButton;
         };
     }
 
-    display() {
+    calculator() {
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
             this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
