@@ -3,20 +3,29 @@ class Operations {
         this.firstVariable = firstVariable;
         this.secondVariable = secondVariable;
         this.operation = operation;
-        this.comma();
     }
 
-    comma() {
-        if (this.firstVariable.includes(',') || this.secondVariable.includes(',')) {
-            this.firstVariable = this.firstVariable.replace(/,/g, ".");
-            this.secondVariable = this.secondVariable.replace("," , ".");
-        };
-        this.firstVariable = parseFloat(this.firstVariable);
-        this.secondVariable = parseFloat(this.secondVariable);
-        this.choice();
+    commaToDot(valuesOfVariables) {
+        const variables = this.parse(valuesOfVariables);
+        this.firstVariable = variables[0];
+        this.secondVariable = variables[1];
+    }
+
+    parse(values) {
+        console.log(values);
+        const valuesFloat = values.map(value => {
+            if (value.includes(',')) {
+                value = value.replace("," , ".");
+            };
+            console.log(value);
+            return value = parseFloat(value);
+        })
+        return valuesFloat;
     }
 
     choice() {
+        let valuesOfVariables = [this.firstVariable, this.secondVariable];
+        this.commaToDot(valuesOfVariables);
         console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
             case 'division':
@@ -35,7 +44,8 @@ class Operations {
 
     addition() {
        if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
-        return this.firstVariable + this.secondVariable;
+        let result = this.firstVariable + this.secondVariable;
+        return 
        } else {
         throw new Error ('Nieprawidłowe dane');
        }
@@ -65,6 +75,10 @@ class Operations {
         } else {
             throw new Error ('Nieprawidłowe dane');
         }
+    }
+    reciprocal(value) {
+        const reciprocal = this.parse([value]);
+        return 1/reciprocal;
     }
 
 }
