@@ -44,9 +44,28 @@ class Calculator {
 
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
-            if (this.dis.inputStorage.textContent.includes('1/')) {
-            this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-            } else this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
+            //if secondValue not enter
+            if (!this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.flag) {
+            this.secondValue.value = this.firstValue.value;
+            };
+            
+            //check reciprocal operation
+            if (this.dis.inputStorage.textContent.includes('1/') && this.secondValue.value) {
+                this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
+                console.log('if');
+            } else if (this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.value){
+                //if reciprocal and only firstValue enter
+                console.log(`to jest zawartosc ${this.dis.inputStorage.textContent}`);
+                this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
+                this.secondValue.value = this.firstValue.value;
+            } else {
+                this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
+                console.log('else');
+            }
+
+            console.log(`zawartosc secondValue ${this.secondValue.value}`);
+
+
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             this.dis.displayInput(this.results.choice());
             this.firstValue.value = `${this.results.choice()}`;
