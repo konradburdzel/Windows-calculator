@@ -23,6 +23,10 @@ class Operations {
         return valuesFloat;
     }
 
+    dotToComma(dotToComma) {
+        return dotToComma.toString().replace('.', ',');
+    }
+
     choice() {
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
@@ -45,7 +49,8 @@ class Operations {
     addition() {
        if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
         let result = this.firstVariable + this.secondVariable;
-        return 
+        console.log(`rezultat ${result}`);
+        return this.dotToComma(result);
        } else {
         throw new Error ('Nieprawidłowe dane');
        }
@@ -53,7 +58,8 @@ class Operations {
 
     subtraction() {
         if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
-            return this.firstVariable - this.secondVariable;
+            let result = this.firstVariable - this.secondVariable;
+            return this.dotToComma(result);
            } else {
             throw new Error ('Nieprawidłowe dane');
            }
@@ -61,7 +67,8 @@ class Operations {
 
     multiplication() {
         if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
-            return this.firstVariable * this.secondVariable;
+            let result = this.firstVariable * this.secondVariable;
+            return this.dotToComma(result);
            } else {
             throw new Error ('Nieprawidłowe dane');
            }
@@ -69,7 +76,10 @@ class Operations {
 
     division() {
         if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
-            if (!(this.secondVariable === 0)) {return this.firstVariable / this.secondVariable;} else {
+            if (!(this.secondVariable === 0)) {
+                let result = this.firstVariable / this.secondVariable;
+                return this.dotToComma(result);
+            } else {
                 throw new Error ('Niewolno dzielić przez 0');
             }
         } else {
@@ -77,8 +87,8 @@ class Operations {
         }
     }
     reciprocal(value) {
-        const reciprocal = this.parse([value]);
-        return 1/reciprocal;
+        const result = 1/this.parse([value]);
+        return this.dotToComma(result);
     }
 
 }

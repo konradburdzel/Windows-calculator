@@ -69,8 +69,10 @@ class Calculator {
             if (this.operator.name === '' && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
                 // this.commaFlag = false;
-                if (this.dis.inputStorage.textContent.includes('1/')) return this.dis.displayStorage(`1/( ${1/this.firstValue.value} ) ${this.button.valueButton()} `);
-                this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
+                console.log(typeof(this.firstValue.value));
+                if (this.dis.inputStorage.textContent.includes('1/')) {
+                    this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.button.valueButton()}`);
+                    } else this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
             };
 
             // do operation when choice two Value are complete
@@ -182,6 +184,7 @@ class Calculator {
             if (this.secondValue.flag) {
                 this.dis.inputStorage.textContent += (` 1/( ${this.secondValue.value} )`);
                 this.secondValue.value = `${this.results.reciprocal(this.secondValue.value)}`;
+                console.log(typeof(this.secondValue.value));
                 this.dis.displayInput(this.secondValue.value);
 
             };
@@ -190,11 +193,8 @@ class Calculator {
                 this.dis.displayStorage(` 1/( ${this.firstValue.value} )`);
                 this.firstValue.value = `${this.results.reciprocal(this.firstValue.value)}`;
                 this.dis.displayInput(this.firstValue.value);
-                // this.dis.displayStorage();
             };
-            let temporaryStorage = this.dis.inputStorage.textContent;
 
-            console.log(temporaryStorage);
         }
     }
 
