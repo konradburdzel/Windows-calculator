@@ -1,4 +1,5 @@
 // equal values are float not string
+//error iinclude - number haven't that method
 // dottocomma
 // precision
 
@@ -48,27 +49,26 @@ class Calculator {
             if (!this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.flag) {
             this.secondValue.value = this.firstValue.value;
             };
-            
+            console.log(Boolean(this.secondValue.value));
+            console.log(typeof(this.firstValue.value))
             //check reciprocal operation
             if (this.dis.inputStorage.textContent.includes('1/') && this.secondValue.value) {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-                console.log('if');
             } else if (this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.value){
                 //if reciprocal and only firstValue enter
-                console.log(`to jest zawartosc ${this.dis.inputStorage.textContent}`);
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
                 this.secondValue.value = this.firstValue.value;
             } else {
                 this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
-                console.log('else');
             }
 
-            console.log(`zawartosc secondValue ${this.secondValue.value}`);
+            console.log(typeof(this.firstValue.value), typeof(this.secondValue.value), 'calc');
 
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-            this.dis.displayInput(this.results.choice());
-            this.firstValue.value = `${this.results.choice()}`;
+            let result = this.results.choice();
+            this.dis.displayInput(result);
+            this.firstValue.value = `${result}`;
             this.secondValue.value = '';
             // this.firstValue.flag = false;
             this.secondValue.flag = false;
@@ -88,10 +88,13 @@ class Calculator {
             if (this.operator.name === '' && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
                 // this.commaFlag = false;
+                if (this.dis.inputStorage.textContent.includes('1/') && this.dis.inputStorage.textContent.includes('=')) {
+                    this.dis.inputStorage.textContent = this.firstValue.value;
+                };
                 console.log(typeof(this.firstValue.value));
                 if (this.dis.inputStorage.textContent.includes('1/')) {
                     this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.button.valueButton()}`);
-                    } else this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
+                } else this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
             };
 
             // do operation when choice two Value are complete

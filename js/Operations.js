@@ -9,6 +9,8 @@ class Operations {
         const variables = this.parse(valuesOfVariables);
         this.firstVariable = variables[0];
         this.secondVariable = variables[1];
+        console.log(typeof(this.firstVariable), typeof(this.secondVariable), 'commaToDot');
+
     }
 
     parse(values) {
@@ -29,6 +31,7 @@ class Operations {
 
     choice() {
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
+        console.log(typeof(this.firstVariable), typeof(this.secondVariable), 'choice');
         this.commaToDot(valuesOfVariables);
         console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
