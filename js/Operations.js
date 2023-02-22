@@ -28,7 +28,7 @@ class Operations {
     choice() {
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
-        // console.log([this.firstVariable, this.secondVariable, this.operation]);
+        console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
             case 'division':
                 return this.division(this.firstValue, this.secondValue);
@@ -100,6 +100,11 @@ class Operations {
 
     percent(value) {
         const result = this.parse([value])/100;
+        return this.dotToComma(result);
+    }
+
+    percentAdditionOrSubtraction(value, percent) {
+        const result = this.parse([value])*(this.parse([percent])/100);
         return this.dotToComma(result);
     }
 

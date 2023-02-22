@@ -249,7 +249,9 @@ class Calculator {
         };
 
         if (this.button.operationButton() === 'percent' && this.secondValue.flag) {
-            this.secondValue.value = `${this.results.percent(this.secondValue.value)}`;
+            if (this.operator.name === 'addition' || this.operator.name === 'subtraction') {
+                this.secondValue.value = this.results.percentAdditionOrSubtraction(this.firstValue.value, this.secondValue.value);
+        } else this.secondValue.value = `${this.results.percent(this.secondValue.value)}`;
             this.dis.inputStorage.textContent += ` ${this.secondValue.value}`;
             // this.dis.displayStorage(this.dis.inputStorage.textContent);
             this.dis.displayInput(this.secondValue.value);
