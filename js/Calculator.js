@@ -33,9 +33,8 @@ class Calculator {
         const operation = e.target.dataset.operation;
         this.button = new Buttons(valueButton, operation);
         this.calculator();
-        if (this.basicOperations.includes(valueButton)) {
+        if (this.basicOperations.includes(operation)) {
             this.operator.value = valueButton;
-            console.log('kliknieto podstawowa operacje');
         };
     }
 
@@ -46,7 +45,6 @@ class Calculator {
         if (this.button.operationButton() === 'equal') {
             //if only first value enter without choice basic operations
             if (this.operationsOnXFlag && !this.secondValue.flag && !this.operator.name) {
-                // console.log(this.dis.inputStorage);
                 return this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
             };
 
@@ -203,7 +201,7 @@ class Calculator {
         if (this.button.operationButton() === 'reciprocal') {
 
             if (this.secondValue.flag) {
-                this.dis.inputStorage.textContent += (` 1/( ${this.secondValue.value} )`);
+                this.dis.inputStorage.textContent += ` 1/( ${this.secondValue.value} )`;
                 this.secondValue.value = `${this.results.reciprocal(this.secondValue.value)}`;
                 this.dis.displayInput(this.secondValue.value);
 
@@ -220,7 +218,7 @@ class Calculator {
 
         if (this.button.operationButton() === 'squared') {
             if (this.secondValue.flag) {
-                this.dis.inputStorage.textContent += (` sqr( ${this.secondValue.value} )`);
+                this.dis.inputStorage.textContent += ` sqr( ${this.secondValue.value} )`;
                 this.secondValue.value = `${this.results.squared(this.secondValue.value)}`;
                 this.dis.displayInput(this.secondValue.value);
 
@@ -236,7 +234,7 @@ class Calculator {
 
         if (this.button.operationButton() === 'square-root') {
             if (this.secondValue.flag) {
-                this.dis.inputStorage.textContent += (` √( ${this.secondValue.value} )`);
+                this.dis.inputStorage.textContent += ` √( ${this.secondValue.value} )`;
                 this.secondValue.value = `${this.results.squareRoot(this.secondValue.value)}`;
                 this.dis.displayInput(this.secondValue.value);
 
@@ -248,6 +246,13 @@ class Calculator {
                 this.dis.displayInput(this.firstValue.value);
             };
             this.operationsOnXFlag = true;
+        };
+
+        if (this.button.operationButton() === 'percent' && this.secondValue.flag) {
+            this.secondValue.value = `${this.results.percent(this.secondValue.value)}`;
+            this.dis.inputStorage.textContent += ` ${this.secondValue.value}`;
+            // this.dis.displayStorage(this.dis.inputStorage.textContent);
+            this.dis.displayInput(this.secondValue.value);
         };
 
     }

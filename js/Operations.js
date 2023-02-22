@@ -98,4 +98,9 @@ class Operations {
         return this.dotToComma(result);
     }
 
+    percent(value) {
+        const result = this.parse([value])/100;
+        return this.dotToComma(result);
+    }
+
 }
