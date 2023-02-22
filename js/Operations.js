@@ -94,4 +94,9 @@ class Operations {
         return this.dotToComma(result);
     }
 
+    squared(value) {
+        const result = Math.pow(this.parse([value]), 2);
+        return this.dotToComma(result);
+    }
+
 }

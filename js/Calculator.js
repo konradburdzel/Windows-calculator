@@ -1,6 +1,3 @@
-// equal values are float not string
-//error iinclude - number haven't that method
-// dottocomma
 // precision
 
 class Calculator {
@@ -11,7 +8,7 @@ class Calculator {
         // firstValue - false and secondValue - false => before enter firstValue use to delete default 0 and when backspace all sign enter 0
         // firstValue - true and secondValue - false => firstValue is entering and secondValue is not enter
         // firstValue - true and secondValue - true => firstValue is ready and secondValue is entering - after equal is done and transfer data to Operations with firstValue and secondValue and operator
-        this.operations = ['division', 'multiplication', 'addition', 'subtraction'];
+        this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
             flag: false
@@ -76,7 +73,7 @@ class Calculator {
         };
 
         // when press some operation buttons
-        if (this.operations.includes(this.button.operationButton())) {
+        if (this.basicOperations.includes(this.button.operationButton())) {
 
             //do change operation when only first Value is enter
             if (this.operator.name && this.firstValue.flag && !this.secondValue.flag) {
@@ -218,6 +215,22 @@ class Calculator {
             };
 
         }
+
+        if (this.button.operationButton() === 'squared') {
+            if (this.secondValue.flag) {
+                this.dis.inputStorage.textContent += (` sqr( ${this.secondValue.value} )`);
+                this.secondValue.value = `${this.results.squared(this.secondValue.value)}`;
+                console.log(typeof(this.secondValue.value));
+                this.dis.displayInput(this.secondValue.value);
+
+            };
+
+            if (!this.secondValue.flag) {
+                this.dis.displayStorage(` sqr( ${this.firstValue.value} )`);
+                this.firstValue.value = `${this.results.squared(this.firstValue.value)}`;
+                this.dis.displayInput(this.firstValue.value);
+            };
+        };
     }
 
     clear() {
