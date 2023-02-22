@@ -93,4 +93,9 @@ class Operations {
         return this.dotToComma(result);
     }
 
+    squareRoot(value) {
+        const result = Math.sqrt(this.parse([value]));
+        return this.dotToComma(result);
+    }
+
 }

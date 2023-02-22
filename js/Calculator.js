@@ -44,6 +44,12 @@ class Calculator {
 
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
+            //if only first value enter without choice basic operations
+            if (this.operationsOnXFlag && !this.secondValue.flag && !this.operator.name) {
+                // console.log(this.dis.inputStorage);
+                return this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
+            };
+
             //if secondValue not enter
             if (!this.operationsOnXFlag && !this.secondValue.flag) {
             this.secondValue.value = this.firstValue.value;
@@ -227,6 +233,23 @@ class Calculator {
             };
             this.operationsOnXFlag = true;
         };
+
+        if (this.button.operationButton() === 'square-root') {
+            if (this.secondValue.flag) {
+                this.dis.inputStorage.textContent += (` √( ${this.secondValue.value} )`);
+                this.secondValue.value = `${this.results.squareRoot(this.secondValue.value)}`;
+                this.dis.displayInput(this.secondValue.value);
+
+            };
+
+            if (!this.secondValue.flag) {
+                this.dis.displayStorage(` √( ${this.firstValue.value} )`);
+                this.firstValue.value = `${this.results.squareRoot(this.firstValue.value)}`;
+                this.dis.displayInput(this.firstValue.value);
+            };
+            this.operationsOnXFlag = true;
+        };
+
     }
 
     clear() {
