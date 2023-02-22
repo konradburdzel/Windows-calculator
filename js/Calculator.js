@@ -1,4 +1,5 @@
 // precision
+// minus operation dont write - on inputStorage
 
 class Calculator {
     constructor() {
@@ -21,7 +22,7 @@ class Calculator {
             value: '',
             name: ''
         };
-        this.commaFlag = false;
+        this.operationsOnXFlag = false;
 
         this.dis = new Display();
         this.results = new Operations();
@@ -32,8 +33,9 @@ class Calculator {
         const operation = e.target.dataset.operation;
         this.button = new Buttons(valueButton, operation);
         this.calculator();
-        if (operation !== 'number' && operation !== 'change-sign' && operation !== 'equal' && operation !== 'comma' && operation !== 'backspace' && operation !== 'reciprocal') {
+        if (this.basicOperations.includes(valueButton)) {
             this.operator.value = valueButton;
+            console.log('kliknieto podstawowa operacje');
         };
     }
 
@@ -43,24 +45,19 @@ class Calculator {
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
             //if secondValue not enter
-            if (!this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.flag) {
+            if (!this.operationsOnXFlag && !this.secondValue.flag) {
             this.secondValue.value = this.firstValue.value;
             };
-            console.log(Boolean(this.secondValue.value));
-            console.log(typeof(this.firstValue.value))
             //check reciprocal operation
-            if (this.dis.inputStorage.textContent.includes('1/') && this.secondValue.value) {
+            if (this.operationsOnXFlag && this.secondValue.value) {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-            } else if (this.dis.inputStorage.textContent.includes('1/') && !this.secondValue.value){
+            } else if (this.operationsOnXFlag && !this.secondValue.value){
                 //if reciprocal and only firstValue enter
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
                 this.secondValue.value = this.firstValue.value;
             } else {
                 this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
             }
-
-            console.log(typeof(this.firstValue.value), typeof(this.secondValue.value), 'calc');
-
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             let result = this.results.choice();
@@ -70,6 +67,7 @@ class Calculator {
             // this.firstValue.flag = false;
             this.secondValue.flag = false;
             this.operator.name = '';
+            this.operationsOnXFlag = false;
         };
 
         // when press some operation buttons
@@ -85,11 +83,10 @@ class Calculator {
             if (this.operator.name === '' && this.firstValue.flag && !this.secondValue.flag) {
                 this.operator.name = this.button.operationButton();
                 // this.commaFlag = false;
-                if (this.dis.inputStorage.textContent.includes('1/') && this.dis.inputStorage.textContent.includes('=')) {
+                if (this.operationsOnXFlag && this.dis.inputStorage.textContent.includes('=')) {
                     this.dis.inputStorage.textContent = this.firstValue.value;
                 };
-                console.log(typeof(this.firstValue.value));
-                if (this.dis.inputStorage.textContent.includes('1/')) {
+                if (this.operationsOnXFlag) {
                     this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.button.valueButton()}`);
                 } else this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
             };
@@ -101,10 +98,10 @@ class Calculator {
                 this.dis.displayInput(this.firstValue.value);
                 this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()}`);
                 this.commaFlag = false;
-                console.log(typeof(this.firstValue.value));
                 this.secondValue.value = '';
                 this.secondValue.flag = false;
                 this.operator.name = this.button.operationButton();
+                this.operationsOnXFlag = false;
             };
         };
         
@@ -194,7 +191,6 @@ class Calculator {
                 this.secondValue.value = '-' + this.secondValue.value;
                 this.dis.displayInput(this.secondValue.value);
             };
-            console.log(this.dis.input.textContent);
         };
 
         //reciprocal
@@ -203,7 +199,6 @@ class Calculator {
             if (this.secondValue.flag) {
                 this.dis.inputStorage.textContent += (` 1/( ${this.secondValue.value} )`);
                 this.secondValue.value = `${this.results.reciprocal(this.secondValue.value)}`;
-                console.log(typeof(this.secondValue.value));
                 this.dis.displayInput(this.secondValue.value);
 
             };
@@ -213,6 +208,7 @@ class Calculator {
                 this.firstValue.value = `${this.results.reciprocal(this.firstValue.value)}`;
                 this.dis.displayInput(this.firstValue.value);
             };
+            this.operationsOnXFlag = true;
 
         }
 
@@ -220,7 +216,6 @@ class Calculator {
             if (this.secondValue.flag) {
                 this.dis.inputStorage.textContent += (` sqr( ${this.secondValue.value} )`);
                 this.secondValue.value = `${this.results.squared(this.secondValue.value)}`;
-                console.log(typeof(this.secondValue.value));
                 this.dis.displayInput(this.secondValue.value);
 
             };
@@ -230,6 +225,7 @@ class Calculator {
                 this.firstValue.value = `${this.results.squared(this.firstValue.value)}`;
                 this.dis.displayInput(this.firstValue.value);
             };
+            this.operationsOnXFlag = true;
         };
     }
 

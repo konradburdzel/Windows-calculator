@@ -9,17 +9,13 @@ class Operations {
         const variables = this.parse(valuesOfVariables);
         this.firstVariable = variables[0];
         this.secondVariable = variables[1];
-        console.log(typeof(this.firstVariable), typeof(this.secondVariable), 'commaToDot');
-
     }
 
     parse(values) {
-        console.log(values);
         const valuesFloat = values.map(value => {
             if (value.includes(',')) {
                 value = value.replace("," , ".");
             };
-            console.log(value);
             return value = parseFloat(value);
         })
         return valuesFloat;
@@ -31,9 +27,8 @@ class Operations {
 
     choice() {
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
-        console.log(typeof(this.firstVariable), typeof(this.secondVariable), 'choice');
         this.commaToDot(valuesOfVariables);
-        console.log([this.firstVariable, this.secondVariable, this.operation]);
+        // console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
             case 'division':
                 return this.division(this.firstValue, this.secondValue);
@@ -52,7 +47,6 @@ class Operations {
     addition() {
        if (typeof this.firstVariable === 'number' && typeof this.secondVariable === 'number') {
         let result = this.firstVariable + this.secondVariable;
-        console.log(`rezultat ${result}`);
         return this.dotToComma(result);
        } else {
         throw new Error ('Nieprawidłowe dane');
