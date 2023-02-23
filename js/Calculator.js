@@ -66,9 +66,7 @@ class Calculator {
             this.dis.displayInput(result);
             this.firstValue.value = `${result}`;
             this.secondValue.value = '';
-            // this.firstValue.flag = false;
             this.secondValue.flag = false;
-            this.operator.name = '';
             this.operationsOnXFlag = false;
         };
 
