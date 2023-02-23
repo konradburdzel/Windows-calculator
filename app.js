@@ -1,0 +1,1 @@
+const calc = new Calculator();

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      title="description"
+      content="Windows Calculator make amanzing things if We thought about infinity posibilities what do Math!"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+
+    <title>Calculator</title>
+
+    <link href="styles/style.css" rel="stylesheet" />
+    <link href="styles/layout.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main id="calculator">
+      <header id="top-bar">
+        <div class="title">
+          <div class="img-app">
+            <img src="/assets/favicon.ico" alt="Picture of calculator" />
+          </div>
+          <div class="name-app">
+            <h1>Kalkulator</h1>
+          </div>
+        </div>
+        <nav class="navigation">
+          <div class="nav-button">
+            <span class="minimalize"></span>
+          </div>
+          <div class="nav-button">
+            <span class="windowed"></span>
+          </div>
+          <div class="nav-button exit">
+            <span class="exit1"></span>
+            <span class="exit2"></span>
+          </div>
+        </nav>
+      </header>
+      <nav class="menu">
+        <div class="menu-icon">
+          <span class="menu-icon-bar"></span>
+          <span class="menu-icon-bar"></span>
+          <span class="menu-icon-bar"></span>
+        </div>
+        <h2 class="calculator-type">Standardowy</h2>
+      </nav>
+      <section class="history">
+        <iconify-icon
+          icon="ic:baseline-history"
+          class="icon-key"
+        ></iconify-icon>
+      </section>
+      <section class="display-result">
+        <div class="input-storage"></div>
+        <div class="input-data">0</div>
+      </section>
+      <section class="memory">
+        <span class="key memory-key mc">MC</span>
+        <span class="key memory-key mr">MR</span>
+        <span class="key memory-key m-plus">M+</span>
+        <span class="key memory-key m-minus">M-</span>
+        <span class="key memory-key ms">MS</span>
+      </section>
+      <section class="history-memory">
+        <span class="key memory-key ms">Mv</span>
+      </section>
+      <section id="keys">
+        <span class="key operator" data-operation="percent">%</span>
+        <span class="key operator" data-operation="CE">CE</span>
+        <span class="key operator" data-operation="C">C</span>
+        <span class="key operator" data-operation="backspace">
+          <iconify-icon
+            icon="material-symbols:backspace-outline"
+            class="icon-key"
+            data-operation="backspace"
+          ></iconify-icon>
+        </span>
+        <span class="key operator" data-operation="reciprocal">1/x</span>
+        <span class="key operator" data-operation="squared">^2</span>
+        <span class="key operator" data-operation="square-root">
+          <iconify-icon
+            icon="mdi:square-root"
+            class="icon-key"
+            data-operation="square-root"
+          ></iconify-icon>
+        </span>
+        <span class="key operator" data-operation="division">/</span>
+        <span class="key number" data-operation="number">7</span>
+        <span class="key number" data-operation="number">8</span>
+        <span class="key number" data-operation="number">9</span>
+        <span class="key operator" data-operation="multiplication">x</span>
+        <span class="key number" data-operation="number">4</span>
+        <span class="key number" data-operation="number">5</span>
+        <span class="key number" data-operation="number">6</span>
+        <span class="key operator" data-operation="subtraction">-</span>
+        <span class="key number" data-operation="number">1</span>
+        <span class="key number" data-operation="number">2</span>
+        <span class="key number" data-operation="number">3</span>
+        <span class="key operator" data-operation="addition">+</span>
+        <span class="key number plus-minus" data-operation="change-sign">
+          <iconify-icon
+            icon="ic:outline-plus-minus-alt"
+            class="icon-key"
+            data-operation="change-sign"
+          ></iconify-icon>
+        </span>
+        <span class="key number" data-operation="number">0</span>
+        <span class="key number" data-operation="comma">,</span>
+        <span class="key equal" data-operation="equal">=</span>
+      </section>
+    </main>
+    <script src="/js/Display.js"></script>
+    <script src="/js/Operations.js"></script>
+    <script src="/js/Buttons.js"></script>
+    <script src="/js/Calculator.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

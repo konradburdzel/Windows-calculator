@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calculator {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  grid-template-rows: 40px 30px 150px 30px;
+  grid-template-areas:
+    "top-bar top-bar"
+    "menu history"
+    "results results"
+    "memory history-memory"
+    "keys keys";
+  gap: 2px;
+}
+
+#top-bar {
+  grid-area: top-bar;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+}
+
+.img-app {
+  padding: 0 20px 0 20px;
+}
+
+.name-app {
+  width: auto;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 30px;
+}
+
+.minimalize {
+  display: block;
+  height: 1px;
+  width: 10px;
+}
+
+.windowed {
+  width: 10px;
+  height: 10px;
+}
+
+.exit {
+  position: relative;
+}
+
+.exit1,
+.exit2 {
+  position: absolute;
+  display: block;
+  width: 13px;
+  height: 1px;
+  transform: rotate(45deg);
+}
+
+.exit2 {
+  transform: rotate(-45deg);
+}
+
+.menu {
+  grid-area: menu;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40px;
+  height: 30px;
+  padding: 7.5px 0;
+}
+
+.menu-icon-bar {
+  width: 15px;
+  height: 2px;
+}
+
+.history {
+  grid-area: history;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history span {
+  padding: 3px;
+}
+
+.display-result {
+  grid-area: results;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 20px;
+  gap: 10px;
+}
+
+.operation {
+  height: 17px;
+}
+
+.memory {
+  grid-area: memory;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.history-memory {
+  grid-area: history-memory;
+  display: grid;
+}
+
+#keys {
+  grid-area: keys;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 2px;
+}
+
+.key {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

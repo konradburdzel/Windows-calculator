@@ -1,0 +1,142 @@
+:root {
+  --dark-grey-key: rgba(32, 33, 36, 1);
+  --grey-key: rgba(50, 50, 50, 1);
+  --light-grey-key: rgba(59, 59, 59, 1);
+  --key-click: rgba(40, 40, 40, 1);
+  --light-blue: rgba(140, 231, 237, 1);
+  --border: rgba(24, 187, 197, 1);
+  --fonts: rgba(255, 255, 255, 1);
+  --fonts-grey: rgba(113, 113, 133, 1);
+  --fonts-light-grey: rgba(166, 166, 166, 1);
+  --white: rgba(255, 255, 255, 1);
+  --equal-sign: rgba(39, 64, 66, 1);
+  --equal-background: rgba(140, 231, 237, 1);
+  --equal-background-click: rgba(129, 210, 216);
+  --exit: rgba(232, 17, 35, 1);
+}
+
+body {
+  background-color: var(--light-grey-key);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--fonts);
+  font-size: 14px;
+}
+
+#calculator {
+  background-color: var(--dark-grey-key);
+  border: 1px solid var(--border);
+}
+
+#top-bar {
+  background-color: var(--dark-grey-key);
+}
+
+h1 {
+  color: var(--fonts);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.minimalize {
+  background-color: var(--white);
+}
+
+.nav-button:hover {
+  cursor: pointer;
+  background-color: var(--light-grey-key);
+}
+
+.windowed {
+  border: 1px solid var(--white);
+}
+
+.exit:hover {
+  background-color: var(--exit);
+}
+
+.exit1,
+.exit2 {
+  background-color: var(--white);
+}
+
+.menu-icon:hover {
+  border-radius: 2px;
+}
+
+.menu-icon-bar {
+  background-color: var(--white);
+}
+
+.calculator-type {
+  color: var(--fonts);
+  font-weight: 500;
+}
+
+.key {
+  font-size: 1.1rem;
+}
+
+.icon-key {
+  font-size: 1.5rem;
+}
+
+.memory-key,
+.history-memory {
+  font-size: 0.9rem;
+}
+
+.history {
+  color: var(--fonts);
+}
+
+.history span:hover {
+  border-radius: 5px;
+}
+
+.operation {
+  font-size: 15px;
+  color: var(--fonts-light-grey);
+}
+.input-data {
+  font-size: 55px;
+}
+
+.memory {
+  color: var(--fonts);
+}
+
+.key {
+  background-color: var(--grey-key);
+}
+
+.memory-key {
+  background-color: var(--dark-grey-key);
+}
+
+.memory-key:hover,
+.menu-icon:hover,
+.history span:hover {
+  cursor: pointer;
+  background-color: var(--grey-key);
+}
+
+.number {
+  background-color: var(--light-grey-key);
+}
+
+.number:hover {
+  background-color: var(--grey-key);
+}
+
+.operator:hover {
+  background-color: var(--light-grey-key);
+}
+
+.equal {
+  background-color: var(--equal-background);
+  color: var(--equal-sign);
+}
+
+.equal:hover {
+  background-color: var(--equal-background-click);
+}
