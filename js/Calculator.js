@@ -42,6 +42,10 @@ class Calculator {
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
             //if only first value and operation on x enter without choice basic operations
+            if (this.dis.inputStorage.textContent.includes('=') && !this.operator.name) {
+                return this.dis.displayStorage(this.firstValue.value + ' =');
+            };
+
             if (this.operationsOnXFlag && !this.secondValue.flag && !this.operator.name) {
                 return this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
             };
@@ -55,6 +59,7 @@ class Calculator {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
             } else if (this.operationsOnXFlag && !this.secondValue.value){
                 //if operation on x and only firstValue enter
+                console.log(this.dis.inputStorage.textContent);
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
                 this.secondValue.value = this.firstValue.value;
             } else {
