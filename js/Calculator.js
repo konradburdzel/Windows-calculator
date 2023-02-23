@@ -1,14 +1,11 @@
 // precision
 // minus operation dont write - on inputStorage
+// multiple times use equal button
+// niie wyswietla się liczna po wukonaniu operatiion on x
 
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
-        // this.input = document.querySelector('.input-data');
-        // this.inputStorage = document.querySelector('.input-storage');
-        // firstValue - false and secondValue - false => before enter firstValue use to delete default 0 and when backspace all sign enter 0
-        // firstValue - true and secondValue - false => firstValue is entering and secondValue is not enter
-        // firstValue - true and secondValue - true => firstValue is ready and secondValue is entering - after equal is done and transfer data to Operations with firstValue and secondValue and operator
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
@@ -23,6 +20,7 @@ class Calculator {
             name: ''
         };
         this.operationsOnXFlag = false;
+        this.backspaceFlag = true;
 
         this.dis = new Display();
         this.results = new Operations();
@@ -43,7 +41,7 @@ class Calculator {
 
         // when press equal sign
         if (this.button.operationButton() === 'equal') {
-            //if only first value enter without choice basic operations
+            //if only first value and operation on x enter without choice basic operations
             if (this.operationsOnXFlag && !this.secondValue.flag && !this.operator.name) {
                 return this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
             };
@@ -52,11 +50,11 @@ class Calculator {
             if (!this.operationsOnXFlag && !this.secondValue.flag) {
             this.secondValue.value = this.firstValue.value;
             };
-            //check reciprocal operation
+            //check operations on x operation
             if (this.operationsOnXFlag && this.secondValue.value) {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
             } else if (this.operationsOnXFlag && !this.secondValue.value){
-                //if reciprocal and only firstValue enter
+                //if operation on x and only firstValue enter
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
                 this.secondValue.value = this.firstValue.value;
             } else {
@@ -117,6 +115,7 @@ class Calculator {
             this.secondValue.flag = true;
             this.secondValue.value += this.button.valueButton();
             this.dis.displayInput(this.secondValue.value)
+            this.backspaceFlag = true;
         };
 
         // entry firstValue 
@@ -128,6 +127,7 @@ class Calculator {
             this.firstValue.flag = true;
             this.firstValue.value += this.button.valueButton();
             this.dis.displayInput(this.firstValue.value);
+            this.backspaceFlag = true;
         };  
 
         // adding comma to input
@@ -144,9 +144,15 @@ class Calculator {
                 this.dis.displayInput(this.secondValue.value);
             };
         };
-
         //backspace
-        if (this.button.operationButton() === 'backspace') {
+        if (this.button.operationButton() === 'backspace' && this.backspaceFlag) {
+            if (this.dis.inputStorage.textContent.includes('=')) {
+                this.dis.displayStorage('');
+                this.backspaceFlag = false;
+                this.secondValue.value = '';
+                this.secondValue.flag = false;
+            };
+            
             if (this.secondValue.flag) {
                 this.secondValue.value = this.secondValue.value.slice(0, -1);
                 this.dis.displayInput(this.secondValue.value);
@@ -182,7 +188,7 @@ class Calculator {
                 this.firstValue.value = '0';
                 return this.dis.displayInput('0');
             };
-
+            this.backspaceFlag = true;
         };
 
         // change sign
@@ -213,7 +219,7 @@ class Calculator {
                 this.dis.displayInput(this.firstValue.value);
             };
             this.operationsOnXFlag = true;
-
+            this.backspaceFlag = false;
         }
 
         if (this.button.operationButton() === 'squared') {
@@ -230,6 +236,7 @@ class Calculator {
                 this.dis.displayInput(this.firstValue.value);
             };
             this.operationsOnXFlag = true;
+            this.backspaceFlag = false;
         };
 
         if (this.button.operationButton() === 'square-root') {
@@ -246,6 +253,7 @@ class Calculator {
                 this.dis.displayInput(this.firstValue.value);
             };
             this.operationsOnXFlag = true;
+            this.backspaceFlag = false;
         };
 
         if (this.button.operationButton() === 'percent' && this.secondValue.flag) {
@@ -255,8 +263,9 @@ class Calculator {
             this.dis.inputStorage.textContent += ` ${this.secondValue.value}`;
             // this.dis.displayStorage(this.dis.inputStorage.textContent);
             this.dis.displayInput(this.secondValue.value);
+            this.backspaceFlag = false;
         };
-
+        
     }
 
     clear() {
@@ -269,5 +278,6 @@ class Calculator {
         this.commaFlag = false;
         this.operator.name = '';
         this.operator.value = '';
+        this.backspaceFlag = true;
     }
 }
