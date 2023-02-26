@@ -1,9 +1,4 @@
 // precision
-// minus operation dont write - on inputStorage
-// operation on x witchout second value - second value is equal two value
-// niie wyswietla się liczna po wukonaniu operatiion on x
-// when use equal operatiion multiple times  and change operator then not correct display secondvalue
-
 
 class Calculator {
     constructor() {
@@ -74,7 +69,6 @@ class Calculator {
             } else if (!this.equalMulti.flag && !this.secondValue.flag) {
                 this.secondValue.value = this.equalMulti.value;
                 console.log(this.secondValue.value);
-                this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)
             };
             //check operations on x operation
             if (this.operationsOnXFlag && this.secondValue.value) {
@@ -94,10 +88,9 @@ class Calculator {
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             let result = this.results.choice();
+            this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)
             this.dis.displayInput(result);
             this.firstValue.value = `${result}`;
-            this.secondValue.value = '';
-            this.secondValue.flag = false;
             this.operationsOnXFlag = false;
         };
 
