@@ -1,7 +1,6 @@
 // precision
 // minus operation dont write - on inputStorage
 // operation on x witchout second value - second value is equal two value
-// entering number and basic operation after use only one operation on x
 // niie wyswietla się liczna po wukonaniu operatiion on x
 // when use equal operatiion multiple times  and change operator then not correct display secondvalue
 
@@ -53,38 +52,45 @@ class Calculator {
                 '='))}`, `;operator name: ${this.operator.name}`, `;operatiiononX: ${this.operationsOnXFlag}`, `;second flag: ${this.secondValue.flag}`, `;first flag: ${this.firstValue.flag}`, `equal: ${this.equalMulti.flag}`);
 
 
-            if (this.dis.inputStorage.textContent.includes('=') && !this.operator.name && this.operationsOnXFlag) {
+            if (!this.operator.name && this.operationsOnXFlag) {
                 console.log(`this.dis.displayStorage(this.firstValue.value + ' =')`);
                 return this.dis.displayStorage(this.firstValue.value + ' =');
             };
 
-            if (this.operationsOnXFlag && !this.secondValue.flag && !this.operator.name) {
-                return this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-            };
-
             //if secondValue not enter
-            if (!this.operationsOnXFlag && !this.secondValue.flag && this.equalMulti.flag) {
+            if (!this.secondValue.flag && this.equalMulti.flag && this.operator.name) {
                 console.log(`niie kliiknieto drugierj wartosci`);
             this.equalMulti.value = this.firstValue.value;
             this.equalMulti.flag = false;
             this.secondValue.value = this.equalMulti.value;
             console.log(this.equalMulti.value);
+                if (this.operationsOnXFlag) {
+                    this.operationsOnXFlag = false;
+
+                    console.log('tactic .');
+                };
+                this.dis.inputStorage.textContent += ` ${this.secondValue.value} = `;
+                this.dis.displayStorage(this.dis.inputStorage.textContent);
             } else if (!this.equalMulti.flag && !this.secondValue.flag) {
-                console.log(`przypisanie this.secondValue.value = this.equalMulti.value;`);
                 this.secondValue.value = this.equalMulti.value;
                 console.log(this.secondValue.value);
+                this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)
             };
             //check operations on x operation
             if (this.operationsOnXFlag && this.secondValue.value) {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-            } else if (this.operationsOnXFlag && !this.secondValue.value){
-                //if operation on x and only firstValue enter
-                console.log(this.dis.inputStorage.textContent);
-                this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
-                this.secondValue.value = this.firstValue.value;
-            } else {
-                this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
-            }
+                console.log('opteams');
+            } 
+            // else if (this.operationsOnXFlag && !this.secondValue.value){
+            //     //if operation on x and only firstValue enter
+            //     console.log('else if when operationonx and false secondvalue');
+            //     this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
+            //     this.secondValue.value = this.firstValue.value;
+            // } 
+            // else {
+            //     this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
+            //     console.log('else');
+            // }
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             let result = this.results.choice();
