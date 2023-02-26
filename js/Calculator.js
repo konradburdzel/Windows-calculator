@@ -1,6 +1,7 @@
 // precision
 // minus operation dont write - on inputStorage
-// multiple times use equal button
+// operation on x witchout second value - second value is equal two value
+// entering number and basic operation after use only one operation on x
 // niie wyswietla się liczna po wukonaniu operatiion on x
 // when use equal operatiion multiple times  and change operator then not correct display secondvalue
 
@@ -289,7 +290,10 @@ class Calculator {
     }
 
     valueOne() {
-        if (this.dis.inputStorage.textContent.includes('=')) this.clear();
+        if (this.dis.inputStorage.textContent.includes('=')) {
+            this.clear();
+            console.log('testujemy wprowadzanie pierwszej wartosci');
+        }
         if (!this.firstValue.flag) {
             this.dis.displayInput('');
         };
@@ -310,5 +314,6 @@ class Calculator {
         this.operator.value = '';
         this.backspaceFlag = true;
         this.equalMulti.flag = true;
+        this.operationsOnXFlag = false;
     }
 }
