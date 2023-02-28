@@ -120,15 +120,18 @@ h1 {
   background-color: var(--grey-key);
 }
 
-.number {
+.number,
+.number-no-hover {
   background-color: var(--light-grey-key);
 }
 
-.number:hover {
+.number:hover,
+.number-no-hover:hover {
   background-color: var(--grey-key);
 }
 
-.operator:hover {
+.operator:hover,
+.no-hover:hover {
   background-color: var(--light-grey-key);
 }
 
