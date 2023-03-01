@@ -23,9 +23,11 @@ class Calculator {
             flag: true
         }
         this.dividePerZeroFlag = false;
+        this.overLoad = false;
         this.dis = new Display();
         this.results = new Operations();
-    }
+        
+}
 
     buttonCreate(e) {
         const valueButton = e.target.textContent;
@@ -38,11 +40,10 @@ class Calculator {
     }
 
     calculator() {
-        console.log(document.querySelector('#keys'));
         console.log(this.button);
 
         // when press equal sign
-        if (this.button.operationButton() === 'equal' && !this.dividePerZeroFlag) {
+        if (this.button.operationButton() === 'equal') {
             if (this.dividePerZeroFlag) {
                 return this.clear();
             };
@@ -80,16 +81,6 @@ class Calculator {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
                 console.log('opteams');
             } 
-            // else if (this.operationsOnXFlag && !this.secondValue.value){
-            //     //if operation on x and only firstValue enter
-            //     console.log('else if when operationonx and false secondvalue');
-            //     this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.dis.inputStorage.textContent.slice(0, -2)} =`);
-            //     this.secondValue.value = this.firstValue.value;
-            // } 
-            // else {
-            //     this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} =`);
-            //     console.log('else');
-            // }
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
             try {
@@ -328,6 +319,8 @@ class Calculator {
                 this.backspaceFlag = false;
             };
     }
+    this.dis.displayOverLoad();
+
     }
 
     valueOne() {
@@ -381,6 +374,9 @@ class Calculator {
             }
         }
         
+    }
+    overLoadNumber() {
+        this.overLoad = true;
     }
     
 }
