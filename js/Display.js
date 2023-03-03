@@ -20,19 +20,17 @@ class Display {
         let fontSize = parseInt(window.getComputedStyle(this.input).getPropertyValue("font-size"));
         
         if (this.input.clientWidth >= (this.app.clientWidth * 0.8) && fontSize > 28) {
-            this.input.style.fontSize = `${fontSize * 0.8}px`;
+            while  (this.input.clientWidth >= this.app.clientWidth)  {
+                fontSize = fontSize * 0.8;
+                this.input.style.fontSize = `${fontSize}px`;
+            }
         } else if (this.input.clientWidth <= (this.app.clientWidth * 0.5)) {
             this.input.style.fontSize = `55px`;
         };
-        // console.log(inputLength);
-        // if (inputLength > 13) {
-        //     new Calculator().overLoadNumber();
-        // }
     }
 
     insertWhiteSpace(value) {
         if (value.includes(',')) return value;
-        // value = '9991234'
         let valueWithWS = '';
         let valueWithoutWS = value.split(' ').join('');
         let k = 0;
@@ -54,7 +52,6 @@ class Display {
                 k++;
             }
         }
-        // console.log(valueWithWS);
         return valueWithWS;
 }
 }

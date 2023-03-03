@@ -1,4 +1,3 @@
-// wynik z przecinkiem wychodzi poza zakres aplikacji
 // duze wyniki są rozłożone na dwie linijki
 // duze liczby są zaokraglane przed wykonaniem działania
 
