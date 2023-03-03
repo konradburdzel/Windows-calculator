@@ -31,6 +31,7 @@ class Display {
     }
 
     insertWhiteSpace(value) {
+        if (value.includes(',')) return value;
         // value = '9991234'
         let valueWithWS = '';
         let valueWithoutWS = value.split(' ').join('');
@@ -53,7 +54,7 @@ class Display {
                 k++;
             }
         }
-        console.log(valueWithWS);
+        // console.log(valueWithWS);
         return valueWithWS;
 }
 }

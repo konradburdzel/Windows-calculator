@@ -1,5 +1,5 @@
 // only 16 numbers can be enter
-// white space between 3 numbers
+// wynik z przecinkiem wychodzi poza zakres aplikacji
 
 class Calculator {
     constructor() {
@@ -223,6 +223,11 @@ class Calculator {
         // entry firstValue 
         if (this.button.operationButton() === 'number' && this.operator.name === '' && !this.secondValue.flag) {
             
+            
+            if (this.firstValue.value.length <= 16) {
+                console.log('jest mniej niz 16 liczb');
+                console.log(this.firstValue.value.length);
+            };
 
             if (this.dividePerZeroFlag) {
                 return this.clear();
