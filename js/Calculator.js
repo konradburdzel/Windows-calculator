@@ -1,5 +1,6 @@
-// only 16 numbers can be enter
 // wynik z przecinkiem wychodzi poza zakres aplikacji
+// duze wyniki są rozłożone na dwie linijki
+// duze liczby są zaokraglane przed wykonaniem działania
 
 class Calculator {
     constructor() {
@@ -198,46 +199,40 @@ class Calculator {
         // entry second value
         if (this.button.operationButton() === 'number' && this.operator.name !== '' && this.firstValue.flag) {
 
-            if (this.dividePerZeroFlag) {
-                this.clear();
-                return this.valueOne();
-            };
+            if (this.secondValue.value.length < 16) {
 
-            if (this.dis.inputStorage.textContent.includes('=')) {
-                this.clear();
-                return this.valueOne();
-            }
+                if (this.dividePerZeroFlag) {
+                    this.clear();
+                    return this.valueOne();
+                };
 
-            if (this.firstValue.flag && !this.secondValue.flag) {
-                this.dis.displayInput('');
-            };
+                if (this.dis.inputStorage.textContent.includes('=')) {
+                    this.clear();
+                    return this.valueOne();
+                }
 
+                if (this.firstValue.flag && !this.secondValue.flag) {
+                    this.dis.displayInput('');
+                };
 
-
-            this.secondValue.flag = true;
-            this.secondValue.value += this.button.valueButton();
-            this.dis.displayInput(this.secondValue.value)
-            this.backspaceFlag = true;
+                this.secondValue.flag = true;
+                this.secondValue.value += this.button.valueButton();
+                this.dis.displayInput(this.secondValue.value)
+                this.backspaceFlag = true;
+            }; 
         };
 
         // entry firstValue 
         if (this.button.operationButton() === 'number' && this.operator.name === '' && !this.secondValue.flag) {
+                        
+            if (this.firstValue.value.length < 16) {
             
-            
-            if (this.firstValue.value.length <= 16) {
-                console.log('jest mniej niz 16 liczb');
-                console.log(this.firstValue.value.length);
-            };
+                if (this.dividePerZeroFlag) {
+                    return this.clear();
+                };
 
-            if (this.dividePerZeroFlag) {
-                return this.clear();
+                this.valueOne();
             };
-
-            // if (!(this.firstValue.value.length % 4)) {
-            //     console.log('kolejne 3 znaki');
-            //     this.firstValue.value += ' ';
-            // };
-            this.valueOne();
         };  
         
         
