@@ -5,6 +5,12 @@ class Operations {
         this.operation = operation;
     }
 
+    deleteWhiteSpaces() {
+        console.log(this.firstVariable);
+        this.firstVariable = this.firstVariable.split(' ').join('');
+        this.secondVariable = this.secondVariable.split(' ').join('');
+    }
+
     commaToDot(valuesOfVariables) {
         const variables = this.parse(valuesOfVariables);
         this.firstVariable = variables[0];
@@ -26,6 +32,7 @@ class Operations {
     }
 
     choice() {
+        // this.deleteWhiteSpaces();
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
         console.log([this.firstVariable, this.secondVariable, this.operation]);

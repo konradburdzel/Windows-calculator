@@ -216,7 +216,6 @@ class Calculator {
 
             this.secondValue.flag = true;
             this.secondValue.value += this.button.valueButton();
-            this.secondValue.value = this.insertWhiteSpace(this.secondValue.value)
             this.dis.displayInput(this.secondValue.value)
             this.backspaceFlag = true;
         };
@@ -343,13 +342,7 @@ class Calculator {
             this.dis.displayInput('');
         };
         this.firstValue.flag = true;
-        // console.log(this.firstValue.value);
         this.firstValue.value += this.button.valueButton();
-        // console.log(this.firstValue.value);
-        
-        this.firstValue.value = this.insertWhiteSpace(this.firstValue.value);
-        // console.log(this.firstValue.value);
-        
         this.dis.displayInput(this.firstValue.value);
         this.backspaceFlag = true;
     }
@@ -392,36 +385,6 @@ class Calculator {
         }
     }
 
-    insertWhiteSpace(value) {
-        // value = '9991234'
-        let valueWithWS = '';
-        let valueWithoutWS = value.split(' ').join('');
-        let k = 0;
-        let spaceForSpaces = valueWithoutWS.length % 3;
-        console.log(`spaceforspaces ${spaceForSpaces}; valueWWS ${valueWithoutWS}; value.length ${valueWithoutWS.length} `);
-        for (let i = 0; i < valueWithoutWS.length; i++) {
-            
-            if (i === spaceForSpaces && spaceForSpaces !== 0) {
-                valueWithWS += ' ';
-                console.log('spaceforspaces dodaje " "');
-                k++;
-            };
-
-            if (!((i - spaceForSpaces) % 3) && valueWithWS[k - 1] !== ' ' && i !== 0) {
-                valueWithWS += ' ';
-                console.log('dodanie " " bo % 3');
-                i--;
-                k++;
-            } else {
-                valueWithWS += valueWithoutWS[i];
-                console.log('dodanie wartosci');
-                k++;
-            }
-        }
-        console.log(valueWithWS);
-        return valueWithWS;
-
-    }
     overLoadNumber() {
         this.overLoad = true;
     }

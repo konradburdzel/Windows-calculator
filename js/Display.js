@@ -8,7 +8,7 @@ class Display {
     }
 
     displayInput(valueInput) {
-        this.input.textContent = valueInput;
+        this.input.textContent = this.insertWhiteSpace(valueInput);
     }
 
     displayStorage(valueStorage) {
@@ -29,4 +29,31 @@ class Display {
         //     new Calculator().overLoadNumber();
         // }
     }
+
+    insertWhiteSpace(value) {
+        // value = '9991234'
+        let valueWithWS = '';
+        let valueWithoutWS = value.split(' ').join('');
+        let k = 0;
+        let spaceForSpaces = valueWithoutWS.length % 3;
+        // console.log(`spaceforspaces ${spaceForSpaces}; valueWWS ${valueWithoutWS}; value.length ${valueWithoutWS.length} `);
+        for (let i = 0; i < valueWithoutWS.length; i++) {
+            
+            if (i === spaceForSpaces && spaceForSpaces !== 0) {
+                valueWithWS += ' ';
+                k++;
+            };
+
+            if (!((i - spaceForSpaces) % 3) && valueWithWS[k - 1] !== ' ' && i !== 0) {
+                valueWithWS += ' ';
+                i--;
+                k++;
+            } else {
+                valueWithWS += valueWithoutWS[i];
+                k++;
+            }
+        }
+        console.log(valueWithWS);
+        return valueWithWS;
+}
 }
