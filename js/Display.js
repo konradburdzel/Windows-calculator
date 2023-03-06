@@ -2,9 +2,7 @@ class Display {
     constructor() {
         this.input = document.querySelector('.input-data');
         this.inputStorage = document.querySelector('.input-storage');
-        // this.changeHeight = 
         this.app = document.querySelector('html');
-
     }
 
     displayInput(valueInput) {
@@ -16,17 +14,19 @@ class Display {
     }
 
     displayOverLoad() {
-        let inputLength = this.input.textContent.length;
         let fontSize = parseInt(window.getComputedStyle(this.input).getPropertyValue("font-size"));
-        
+        // console.log([this.input.clientWidth, this.app.clientWidth * 0.8, fontSize]);
         if (this.input.clientWidth >= (this.app.clientWidth * 0.8) && fontSize > 28) {
-            while  (this.input.clientWidth >= this.app.clientWidth)  {
-                fontSize = fontSize * 0.8;
+            while  (this.input.clientWidth >= this.app.clientWidth * 0.8)  {
+                fontSize = fontSize * 0.9;
                 this.input.style.fontSize = `${fontSize}px`;
             }
-        } else if (this.input.clientWidth <= (this.app.clientWidth * 0.5)) {
-            this.input.style.fontSize = `55px`;
-        };
+        } else if (this.input.clientWidth <= (this.app.clientWidth * 0.7) && fontSize < 55) {
+            while (this.input.clientWidth < this.app.clientWidth * 0.7 && fontSize < 55) {
+                fontSize = fontSize * 1.1;
+                this.input.style.fontSize = `${fontSize}px`;
+            }
+        }
     }
 
     insertWhiteSpace(value) {

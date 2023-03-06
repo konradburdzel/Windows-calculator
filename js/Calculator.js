@@ -203,7 +203,7 @@ class Calculator {
                 if (this.dividePerZeroFlag) {
                     this.clear();
                     return this.valueOne();
-                };
+                }
 
                 if (this.dis.inputStorage.textContent.includes('=')) {
                     this.clear();
@@ -212,14 +212,14 @@ class Calculator {
 
                 if (this.firstValue.flag && !this.secondValue.flag) {
                     this.dis.displayInput('');
-                };
+                }
 
                 this.secondValue.flag = true;
                 this.secondValue.value += this.button.valueButton();
                 this.dis.displayInput(this.secondValue.value)
                 this.backspaceFlag = true;
-            }; 
-        };
+            }
+        }
 
         // entry firstValue 
         if (this.button.operationButton() === 'number' && this.operator.name === '' && !this.secondValue.flag) {
@@ -228,11 +228,11 @@ class Calculator {
             
                 if (this.dividePerZeroFlag) {
                     return this.clear();
-                };
+                }
 
                 this.valueOne();
-            };
-        };  
+            }
+        }
         
         
         if (!this.dividePerZeroFlag) {
@@ -327,7 +327,7 @@ class Calculator {
                 this.dis.displayInput(this.secondValue.value);
                 this.backspaceFlag = false;
             };
-    }
+        };
     this.dis.displayOverLoad();
 
     }
@@ -382,10 +382,6 @@ class Calculator {
                 }
             }
         }
-    }
-
-    overLoadNumber() {
-        this.overLoad = true;
     }
     
 }
