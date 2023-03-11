@@ -1,5 +1,3 @@
-// duze wyniki są rozłożone na dwie linijki
-// duze liczby są zaokraglane przed wykonaniem działania
 
 class Calculator {
     constructor() {
@@ -50,37 +48,29 @@ class Calculator {
             };
 
             //if only first value and operation on x enter without choice basic operations
-            console.log(`;inputStorage include =: ${Boolean(this.dis.inputStorage.textContent.includes(
-                '='))}`, `;operator name: ${this.operator.name}`, `;operatiiononX: ${this.operationsOnXFlag}`, `;second flag: ${this.secondValue.flag}`, `;first flag: ${this.firstValue.flag}`, `equal: ${this.equalMulti.flag}`);
+            // console.log(`;inputStorage include =: ${Boolean(this.dis.inputStorage.textContent.includes('='))}`, `;operator name: ${this.operator.name}`, `;operatiiononX: ${this.operationsOnXFlag}`, `;second flag: ${this.secondValue.flag}`, `;first flag: ${this.firstValue.flag}`, `equal: ${this.equalMulti.flag}`);
 
 
             if (!this.operator.name && this.operationsOnXFlag) {
-                console.log(`this.dis.displayStorage(this.firstValue.value + ' =')`);
                 return this.dis.displayStorage(this.firstValue.value + ' =');
             };
 
             //if secondValue not enter
             if (!this.secondValue.flag && this.equalMulti.flag && this.operator.name) {
-                console.log(`niie kliiknieto drugierj wartosci`);
-            this.equalMulti.value = this.firstValue.value;
-            this.equalMulti.flag = false;
-            this.secondValue.value = this.equalMulti.value;
-            console.log(this.equalMulti.value);
+                this.equalMulti.value = this.firstValue.value;
+                this.equalMulti.flag = false;
+                this.secondValue.value = this.equalMulti.value;
                 if (this.operationsOnXFlag) {
                     this.operationsOnXFlag = false;
-
-                    console.log('tactic .');
                 };
                 this.dis.inputStorage.textContent += ` ${this.secondValue.value} = `;
                 this.dis.displayStorage(this.dis.inputStorage.textContent);
             } else if (!this.equalMulti.flag && !this.secondValue.flag) {
                 this.secondValue.value = this.equalMulti.value;
-                console.log(this.secondValue.value);
             };
             //check operations on x operation
             if (this.operationsOnXFlag && this.secondValue.value) {
                 this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
-                console.log('opteams');
             } 
 
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
@@ -94,7 +84,7 @@ class Calculator {
             catch {
                 this.dividePerZeroFlag = true;
                 this.dividePerZero();
-                return this.dis.displayInput('Nie można dzielić przez zero');
+                return this.dis.displayInput(this.results.errorDivideZero());
             }
         };
 
@@ -120,6 +110,7 @@ class Calculator {
                 if (this.operationsOnXFlag && this.dis.inputStorage.textContent.includes('=')) {
                     this.dis.inputStorage.textContent = this.firstValue.value;
                 };
+
                 if (this.operationsOnXFlag) {
                     this.dis.displayStorage(`${this.dis.inputStorage.textContent} ${this.button.valueButton()}`);
                 } else this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()} `);
@@ -284,6 +275,7 @@ class Calculator {
                 this.backspaceFlag = false;
             }
 
+            //squared
             if (this.button.operationButton() === 'squared') {
                 if (this.secondValue.flag) {
                     this.dis.inputStorage.textContent += ` sqr( ${this.secondValue.value} )`;
@@ -301,6 +293,7 @@ class Calculator {
                 this.backspaceFlag = false;
             };
 
+            //square-root
             if (this.button.operationButton() === 'square-root') {
                 if (this.secondValue.flag) {
                     this.dis.inputStorage.textContent += ` √( ${this.secondValue.value} )`;
@@ -318,16 +311,18 @@ class Calculator {
                 this.backspaceFlag = false;
             };
 
+            //percent
             if (this.button.operationButton() === 'percent' && this.secondValue.flag) {
                 if (this.operator.name === 'addition' || this.operator.name === 'subtraction') {
                     this.secondValue.value = this.results.percentAdditionOrSubtraction(this.firstValue.value, this.secondValue.value);
-            } else this.secondValue.value = `${this.results.percent(this.secondValue.value)}`;
-                this.dis.inputStorage.textContent += ` ${this.secondValue.value}`;
-                // this.dis.displayStorage(this.dis.inputStorage.textContent);
-                this.dis.displayInput(this.secondValue.value);
-                this.backspaceFlag = false;
-            };
-        };
+                } else { 
+                    this.secondValue.value = `${this.results.percent(this.secondValue.value)}`;
+                    this.dis.inputStorage.textContent += ` ${this.secondValue.value}`;
+                    this.dis.displayInput(this.secondValue.value);
+                    this.backspaceFlag = false;
+                }
+            }
+        }
     this.dis.displayOverLoad();
 
     }

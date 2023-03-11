@@ -3,6 +3,7 @@ class Display {
         this.input = document.querySelector('.input-data');
         this.inputStorage = document.querySelector('.input-storage');
         this.app = document.querySelector('html');
+        this.operations = new Operations();
     }
 
     displayInput(valueInput) {
@@ -30,6 +31,8 @@ class Display {
     }
 
     insertWhiteSpace(value) {
+        if (value === this.operations.errorDivideZero()) return value;
+        console.log([value === this.operations.errorDivideZero(), value, this.operations.errorDivideZero()]);
         if (value.includes(',')) return value;
         let valueWithWS = '';
         let valueWithoutWS = value.split(' ').join('');

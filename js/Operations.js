@@ -5,6 +5,11 @@ class Operations {
         this.operation = operation;
     }
 
+    errorDivideZero() {
+        this.errorText = 'Niewolno dzielić przez 0';
+        return this.errorText;
+    }
+
     deleteWhiteSpaces() {
         console.log(this.firstVariable);
         this.firstVariable = this.firstVariable.split(' ').join('');
@@ -84,7 +89,7 @@ class Operations {
                 let result = this.firstVariable / this.secondVariable;
                 return this.dotToComma(result);
             } else {
-                throw new Error ('Niewolno dzielić przez 0');
+                throw new Error (this.errorDivideZero());
             }
         } else {
             throw new Error ('Nieprawidłowe dane');
