@@ -16,7 +16,6 @@ class Display {
 
     displayOverLoad() {
         let fontSize = parseInt(window.getComputedStyle(this.input).getPropertyValue("font-size"));
-        // console.log([this.input.clientWidth, this.app.clientWidth * 0.8, fontSize]);
         if (this.input.clientWidth >= (this.app.clientWidth * 0.8) && fontSize > 28) {
             while  (this.input.clientWidth >= this.app.clientWidth * 0.8)  {
                 fontSize = fontSize * 0.9;
@@ -32,7 +31,6 @@ class Display {
 
     insertWhiteSpace(value) {
         if (value === this.operations.errorDivideZero()) return value;
-        console.log([value === this.operations.errorDivideZero(), value, this.operations.errorDivideZero()]);
         if (value.includes(',')) return value;
         let valueWithWS = '';
         let valueWithoutWS = value.split(' ').join('');

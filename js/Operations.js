@@ -11,7 +11,6 @@ class Operations {
     }
 
     deleteWhiteSpaces() {
-        console.log(this.firstVariable);
         this.firstVariable = this.firstVariable.split(' ').join('');
         this.secondVariable = this.secondVariable.split(' ').join('');
     }
@@ -37,10 +36,8 @@ class Operations {
     }
 
     choice() {
-        // this.deleteWhiteSpaces();
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
-        console.log([this.firstVariable, this.secondVariable, this.operation]);
         switch (this.operation) {
             case 'division':
                 return this.division(this.firstValue, this.secondValue);
