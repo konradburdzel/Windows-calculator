@@ -2,7 +2,7 @@
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
-        document.querySelector('.history-key').addEventListener('click', e => this.history(e));
+        document.querySelector('.history-key').addEventListener('click', e => this.historyToggleClass(e));
         document.querySelector('.history-top-background').addEventListener('click', e => this.history(e));
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
@@ -26,11 +26,11 @@ class Calculator {
         this.dividePerZeroFlag = false;
         this.overLoad = false;
         this.dis = new Display();
-        this.results = new Operations();
-        
+        // this.results = new Operations();
+        // this.history = new History();
     }
 
-    history(e) {
+    historyToggleClass(e) {
         this.historyWindow = document.querySelector('.history-window');
         this.historyWindow.classList.toggle('active');
     }
@@ -203,7 +203,9 @@ class Calculator {
 
         // do operation when choice two Value are complete
         if (this.firstValue.flag && this.secondValue.flag) {
+            console.log([typeof(this.firstValue.value),typeof(this.secondValue.value),typeof(this.operator.name)]);
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
+            this.history = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
             this.firstValue.value = `${this.results.choice()}`; 
             this.dis.displayInput(this.firstValue.value);
             this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()}`);

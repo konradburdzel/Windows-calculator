@@ -23,6 +23,7 @@ class Operations {
 
     parse(values) {
         const valuesFloat = values.map(value => {
+            value = `${value}`;
             if (value.includes(',')) {
                 value = value.replace("," , ".");
             };
