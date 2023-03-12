@@ -22,6 +22,10 @@ body {
   font-size: 14px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 #calculator {
   background-color: var(--dark-grey-key);
   border: 1px solid var(--border);

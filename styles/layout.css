@@ -146,6 +146,10 @@ body {
   width: calc(100% - 12px);
   height: calc(100% - 262px);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
 }
 
 .display-result {
