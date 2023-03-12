@@ -2,6 +2,8 @@
 class Calculator {
     constructor() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
+        document.querySelector('.history-key').addEventListener('click', e => this.history(e));
+        document.querySelector('.history-top-background').addEventListener('click', e => this.history(e));
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
@@ -26,7 +28,12 @@ class Calculator {
         this.dis = new Display();
         this.results = new Operations();
         
-}
+    }
+
+    history(e) {
+        this.historyWindow = document.querySelector('.history-window');
+        this.historyWindow.classList.toggle('active');
+    }
 
     buttonCreate(e) {
         const valueButton = e.target.textContent;
@@ -153,7 +160,7 @@ class Calculator {
         } 
 
         this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-        
+
         try {
             let result = this.results.choice();
             this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)

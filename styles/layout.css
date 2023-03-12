@@ -109,15 +109,43 @@ body {
   height: 2px;
 }
 
-.history {
-  grid-area: history;
+.history,
+.history-key {
   display: flex;
   justify-content: center;
+}
+
+.history {
+  grid-area: history;
+}
+
+.history-key {
+  width: 30px;
+  height: 30px;
   align-items: center;
 }
 
-.history span {
-  padding: 3px;
+.history-window {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  transform: scaleY(0);
+}
+
+.history-window.active {
+  transform: scaleY(100%);
+}
+
+.history-top-background {
+  width: calc(100% - 12px);
+  height: 250px;
+}
+
+.display-history {
+  bottom: 12px;
+  width: calc(100% - 12px);
+  height: calc(100% - 262px);
+  padding: 10px;
 }
 
 .display-result {
