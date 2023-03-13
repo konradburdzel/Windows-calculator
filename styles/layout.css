@@ -152,6 +152,19 @@ body {
   justify-content: space-between;
 }
 
+.binHandle {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bin {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
 .display-result {
   grid-area: results;
   display: flex;

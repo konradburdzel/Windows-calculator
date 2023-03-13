@@ -23,9 +23,9 @@ class History {
         historyHandle.style.alignItems = 'flex-end';
         historyHandle.style.paddingTop = '30px';
         let bin = document.createElement('div');
-        bin.style.height = '30px';
-        bin.style.width = '30px';
-        bin.style.backgroundColor = 'red';
+        bin.classList.toggle('binHandle');
+        // bin.style.backgroundColor = 'red';
+        bin.innerHTML = '<iconify-icon class="bin" icon="ri:delete-bin-line"></iconify-icon>';
         historyHandle.appendChild(bin);
     }
 }

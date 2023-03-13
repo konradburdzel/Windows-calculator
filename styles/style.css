@@ -108,6 +108,12 @@ h1 {
   opacity: 1;
 }
 
+.binHandle:hover {
+  cursor: pointer;
+  background-color: var(--light-grey-key);
+  border-radius: 5px;
+}
+
 .operation {
   font-size: 15px;
   color: var(--fonts-light-grey);
