@@ -152,6 +152,17 @@ body {
   justify-content: space-between;
 }
 
+.history-elements {
+  width: 100%;
+}
+
+.ul-in-history-element {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* width: 100%; */
+}
+
 .binHandle {
   width: 30px;
   height: 30px;

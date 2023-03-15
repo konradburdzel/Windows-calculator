@@ -108,6 +108,14 @@ h1 {
   opacity: 1;
 }
 
+.li-element-operation {
+  color: var(--fonts-light-grey);
+}
+
+.li-element-result {
+  font-size: 20px;
+}
+
 .binHandle:hover {
   cursor: pointer;
   background-color: var(--light-grey-key);
