@@ -7,6 +7,7 @@
   --border: rgba(24, 187, 197, 1);
   --fonts: rgba(255, 255, 255, 1);
   --fonts-grey: rgba(113, 113, 133, 1);
+  --fonts-grey-opacity: rgba(113, 113, 133, 0.2);
   --fonts-light-grey: rgba(166, 166, 166, 1);
   --white: rgba(255, 255, 255, 1);
   --equal-sign: rgba(39, 64, 66, 1);
@@ -106,6 +107,11 @@ h1 {
 .display-history {
   background-color: var(--dark-grey-key);
   opacity: 1;
+}
+
+.ul-in-history-element:hover {
+  background-color: var(--fonts-grey-opacity);
+  border-radius: 5px;
 }
 
 .li-element-operation {
