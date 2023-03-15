@@ -163,6 +163,10 @@ class Calculator {
         this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
 
         try {
+            let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
+            saveHistory.addToHistory();
+            this.history.push(saveHistory);
+
             let result = this.results.choice();
             this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)
             this.dis.displayInput(result);
