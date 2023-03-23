@@ -24,8 +24,6 @@ class Calculator {
         this.dividePerZeroFlag = false;
         this.overLoad = false;
         this.dis = new Display();
-        // this.results = new Operations();
-        // this.history = new History();
         this.history = [];
     }
 
