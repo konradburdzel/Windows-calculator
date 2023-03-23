@@ -34,7 +34,7 @@ class History {
 
     changeStyleForElement() {
         this.historyElements.children[0].remove();
-        this.historyElements.style.height = 'auto';
+        // this.historyElements.style.height = 'auto';
         this.historyHandle.style.alignItems = 'flex-end';
         this.historyHandle.style.paddingTop = '30px';
         let bin = document.createElement('div');

@@ -153,7 +153,9 @@ body {
 }
 
 .history-elements {
+  overflow: scroll;
   width: 100%;
+  height: calc(100% - 60px);
 }
 
 .ul-in-history-element {
@@ -162,10 +164,13 @@ body {
   align-items: flex-end;
   gap: 5px;
   padding: 5px 10px;
-  margin: 10px 0;
+  margin-top: 10px;
 }
 
 .binHandle {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
   width: 30px;
   height: 30px;
   display: flex;
