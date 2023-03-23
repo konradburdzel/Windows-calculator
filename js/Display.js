@@ -36,7 +36,6 @@ class Display {
         let valueWithoutWS = value.split(' ').join('');
         let k = 0;
         let spaceForSpaces = valueWithoutWS.length % 3;
-        // console.log(`spaceforspaces ${spaceForSpaces}; valueWWS ${valueWithoutWS}; value.length ${valueWithoutWS.length} `);
         for (let i = 0; i < valueWithoutWS.length; i++) {
             
             if (i === spaceForSpaces && spaceForSpaces !== 0) {

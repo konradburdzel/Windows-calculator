@@ -37,7 +37,6 @@ class Operations {
     }
 
     choice() {
-        console.log([this.firstVariable, this.secondVariable, this.operation]);
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
         switch (this.operation) {
@@ -94,6 +93,7 @@ class Operations {
             throw new Error ('Nieprawidłowe dane');
         }
     }
+    
     reciprocal(value) {
         const result = 1/this.parse([value]);
         return this.dotToComma(result);

@@ -34,7 +34,6 @@ class History {
 
     changeStyleForElement() {
         this.historyElements.children[0].remove();
-        // this.historyElements.style.height = 'auto';
         this.historyHandle.style.alignItems = 'flex-end';
         this.historyHandle.style.paddingTop = '30px';
         let bin = document.createElement('div');
@@ -49,9 +48,7 @@ class History {
         this.historyHandle.style.paddingTop = '10px';
         const lengthChildren = [...this.historyElements.children].length;
         for (let i = 0; i < lengthChildren - 1; i++) {
-            console.log(this.historyElements.firstChild.textContent);
             this.historyElements.removeChild(this.historyElements.children[0]);
-            console.log(i);
         }
         this.historyElements.children[0].textContent = 'Nie ma jeszcze żadnej historii';
         const bin = document.querySelector('.binHandle');
