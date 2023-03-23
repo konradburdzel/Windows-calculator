@@ -1,9 +1,8 @@
-
+// zmianic wyswietlanie elementow w historii - od gory padding od dolu na 0;
+// dodac kosz w historii jako osobnego diva i pozycjonowac go do okna na dole po prawej
 class Calculator {
     constructor() {
-        document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
-        document.querySelector('.history-key').addEventListener('click', e => this.historyToggleClass(e));
-        document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
+        this.addEventListeners();
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
@@ -31,9 +30,19 @@ class Calculator {
         this.history = [];
     }
 
-    historyToggleClass(e) {
+    addEventListeners() {
+        document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
+        document.querySelector('.history-key').addEventListener('click', () => this.historyToggleClass());
+        document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
+    }
+
+    historyToggleClass() {
         this.historyWindow = document.querySelector('.history-window');
         this.historyWindow.classList.toggle('active');
+        this.historyElements = [...document.querySelectorAll('.history-element')]
+        this.historyElements.forEach(historyElement => {
+            historyElement.addEventListener('click', e => this.chooseHistory(e));
+        })
     }
 
     buttonCreate(e) {
@@ -133,6 +142,7 @@ class Calculator {
     }
 
     equal() {
+        this.checkMethod();
         if (this.dividePerZeroFlag) {
             return this.clear();
         };
@@ -159,19 +169,22 @@ class Calculator {
         if (this.operationsOnXFlag && this.secondValue.value) {
             this.dis.displayStorage(`${this.dis.inputStorage.textContent} =`);
         } 
-
+        console.log('będzie wykonywane działanie');
+        console.log([this.firstValue.value, this.secondValue.value]);
         this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
 
         try {
-            let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
-            saveHistory.addToHistory();
-            this.history.push(saveHistory);
+            this.addHistory();
+
 
             let result = this.results.choice();
             this.dis.displayStorage(`${this.firstValue.value} ${this.operator.value} ${this.secondValue.value} = `)
             this.dis.displayInput(result);
             this.firstValue.value = `${result}`;
             this.operationsOnXFlag = false;
+            console.log([this.firstValue.value, this.secondValue.value, this.firstValue.flag, this.secondValue.flag]);
+            this.secondValue.value = '';
+            this.secondValue.flag = false;
         }
         catch {
             this.dividePerZeroFlag = true;
@@ -181,10 +194,11 @@ class Calculator {
     }
 
     basicOperationButton() {
+        console.log(['basicoperator',this.firstValue.value, this.secondValue.value, this.operator.name]);
         if (this.dividePerZeroFlag) {
             return this.clear();
         };
-
+        console.log(['basic', this.firstValue.flag, this.secondValue.flag,this.operator.name]);
         //do change operation when only first Value is enter
         if (this.operator.name && this.firstValue.flag && !this.secondValue.flag) {
             this.operator.name = this.button.operationButton();
@@ -208,11 +222,11 @@ class Calculator {
 
         // do operation when choice two Value are complete
         if (this.firstValue.flag && this.secondValue.flag) {
-            console.log([typeof(this.firstValue.value),typeof(this.secondValue.value),typeof(this.operator.name)]);
+            console.log(['oba operatory sa wybrane',typeof(this.firstValue.value),typeof(this.secondValue.value),typeof(this.operator.name)]);
             this.results = new Operations(this.firstValue.value, this.secondValue.value, this.operator.name);
-            let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
-            saveHistory.addToHistory();
-            this.history.push(saveHistory);
+
+            this.addHistory();
+
             this.firstValue.value = `${this.results.choice()}`; 
             this.dis.displayInput(this.firstValue.value);
             this.dis.displayStorage(`${this.firstValue.value} ${this.button.valueButton()}`);
@@ -430,5 +444,51 @@ class Calculator {
             }
         }
     }
-    
+
+    checkMethod() {
+        console.log(Boolean(this.dividePerZeroFlag));
+        console.log(Boolean(!this.operator.name && this.operationsOnXFlag));
+        console.log(Boolean(!this.secondValue.flag && this.equalMulti.flag && this.operator.name)); 
+        console.log(Boolean(this.operationsOnXFlag && this.secondValue.value) ); 
+    }
+
+    addHistory() {
+        let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
+        saveHistory.addToHistory();
+        this.history.push(saveHistory);
+    }
+
+    chooseHistory(e) {
+        const target = e.currentTarget.textContent;
+        const array = target.split(' ');
+        // calc.transferDataFromHistory(array[0], array[1], array[2]);
+        console.log(`Przeniesiono dane z klasy History ${array[0]} ${ array[1]} ${array[2]}`);
+        this.firstValue.value = array[0];
+        this.secondValue.value = array[2];
+        this.operator.value = array[1];
+        console.log([this.firstValue.flag, this.secondValue.flag]);
+        this.secondValue.flag = true;
+        this.historyToggleClass();
+        // this.addEventListeners();
+
+        switch (array[1]) {
+            case 'x':
+                this.operator.name = 'multiplication';  
+                break;
+            case '/':
+                this.operator.name = 'division';
+                break;
+            case '+':
+                this.operator.name = 'addition';
+                break;
+            case '-':
+                this.operator.name = 'subtraction';
+                break;
+        
+            default:
+                throw new Error('Check out this error! Transfer data from History class.')
+                break;
+        }
+        this.equal();
+    }
 }

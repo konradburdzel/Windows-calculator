@@ -37,6 +37,7 @@ class Operations {
     }
 
     choice() {
+        console.log([this.firstVariable, this.secondVariable, this.operation]);
         let valuesOfVariables = [this.firstVariable, this.secondVariable];
         this.commaToDot(valuesOfVariables);
         switch (this.operation) {

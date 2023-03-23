@@ -6,11 +6,9 @@ class History {
         this.result = result;
         this.historyHandle = document.querySelector('.display-history');
         this.historyElements = document.querySelector('.history-elements');
-
     }
 
     addToHistory() {
-        // console.log([this.firstValue, this.secondValue, this.operation, this.result]);
         if (this.historyElements.children[0].textContent === "Nie ma jeszcze żadnej historii") {
             this.changeStyleForElement();
         };
@@ -24,14 +22,14 @@ class History {
 
         const liElementOperation = document.createElement('li');
         liElementOperation.classList.add('li-element-operation');
-        liElementOperation.textContent = `${this.firstValue}  ${this.operation}  ${this.secondValue} =`;
+        liElementOperation.textContent = `${this.firstValue} ${this.operation} ${this.secondValue} =`;
         ulInsideHistoryElement.appendChild(liElementOperation);
 
         const liElementResult = document.createElement('li');
         liElementResult.classList.add('li-element-result');
-        liElementResult.textContent = `${this.result}`;
+        liElementResult.textContent = ` ${this.result}`;
         ulInsideHistoryElement.appendChild(liElementResult);
-        // console.log(historyElements.children[0].textContent === "Nie ma jeszcze żadnej historii");
+
     }
 
     changeStyleForElement() {
@@ -59,4 +57,5 @@ class History {
         const bin = document.querySelector('.binHandle');
         bin.remove();
     }
+
 }
