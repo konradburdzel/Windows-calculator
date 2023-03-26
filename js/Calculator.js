@@ -139,7 +139,6 @@ class Calculator {
     }
 
     equal() {
-        this.checkMethod();
         if (this.dividePerZeroFlag) {
             return this.clear();
         };
