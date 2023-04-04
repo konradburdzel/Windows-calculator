@@ -25,6 +25,7 @@ class Calculator {
         this.overLoad = false;
         this.dis = new Display();
         this.history = [];
+        this.memory = new Memory();
     }
 
     addEventListeners() {
@@ -33,6 +34,9 @@ class Calculator {
         document.querySelector('.mv').addEventListener('click', () => this.memoryToggleClass());
         document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
         document.querySelector('.memory-top-background').addEventListener('click', e => this.memoryToggleClass(e));
+        [...document.querySelectorAll('.memory-key')].forEach(key => {
+            key.addEventListener('click', e => this.memoryPanel(e));
+        });
     }
 
     historyToggleClass() {
@@ -478,5 +482,13 @@ class Calculator {
                 break;
         }
         this.equal();
+    }
+
+    memoryPanel(e) {
+        let target = e.target;
+        let memoryKey = target.classList[target.classList.length - 1];
+        let valueToMemory = document.querySelector('.input-data').textContent;
+        
+        if (memoryKey === 'ms') this.memory.addToMemory(valueToMemory, memoryKey);
     }
 }
