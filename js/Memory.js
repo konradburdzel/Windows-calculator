@@ -3,6 +3,7 @@ class Memory {
         this.value = 0;
         this.memoryKey = '';
         this.memoryHandle = document.querySelector('.display-memory');
+        this.operationsSpan = ['MC', 'M-', 'M+'];
     }
 
     addToMemory(value, memoryKey) {
@@ -25,10 +26,17 @@ class Memory {
         liElementMemory.textContent = `${this.value}`;
         ulInsideMemoryElement.appendChild(liElementMemory);
 
-        const liElementResult = document.createElement('li');
-        liElementResult.classList.add('li-element-result');
-        liElementResult.textContent = ` ${this.value}`;
-        ulInsideMemoryElement.appendChild(liElementResult);
+        const divMemoryOperations = document.createElement('div');
+        divMemoryOperations.classList.add('div-memory-operations');
+        // divMemoryOperations.textContent = ` ${this.value}`;
+        ulInsideMemoryElement.appendChild(divMemoryOperations);
+
+        for (let i = 0; i < 3; i++) {
+            const spanOperation = document.createElement('span');
+            spanOperation.classList.add('span-operation');
+            spanOperation.textContent = this.operationsSpan[i];
+            divMemoryOperations.appendChild(spanOperation);
+            }
 
     }
 

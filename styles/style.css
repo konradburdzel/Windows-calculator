@@ -91,7 +91,8 @@ h1 {
   font-size: 0.9rem;
 }
 
-.history {
+.history,
+.li-element-memory {
   color: var(--fonts);
 }
 
@@ -120,7 +121,8 @@ h1 {
   color: var(--fonts-light-grey);
 }
 
-.li-element-result {
+.li-element-result,
+.li-element-memory {
   font-size: 20px;
 }
 
