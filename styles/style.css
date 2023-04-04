@@ -99,12 +99,14 @@ h1 {
   border-radius: 5px;
 }
 
-.history-top-background {
+.history-top-background,
+.memory-top-background {
   background-color: var(--dark-grey-key);
   opacity: 0.7;
 }
 
-.display-history {
+.display-history,
+.display-memory {
   background-color: var(--dark-grey-key);
   opacity: 1;
 }

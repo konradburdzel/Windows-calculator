@@ -30,6 +30,7 @@ class Calculator {
     addEventListeners() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
         document.querySelector('.history-key').addEventListener('click', () => this.historyToggleClass());
+        document.querySelector('.mv').addEventListener('click', () => this.memoryToggleClass());
         document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
     }
 
@@ -40,6 +41,15 @@ class Calculator {
         this.historyElements.forEach(historyElement => {
             historyElement.addEventListener('click', e => this.chooseHistory(e));
         })
+    }
+
+    memoryToggleClass() {
+        this.historyWindow = document.querySelector('.memory-window');
+        this.historyWindow.classList.toggle('active');
+        this.historyElements = [...document.querySelectorAll('.memory-element')]
+        // this.historyElements.forEach(historyElement => {
+        //     historyElement.addEventListener('click', e => this.chooseHistory(e));
+        // })
     }
 
     buttonCreate(e) {
