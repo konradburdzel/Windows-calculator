@@ -32,6 +32,7 @@ class Calculator {
         document.querySelector('.history-key').addEventListener('click', () => this.historyToggleClass());
         document.querySelector('.mv').addEventListener('click', () => this.memoryToggleClass());
         document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
+        document.querySelector('.memory-top-background').addEventListener('click', e => this.memoryToggleClass(e));
     }
 
     historyToggleClass() {
