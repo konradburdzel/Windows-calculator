@@ -490,5 +490,6 @@ class Calculator {
         let valueToMemory = document.querySelector('.input-data').textContent;
         
         if (memoryKey === 'ms') this.memory.addToMemory(valueToMemory, memoryKey);
+        if (memoryKey === 'm-plus') this.memory.additionToMemory(valueToMemory);
     }
 }

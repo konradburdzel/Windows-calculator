@@ -3,13 +3,13 @@ class Memory {
         this.value = 0;
         this.memoryKey = '';
         this.memoryHandle = document.querySelector('.display-memory');
+        this.memoryElements = document.querySelector('.memory-elements');
         this.operationsSpan = ['MC', 'M-', 'M+'];
     }
 
     addToMemory(value, memoryKey) {
         this.value = value;
         this.memoryKey = memoryKey;
-        this.memoryElements = document.querySelector('.memory-elements')
         if (this.memoryElements.children[0].textContent === 'Brak elementów zapisanych w pamięci') {
             this.changeStyleForElement();
         };
@@ -61,6 +61,15 @@ class Memory {
         this.memoryElements.children[0].textContent = 'Brak elementów zapisanych w pamięci';
         const bin = document.querySelector('.binHandle');
         bin.remove();
+    }
+
+    additionToMemory(value) {
+        console.log(value);
+        // this.memoryElements.children[0].children[0].innerText = parseFloat(this.memoryElements.children[0].children[0].innerText) + parseFloat(value);
+        let liElementHandle = document.querySelector('.li-element-memory');
+        liElementHandle.textContent = parseFloat(liElementHandle.textContent) + parseFloat(value);
+        // console.log(this.memoryElements.children[0].children[0]);
+        console.log(liElementHandle);
     }
 
 }
