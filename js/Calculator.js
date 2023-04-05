@@ -491,5 +491,6 @@ class Calculator {
         
         if (memoryKey === 'ms') this.memory.addToMemory(valueToMemory, memoryKey);
         if (memoryKey === 'm-plus') this.memory.additionToMemory(valueToMemory);
+        if (memoryKey === 'm-minus') this.memory.subtractionToMemory(valueToMemory);
     }
 }

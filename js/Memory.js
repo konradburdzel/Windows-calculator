@@ -64,12 +64,13 @@ class Memory {
     }
 
     additionToMemory(value) {
-        console.log(value);
-        // this.memoryElements.children[0].children[0].innerText = parseFloat(this.memoryElements.children[0].children[0].innerText) + parseFloat(value);
         let liElementHandle = document.querySelector('.li-element-memory');
         liElementHandle.textContent = parseFloat(liElementHandle.textContent) + parseFloat(value);
-        // console.log(this.memoryElements.children[0].children[0]);
-        console.log(liElementHandle);
+    }
+
+    subtractionToMemory(value) {
+        let liElementHandle = document.querySelector('.li-element-memory');
+        liElementHandle.textContent = parseFloat(liElementHandle.textContent) - parseFloat(value);
     }
 
 }
