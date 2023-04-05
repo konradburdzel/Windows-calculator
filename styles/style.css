@@ -112,7 +112,9 @@ h1 {
   opacity: 1;
 }
 
-.ul-in-history-element:hover {
+.ul-in-history-element:hover,
+.ul-in-memory-element:hover {
+  cursor: pointer;
   background-color: var(--fonts-grey-opacity);
   border-radius: 5px;
 }
@@ -142,6 +144,16 @@ h1 {
 
 .memory {
   color: var(--fonts);
+}
+
+.span-operation {
+  background-color: var(--fonts-grey-opacity);
+  border-radius: 5px;
+}
+
+.span-operation:hover {
+  cursor: pointer;
+  background-color: var(--fonts-grey);
 }
 
 .key {

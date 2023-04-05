@@ -219,6 +219,31 @@ body {
   display: grid;
 }
 
+.ul-in-memory-element {
+  height: 72px;
+}
+
+.div-memory-operations {
+  width: 100%;
+  display: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1px;
+}
+
+.ul-in-memory-element:hover .div-memory-operations {
+  display: flex;
+}
+
+.span-operation {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #keys {
   grid-area: keys;
   display: grid;
