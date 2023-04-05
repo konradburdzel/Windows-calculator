@@ -73,4 +73,9 @@ class Memory {
         liElementHandle.textContent = parseFloat(liElementHandle.textContent) - parseFloat(value);
     }
 
+    memoryRecall() {
+        let liElementHandle = document.querySelector('.li-element-memory');
+        return liElementHandle.textContent;
+    }
+
 }
