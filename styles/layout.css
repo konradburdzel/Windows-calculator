@@ -224,7 +224,7 @@ body {
 }
 
 .div-memory-operations {
-  width: 100%;
+  /* width: 100%; */
   display: none;
   flex-direction: row;
   justify-content: flex-end;

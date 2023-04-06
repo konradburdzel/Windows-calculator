@@ -54,6 +54,9 @@ class Calculator {
         this.memoryWindow = document.querySelector('.memory-window');
         this.memoryWindow.classList.toggle('active');
         this.memoryElements = [...document.querySelectorAll('.memory-element')]
+        this.memoryElements.forEach(memortElement => {
+            memortElement.addEventListener('click', e => this.chooseMemory(e));
+        })
     }
 
     buttonCreate(e) {
@@ -508,13 +511,8 @@ class Calculator {
         if (memoryKey.includes('m-minus')) this.memory.subtractionToMemory(valueToMemory);
         if (memoryKey.includes('mr')) {
             let recall = this.memory.memoryRecall()
-            if (this.secondValue.flag) {
-                this.secondValue.value = recall;
-            } else {
-                this.firstValue.value = recall;
+            this.addMemoryToCalculatorValue(recall);
             }
-            this.dis.displayInput(recall);
-        }
         if (memoryKey.includes('mc')) {
             this.memory.deleteMemory();
             // do not work properly
@@ -522,5 +520,21 @@ class Calculator {
         }
         
         
+    }
+
+    chooseMemory(e) {
+        const target = [...e.target.outerText];
+        const memoryValue = target.slice(0, target.indexOf('\n')).join('');
+        this.addMemoryToCalculatorValue(memoryValue);
+        this.memoryToggleClass();
+    }
+
+    addMemoryToCalculatorValue(memValue) {
+        if (this.secondValue.flag) {
+            this.secondValue.value = memValue;
+        } else {
+            this.firstValue.value = memValue;
+        }
+        this.dis.displayInput(memValue);
     }
 }
