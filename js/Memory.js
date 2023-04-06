@@ -1,15 +1,14 @@
 class Memory {
     constructor() {
         this.value = 0;
-        this.memoryKey = '';
         this.memoryHandle = document.querySelector('.display-memory');
         this.memoryElements = document.querySelector('.memory-elements');
         this.operationsSpan = ['MC', 'M-', 'M+'];
     }
 
-    addToMemory(value, memoryKey) {
+    addToMemory(value) {
+        this.addClassKey();
         this.value = value;
-        this.memoryKey = memoryKey;
         if (this.memoryElements.children[0].textContent === 'Brak elementów zapisanych w pamięci') {
             this.changeStyleForElement();
         };
@@ -28,7 +27,6 @@ class Memory {
 
         const divMemoryOperations = document.createElement('div');
         divMemoryOperations.classList.add('div-memory-operations');
-        // divMemoryOperations.textContent = ` ${this.value}`;
         ulInsideMemoryElement.appendChild(divMemoryOperations);
 
         for (let i = 0; i < 3; i++) {
@@ -52,6 +50,7 @@ class Memory {
     }
 
     deleteMemory() {
+        this.removeClassKey();
         this.memoryHandle.style.alignItems = 'flex-start';
         this.memoryHandle.style.paddingTop = '10px';
         const lengthChildren = [...this.memoryElements.children].length;
@@ -59,8 +58,10 @@ class Memory {
             this.memoryElements.removeChild(this.memoryElements.children[0]);
         }
         this.memoryElements.children[0].textContent = 'Brak elementów zapisanych w pamięci';
-        const bin = document.querySelector('.binHandle');
-        bin.remove();
+        if (document.querySelector('.binHandle')) {
+           const bin = document.querySelector('.binHandle');
+        bin.remove(); 
+        }
     }
 
     additionToMemory(value) {
@@ -78,4 +79,21 @@ class Memory {
         return liElementHandle.textContent;
     }
 
+    addClassKey() {
+        let mc = document.querySelector('.mc');
+        let mr = document.querySelector('.mr');
+        let mv = document.querySelector('.mv');
+        mc.classList.add('memory-key');
+        mr.classList.add('memory-key');
+        mv.classList.add('memory-key');
+    }
+
+    removeClassKey() {
+        let mc = document.querySelector('.mc');
+        let mr = document.querySelector('.mr');
+        let mv = document.querySelector('.mv');
+        mc.classList.remove('memory-key');
+        mr.classList.remove('memory-key');
+        mv.classList.remove('memory-key');
+    }
 }

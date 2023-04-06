@@ -31,10 +31,12 @@ class Calculator {
     addEventListeners() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
         document.querySelector('.history-key').addEventListener('click', () => this.historyToggleClass());
-        document.querySelector('.mv').addEventListener('click', () => this.memoryToggleClass());
         document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
         document.querySelector('.memory-top-background').addEventListener('click', e => this.memoryToggleClass(e));
         [...document.querySelectorAll('.memory-key')].forEach(key => {
+            key.addEventListener('click', e => this.memoryPanel(e));
+        });
+        [...document.querySelectorAll('.key-memory-spec')].forEach(key => {
             key.addEventListener('click', e => this.memoryPanel(e));
         });
     }
@@ -49,12 +51,9 @@ class Calculator {
     }
 
     memoryToggleClass() {
-        this.historyWindow = document.querySelector('.memory-window');
-        this.historyWindow.classList.toggle('active');
-        this.historyElements = [...document.querySelectorAll('.memory-element')]
-        // this.historyElements.forEach(historyElement => {
-        //     historyElement.addEventListener('click', e => this.chooseHistory(e));
-        // })
+        this.memoryWindow = document.querySelector('.memory-window');
+        this.memoryWindow.classList.toggle('active');
+        this.memoryElements = [...document.querySelectorAll('.memory-element')]
     }
 
     buttonCreate(e) {
@@ -486,13 +485,28 @@ class Calculator {
 
     memoryPanel(e) {
         let target = e.target;
-        let memoryKey = target.classList[target.classList.length - 1];
+        let memoryKey = [...target.classList];
         let valueToMemory = document.querySelector('.input-data').textContent;
+
+        let mv = document.querySelector('.mv');
+        const bin = document.querySelector('.binHandle');
         
-        if (memoryKey === 'ms') this.memory.addToMemory(valueToMemory, memoryKey);
-        if (memoryKey === 'm-plus') this.memory.additionToMemory(valueToMemory);
-        if (memoryKey === 'm-minus') this.memory.subtractionToMemory(valueToMemory);
-        if (memoryKey === 'mr') {
+        if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
+            mv.addEventListener('click', () => this.memoryToggleClass());
+        }
+
+        if (!bin && memoryKey.includes('m-plus')) {
+            return this.memory.addToMemory(valueToMemory);
+        }
+
+        if (!bin && memoryKey.includes('m-minus')) {
+            return this.memory.addToMemory(-valueToMemory);
+        }
+
+        if (memoryKey.includes('ms')) this.memory.addToMemory(valueToMemory);
+        if (memoryKey.includes('m-plus')) this.memory.additionToMemory(valueToMemory);
+        if (memoryKey.includes('m-minus')) this.memory.subtractionToMemory(valueToMemory);
+        if (memoryKey.includes('mr')) {
             let recall = this.memory.memoryRecall()
             if (this.secondValue.flag) {
                 this.secondValue.value = recall;
@@ -501,6 +515,12 @@ class Calculator {
             }
             this.dis.displayInput(recall);
         }
-        if (memoryKey === 'mc') this.memory.deleteMemory();
+        if (memoryKey.includes('mc')) {
+            this.memory.deleteMemory();
+            // do not work properly
+            mv.removeEventListener('click', () => this.memoryToggleClass());
+        }
+        
+        
     }
 }

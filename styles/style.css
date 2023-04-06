@@ -87,6 +87,7 @@ h1 {
 }
 
 .memory-key,
+.key-memory-spec,
 .history-memory {
   font-size: 0.9rem;
 }
@@ -160,7 +161,16 @@ h1 {
   background-color: var(--grey-key);
 }
 
-.memory-key {
+.key-memory-spec {
+  opacity: 0.5;
+}
+
+.key-memory-spec.memory-key {
+  opacity: 1;
+}
+
+.memory-key,
+.key-memory-spec {
   background-color: var(--dark-grey-key);
 }
 
