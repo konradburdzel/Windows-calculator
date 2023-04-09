@@ -26,6 +26,7 @@ class Calculator {
         this.dis = new Display();
         this.history = [];
         this.memory = new Memory();
+        this.memoryUse = false;
     }
 
     addEventListeners() {
@@ -307,23 +308,35 @@ class Calculator {
             this.dis.displayInput('');
         }
 
+        if (this.memoryUse) {
+            this.secondValue.value = '';
+        }
+
         this.secondValue.flag = true;
         this.secondValue.value += this.button.valueButton();
         this.dis.displayInput(this.secondValue.value)
         this.backspaceFlag = true;
+        this.memoryUse = false;
     }
 
     valueOne() {
         if (this.dis.inputStorage.textContent.includes('=')) {
             this.clear();
         }
+
         if (!this.firstValue.flag) {
             this.dis.displayInput('');
-        };
+        }
+
+        if (this.memoryUse) {
+            this.firstValue.value = '';
+        }
+
         this.firstValue.flag = true;
         this.firstValue.value += this.button.valueButton();
         this.dis.displayInput(this.firstValue.value);
         this.backspaceFlag = true;
+        this.memoryUse = false;
     }
 
     comma() {
@@ -491,14 +504,12 @@ class Calculator {
         let target = e.target;
         let memoryKey = [...target.classList];
         let valueToMemory = document.querySelector('.input-data').textContent;
-        console.log(memoryKey);
 
         this.mv = document.querySelector('.mv');
         const bin = document.querySelector('.binHandle');
         
         if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
             this.mv.addEventListener('click', () => this.memoryToggleClass());
-            console.log('dodano event do mv');
         }
 
         if (!bin && memoryKey.includes('m-plus')) {
@@ -509,16 +520,32 @@ class Calculator {
             return this.memory.addToMemory(-valueToMemory);
         }
 
-        if (memoryKey.includes('ms')) this.memory.addToMemory(valueToMemory);
-        if (memoryKey.includes('m-plus')) this.memory.additionToMemory(valueToMemory);
-        if (memoryKey.includes('m-minus')) this.memory.subtractionToMemory(valueToMemory);
+        if (memoryKey.includes('ms')) {
+            this.memory.addToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+        if (memoryKey.includes('m-plus')) {
+            this.memory.additionToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+
+        if (memoryKey.includes('m-minus')) {
+            this.memory.subtractionToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+
         if (memoryKey.includes('mr')) {
             let recall = this.memory.memoryRecall()
             this.addMemoryToCalculatorValue(recall);
-            }
+        }
+
         if (memoryKey.includes('mc')) {
             this.memory.deleteMemory();
             this.mv.addEventListener('click', () => this.memoryToggleClass());
+            this.memoryUse = true;
         }
     }
 
@@ -526,7 +553,6 @@ class Calculator {
         const target = e.target;
         const outerText = [...e.target.outerText];
         const value = document.querySelector('.input-data').textContent;
-        console.log(value);
 
         //Click on element which hold number in memory
         if ([...e.target.classList].includes('ul-in-memory-element')) {
@@ -536,7 +562,6 @@ class Calculator {
         }
 
         if (target.textContent === 'MC') {
-            console.log(target.parentElement.parentElement.parentElement);
             target.parentElement.parentElement.parentElement.remove();
             if (!document.querySelector('.memory-elements').children[0]) this.memory.deleteMemory();
             this.mv.addEventListener('click', () => this.memoryToggleClass());
