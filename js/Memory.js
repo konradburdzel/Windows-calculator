@@ -68,12 +68,32 @@ class Memory {
 
     additionToMemory(value) {
         let liElementHandle = document.querySelector('.li-element-memory');
-        liElementHandle.textContent = parseFloat(liElementHandle.textContent) + parseFloat(value);
+
+        const variablesHandle = [value, liElementHandle.textContent];
+
+        //comma to dot and parse to float
+        const dotVariables = this.commaToDot(variablesHandle);
+
+        const parseVariables = this.parseToFloat(dotVariables);
+
+        const addition = parseVariables[0] + parseVariables[1];
+
+        liElementHandle.textContent = `${this.dotToComma(addition)}`;
     }
 
     subtractionToMemory(value) {
         let liElementHandle = document.querySelector('.li-element-memory');
-        liElementHandle.textContent = parseFloat(liElementHandle.textContent) - parseFloat(value);
+
+        const variablesHandle = [value, liElementHandle.textContent];
+
+        //comma to dot and parse to float
+        const dotVariables = this.commaToDot(variablesHandle);
+
+        const parseVariables = this.parseToFloat(dotVariables);
+
+        const subtraction = parseVariables[0] - parseVariables[1];
+
+        liElementHandle.textContent = `${this.dotToComma(subtraction)}`;
     }
 
     memoryRecall() {
@@ -99,5 +119,27 @@ class Memory {
         mc.classList.remove('memory-key');
         mr.classList.remove('memory-key');
         mv.classList.remove('memory-key');
+    }
+
+    commaToDot(commaVariables) {
+        const dotVariables = commaVariables.map(variable => {
+            if (variable.includes(',')) {
+                variable = variable.replace("," , ".");
+            };
+            return variable;
+        })
+        return dotVariables;
+    }
+
+    parseToFloat(dotVariables) {
+        const parseToFloatVariables = dotVariables.map  (dotVariable => {
+            dotVariable = parseFloat(dotVariable);
+            return dotVariable;
+        })
+        return parseToFloatVariables;
+    }
+
+    dotToComma(dotToComma) {
+        return dotToComma.toString().replace('.', ',');
     }
 }
