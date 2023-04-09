@@ -517,7 +517,7 @@ class Calculator {
         }
 
         if (!bin && memoryKey.includes('m-minus')) {
-            return this.memory.addToMemory(-valueToMemory);
+            return this.memory.addToMemory('-' + valueToMemory);
         }
 
         if (memoryKey.includes('ms')) {

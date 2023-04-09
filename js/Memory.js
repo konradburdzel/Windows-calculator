@@ -69,7 +69,7 @@ class Memory {
     additionToMemory(value) {
         let liElementHandle = document.querySelector('.li-element-memory');
 
-        const variablesHandle = [value, liElementHandle.textContent];
+        const variablesHandle = [liElementHandle.textContent, value];
 
         //comma to dot and parse to float
         const dotVariables = this.commaToDot(variablesHandle);
@@ -84,15 +84,15 @@ class Memory {
     subtractionToMemory(value) {
         let liElementHandle = document.querySelector('.li-element-memory');
 
-        const variablesHandle = [value, liElementHandle.textContent];
-
+        const variablesHandle = [liElementHandle.textContent, value];
+        console.log(variablesHandle);
         //comma to dot and parse to float
         const dotVariables = this.commaToDot(variablesHandle);
-
+        console.log(dotVariables);
         const parseVariables = this.parseToFloat(dotVariables);
-
+        console.log(parseVariables);
         const subtraction = parseVariables[0] - parseVariables[1];
-
+        console.log(subtraction);
         liElementHandle.textContent = `${this.dotToComma(subtraction)}`;
     }
 
