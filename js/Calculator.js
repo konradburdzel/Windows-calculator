@@ -543,7 +543,7 @@ class Calculator {
         }
 
         if (target.textContent === 'M-') {
-            console.log('M-');
+            this.memory.subtractionToMemory(value);
 
         }
 
