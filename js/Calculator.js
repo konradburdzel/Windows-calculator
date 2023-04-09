@@ -56,7 +56,8 @@ class Calculator {
         this.memoryElements = [...document.querySelectorAll('.memory-element')]
         this.memoryElements.forEach(memortElement => {
             memortElement.addEventListener('click', e => this.chooseMemory(e));
-        })
+        });
+
     }
 
     buttonCreate(e) {
@@ -490,6 +491,7 @@ class Calculator {
         let target = e.target;
         let memoryKey = [...target.classList];
         let valueToMemory = document.querySelector('.input-data').textContent;
+        console.log(memoryKey);
 
         let mv = document.querySelector('.mv');
         const bin = document.querySelector('.binHandle');
@@ -517,12 +519,15 @@ class Calculator {
             this.memory.deleteMemory();
             // do not work properly
             mv.removeEventListener('click', () => this.memoryToggleClass());
+            console.log('delete per mc');
+            console.log(this.memoryToggleClass());
         }
         
         
     }
 
     chooseMemory(e) {
+        console.log(e.target);
         const target = [...e.target.outerText];
         const memoryValue = target.slice(0, target.indexOf('\n')).join('');
         this.addMemoryToCalculatorValue(memoryValue);

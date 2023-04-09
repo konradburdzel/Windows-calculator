@@ -31,6 +31,7 @@ class Display {
 
     insertWhiteSpace(value) {
         if (value === this.operations.errorDivideZero()) return value;
+        if (value === null || value === undefined) return console.log('Error: Invalid type of value!!!');
         if (value.includes(',')) return value;
         let valueWithWS = '';
         let valueWithoutWS = value.split(' ').join('');

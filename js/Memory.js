@@ -75,8 +75,11 @@ class Memory {
     }
 
     memoryRecall() {
-        let liElementHandle = document.querySelector('.li-element-memory');
-        return liElementHandle.textContent;
+        const liElementHandle = document.querySelector('.li-element-memory');
+        if (liElementHandle) {
+            return liElementHandle.textContent; 
+        }
+        console.log(liElementHandle);
     }
 
     addClassKey() {
