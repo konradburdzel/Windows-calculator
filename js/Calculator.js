@@ -498,6 +498,7 @@ class Calculator {
         
         if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
             this.mv.addEventListener('click', () => this.memoryToggleClass());
+            console.log('dodano event do mv');
         }
 
         if (!bin && memoryKey.includes('m-plus')) {
@@ -547,7 +548,7 @@ class Calculator {
         }
 
         if (target.textContent === 'M+') {
-            console.log('M+');
+            this.memory.additionToMemory(value);
         }
         
     }

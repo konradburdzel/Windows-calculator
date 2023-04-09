@@ -3,7 +3,7 @@ class Memory {
         this.value = 0;
         this.memoryHandle = document.querySelector('.display-memory');
         this.memoryElements = document.querySelector('.memory-elements');
-        this.operationsSpan = ['MC', 'M-', 'M+'];
+        this.operationsSpan = ['MC', 'M+', 'M-'];
     }
 
     addToMemory(value) {
