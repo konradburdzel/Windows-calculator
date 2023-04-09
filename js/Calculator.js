@@ -493,11 +493,11 @@ class Calculator {
         let valueToMemory = document.querySelector('.input-data').textContent;
         console.log(memoryKey);
 
-        let mv = document.querySelector('.mv');
+        this.mv = document.querySelector('.mv');
         const bin = document.querySelector('.binHandle');
         
         if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
-            mv.addEventListener('click', () => this.memoryToggleClass());
+            this.mv.addEventListener('click', () => this.memoryToggleClass());
         }
 
         if (!bin && memoryKey.includes('m-plus')) {
@@ -517,21 +517,39 @@ class Calculator {
             }
         if (memoryKey.includes('mc')) {
             this.memory.deleteMemory();
-            // do not work properly
-            mv.removeEventListener('click', () => this.memoryToggleClass());
-            console.log('delete per mc');
-            console.log(this.memoryToggleClass());
+            this.mv.addEventListener('click', () => this.memoryToggleClass());
         }
-        
-        
     }
 
     chooseMemory(e) {
-        console.log(e.target);
-        const target = [...e.target.outerText];
-        const memoryValue = target.slice(0, target.indexOf('\n')).join('');
-        this.addMemoryToCalculatorValue(memoryValue);
-        this.memoryToggleClass();
+        const target = e.target;
+        const outerText = [...e.target.outerText];
+        const value = document.querySelector('.input-data').textContent;
+        console.log(value);
+
+        //Click on element which hold number in memory
+        if ([...e.target.classList].includes('ul-in-memory-element')) {
+            const memoryValue = outerText.slice(0, outerText.indexOf('\n')).join('');
+            this.addMemoryToCalculatorValue(memoryValue);
+            this.memoryToggleClass();
+        }
+
+        if (target.textContent === 'MC') {
+            console.log(target.parentElement.parentElement.parentElement);
+            target.parentElement.parentElement.parentElement.remove();
+            if (!document.querySelector('.memory-elements').children[0]) this.memory.deleteMemory();
+            this.mv.addEventListener('click', () => this.memoryToggleClass());
+        }
+
+        if (target.textContent === 'M-') {
+            console.log('M-');
+
+        }
+
+        if (target.textContent === 'M+') {
+            console.log('M+');
+        }
+        
     }
 
     addMemoryToCalculatorValue(memValue) {

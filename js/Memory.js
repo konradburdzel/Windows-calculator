@@ -54,9 +54,11 @@ class Memory {
         this.memoryHandle.style.alignItems = 'flex-start';
         this.memoryHandle.style.paddingTop = '10px';
         const lengthChildren = [...this.memoryElements.children].length;
-        for (let i = 0; i < lengthChildren - 1; i++) {
+        for (let i = 0; i < lengthChildren; i++) {
             this.memoryElements.removeChild(this.memoryElements.children[0]);
         }
+        const firstChildren = document.createElement('li');
+        this.memoryElements.appendChild(firstChildren);
         this.memoryElements.children[0].textContent = 'Brak elementów zapisanych w pamięci';
         if (document.querySelector('.binHandle')) {
            const bin = document.querySelector('.binHandle');
@@ -79,7 +81,6 @@ class Memory {
         if (liElementHandle) {
             return liElementHandle.textContent; 
         }
-        console.log(liElementHandle);
     }
 
     addClassKey() {
