@@ -501,16 +501,18 @@ class Calculator {
     }
 
     memoryPanel(e) {
-        let target = e.target;
-        let memoryKey = [...target.classList];
-        let valueToMemory = document.querySelector('.input-data').textContent;
+        const target = e.target;
+        const memoryKey = [...target.classList];
+        const valueToMemory = document.querySelector('.input-data').textContent;
 
         this.mv = document.querySelector('.mv');
         const bin = document.querySelector('.binHandle');
         
         if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
-            this.mv.addEventListener('click', () => this.memoryToggleClass());
+            this.mv.classList.add('active');
         }
+
+        if (memoryKey.includes('mv') && memoryKey.includes('active')) this.memoryToggleClass();
 
         if (!bin && memoryKey.includes('m-plus')) {
             return this.memory.addToMemory(valueToMemory);
@@ -544,8 +546,8 @@ class Calculator {
 
         if (memoryKey.includes('mc')) {
             this.memory.deleteMemory();
-            this.mv.addEventListener('click', () => this.memoryToggleClass());
             this.memoryUse = true;
+            this.mv.classList.remove('active');
         }
     }
 
@@ -564,7 +566,7 @@ class Calculator {
         if (target.textContent === 'MC') {
             target.parentElement.parentElement.parentElement.remove();
             if (!document.querySelector('.memory-elements').children[0]) this.memory.deleteMemory();
-            this.mv.addEventListener('click', () => this.memoryToggleClass());
+            this.mv.classList.remove('active');
         }
 
         if (target.textContent === 'M-') {

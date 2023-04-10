@@ -63,6 +63,7 @@ class Memory {
         if (document.querySelector('.binHandle')) {
            const bin = document.querySelector('.binHandle');
         bin.remove(); 
+        document.querySelector('.mv').classList.remove('active');
         }
     }
 
@@ -94,7 +95,7 @@ class Memory {
 
         //comma to dot and parse to float
         const dotVariables = this.commaToDot(variablesHandle);
-        
+
         const parseVariables = this.parseToFloat(dotVariables);
 
         let subtraction = parseVariables[0] - parseVariables[1];
