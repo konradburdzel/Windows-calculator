@@ -537,7 +537,7 @@ class Calculator {
         }
 
 
-        if (memoryKey.includes('mr')) {
+        if (memoryKey.includes('mr') && bin) {
             let recall = this.memory.memoryRecall()
             this.addMemoryToCalculatorValue(recall);
         }
