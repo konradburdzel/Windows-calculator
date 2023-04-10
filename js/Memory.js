@@ -71,12 +71,16 @@ class Memory {
 
         const variablesHandle = [liElementHandle.textContent, value];
 
+        const numberOfDecimal = this.fixedNumberOfDecimal(liElementHandle.textContent, value);        
+
         //comma to dot and parse to float
         const dotVariables = this.commaToDot(variablesHandle);
 
         const parseVariables = this.parseToFloat(dotVariables);
 
-        const addition = parseVariables[0] + parseVariables[1];
+        let addition = parseVariables[0] + parseVariables[1];
+
+        addition = this.roundToFixed(addition, numberOfDecimal);
 
         liElementHandle.textContent = `${this.dotToComma(addition)}`;
     }
@@ -85,14 +89,18 @@ class Memory {
         let liElementHandle = document.querySelector('.li-element-memory');
 
         const variablesHandle = [liElementHandle.textContent, value];
-        console.log(variablesHandle);
+
+        const numberOfDecimal = this.fixedNumberOfDecimal(liElementHandle.textContent, value);
+
         //comma to dot and parse to float
         const dotVariables = this.commaToDot(variablesHandle);
-        console.log(dotVariables);
+        
         const parseVariables = this.parseToFloat(dotVariables);
-        console.log(parseVariables);
-        const subtraction = parseVariables[0] - parseVariables[1];
-        console.log(subtraction);
+
+        let subtraction = parseVariables[0] - parseVariables[1];
+
+        subtraction = this.roundToFixed(subtraction, numberOfDecimal);
+
         liElementHandle.textContent = `${this.dotToComma(subtraction)}`;
     }
 
@@ -141,5 +149,22 @@ class Memory {
 
     dotToComma(dotToComma) {
         return dotToComma.toString().replace('.', ',');
+    }
+
+    fixedNumberOfDecimal(liValue, value) {
+        const numberOfDecimalLiValue = liValue.length - 1 - liValue.indexOf(',');
+        const numberOfDecimalValue = value.length - 1 - value.indexOf(',');
+        let numberOfDecimal;
+        if (numberOfDecimalLiValue >= numberOfDecimalValue) {
+            numberOfDecimal = numberOfDecimalLiValue
+        } else {
+            numberOfDecimal = numberOfDecimalValue;
+        }
+        return numberOfDecimal;
+    }
+
+    roundToFixed(number, digits) {
+        const rounded = number.toFixed(digits);
+        return parseFloat(rounded);
     }
 }
