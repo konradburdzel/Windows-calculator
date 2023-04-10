@@ -365,6 +365,14 @@ class Calculator {
     }
 
     reciprocal() {
+        this.results = new Operations();
+
+        if (this.dis.input.textContent === '0') {
+            this.dividePerZeroFlag = true;
+            this.dividePerZero();
+            return this.dis.displayInput(this.results.errorDivideZero());
+        }
+
         if (this.secondValue.flag) {
             this.dis.inputStorage.textContent += ` 1/( ${this.secondValue.value} )`;
             this.secondValue.value = `${this.results.reciprocal(this.secondValue.value)}`;
@@ -446,7 +454,6 @@ class Calculator {
         this.notClickKeys = [...document.querySelectorAll('.zero')];
         if (this.dividePerZeroFlag) {
             this.notClickKeys.forEach(key => {
-                key.addEventListener('click', console.log('test'));
                 key.style.opacity = 0.5;
                 key.classList.remove('number-no-hover');
                 key.classList.remove('no-hover');
