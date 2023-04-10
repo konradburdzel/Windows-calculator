@@ -112,7 +112,7 @@ class Calculator {
             if (this.firstValue.value.length < 16) {
             
                 if (this.dividePerZeroFlag) {
-                    return this.clear();
+                    this.clear();
                 }
 
                 this.valueOne();
