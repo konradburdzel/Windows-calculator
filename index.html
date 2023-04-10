@@ -67,14 +67,22 @@
         <div class="input-data">0</div>
       </section>
       <section class="memory">
-        <span class="key memory-key mc">MC</span>
-        <span class="key memory-key mr">MR</span>
+        <span class="key-memory-spec key mc">MC</span>
+        <span class="key-memory-spec key mr">MR</span>
         <span class="key memory-key m-plus">M+</span>
         <span class="key memory-key m-minus">M-</span>
         <span class="key memory-key ms">MS</span>
       </section>
       <section class="history-memory">
-        <span class="key memory-key ms">Mv</span>
+        <span class="key-memory-spec key mv">Mv</span>
+      </section>
+      <section class="memory-window">
+        <div class="memory-top-background"></div>
+        <div class="display-memory">
+          <ul class="memory-elements">
+            <li class="memory-element">Brak elementów zapisanych w pamięci</li>
+          </ul>
+        </div>
       </section>
       <section id="keys">
         <span class="key zero no-hover" data-operation="percent">%</span>
@@ -128,6 +136,7 @@
     <script src="/js/Operations.js"></script>
     <script src="/js/Buttons.js"></script>
     <script src="/js/History.js"></script>
+    <script src="/js/Memory.js"></script>
     <script src="/js/Calculator.js"></script>
     <script src="app.js"></script>
   </body>

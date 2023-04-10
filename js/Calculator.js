@@ -25,12 +25,21 @@ class Calculator {
         this.overLoad = false;
         this.dis = new Display();
         this.history = [];
+        this.memory = new Memory();
+        this.memoryUse = false;
     }
 
     addEventListeners() {
         document.querySelector('#keys').addEventListener('click', e => this.buttonCreate(e));
         document.querySelector('.history-key').addEventListener('click', () => this.historyToggleClass());
         document.querySelector('.history-top-background').addEventListener('click', e => this.historyToggleClass(e));
+        document.querySelector('.memory-top-background').addEventListener('click', e => this.memoryToggleClass(e));
+        [...document.querySelectorAll('.memory-key')].forEach(key => {
+            key.addEventListener('click', e => this.memoryPanel(e));
+        });
+        [...document.querySelectorAll('.key-memory-spec')].forEach(key => {
+            key.addEventListener('click', e => this.memoryPanel(e));
+        });
     }
 
     historyToggleClass() {
@@ -40,6 +49,16 @@ class Calculator {
         this.historyElements.forEach(historyElement => {
             historyElement.addEventListener('click', e => this.chooseHistory(e));
         })
+    }
+
+    memoryToggleClass() {
+        this.memoryWindow = document.querySelector('.memory-window');
+        this.memoryWindow.classList.toggle('active');
+        this.memoryElements = [...document.querySelectorAll('.memory-element')]
+        this.memoryElements.forEach(memortElement => {
+            memortElement.addEventListener('click', e => this.chooseMemory(e));
+        });
+
     }
 
     buttonCreate(e) {
@@ -289,23 +308,35 @@ class Calculator {
             this.dis.displayInput('');
         }
 
+        if (this.memoryUse) {
+            this.secondValue.value = '';
+        }
+
         this.secondValue.flag = true;
         this.secondValue.value += this.button.valueButton();
         this.dis.displayInput(this.secondValue.value)
         this.backspaceFlag = true;
+        this.memoryUse = false;
     }
 
     valueOne() {
         if (this.dis.inputStorage.textContent.includes('=')) {
             this.clear();
         }
+
         if (!this.firstValue.flag) {
             this.dis.displayInput('');
-        };
+        }
+
+        if (this.memoryUse) {
+            this.firstValue.value = '';
+        }
+
         this.firstValue.flag = true;
         this.firstValue.value += this.button.valueButton();
         this.dis.displayInput(this.firstValue.value);
         this.backspaceFlag = true;
+        this.memoryUse = false;
     }
 
     comma() {
@@ -467,5 +498,94 @@ class Calculator {
                 break;
         }
         this.equal();
+    }
+
+    memoryPanel(e) {
+        const target = e.target;
+        const memoryKey = [...target.classList];
+        const valueToMemory = document.querySelector('.input-data').textContent;
+
+        this.mv = document.querySelector('.mv');
+        const bin = document.querySelector('.binHandle');
+        
+        if (!bin && (memoryKey.includes('ms') || memoryKey.includes('m-minus') || memoryKey.includes('m-plus'))) {
+            this.mv.classList.add('active');
+        }
+
+        if (memoryKey.includes('mv') && memoryKey.includes('active')) this.memoryToggleClass();
+
+        if (!bin && memoryKey.includes('m-plus')) {
+            return this.memory.addToMemory(valueToMemory);
+        }
+
+        if (!bin && memoryKey.includes('m-minus')) {
+            return this.memory.addToMemory('-' + valueToMemory);
+        }
+
+        if (memoryKey.includes('ms')) {
+            this.memory.addToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+        if (memoryKey.includes('m-plus')) {
+            this.memory.additionToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+
+        if (memoryKey.includes('m-minus')) {
+            this.memory.subtractionToMemory(valueToMemory);
+            this.memoryUse = true;
+        }
+
+
+        if (memoryKey.includes('mr') && bin) {
+            let recall = this.memory.memoryRecall()
+            this.addMemoryToCalculatorValue(recall);
+        }
+
+        if (memoryKey.includes('mc')) {
+            this.memory.deleteMemory();
+            this.memoryUse = true;
+            this.mv.classList.remove('active');
+        }
+    }
+
+    chooseMemory(e) {
+        const target = e.target;
+        const outerText = [...e.target.outerText];
+        const value = document.querySelector('.input-data').textContent;
+
+        //Click on element which hold number in memory
+        if ([...e.target.classList].includes('ul-in-memory-element')) {
+            const memoryValue = outerText.slice(0, outerText.indexOf('\n')).join('');
+            this.addMemoryToCalculatorValue(memoryValue);
+            this.memoryToggleClass();
+        }
+
+        if (target.textContent === 'MC') {
+            target.parentElement.parentElement.parentElement.remove();
+            if (!document.querySelector('.memory-elements').children[0]) this.memory.deleteMemory();
+            this.mv.classList.remove('active');
+        }
+
+        if (target.textContent === 'M-') {
+            this.memory.subtractionToMemory(value);
+
+        }
+
+        if (target.textContent === 'M+') {
+            this.memory.additionToMemory(value);
+        }
+        
+    }
+
+    addMemoryToCalculatorValue(memValue) {
+        if (this.secondValue.flag) {
+            this.secondValue.value = memValue;
+        } else {
+            this.firstValue.value = memValue;
+        }
+        this.dis.displayInput(memValue);
     }
 }
