@@ -204,3 +204,8 @@ h1 {
 .equal:hover {
   background-color: var(--equal-background-click);
 }
+
+/* .history-title::after .active,
+.memory-title::after .active {
+  background-color: var(--border);
+} */
