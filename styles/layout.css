@@ -288,6 +288,12 @@ body {
     align-items: center;
   }
 
+  .display-history,
+  .display-memory {
+    height: 100%;
+    overflow: hidden;
+  }
+
   .history-title,
   .memory-title {
     position: relative;
@@ -318,6 +324,7 @@ body {
   .history-window {
     grid-area: history-memory;
     position: relative;
+    overflow: hidden;
   }
 
   /* .history-window,

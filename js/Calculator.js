@@ -1,7 +1,6 @@
-
+//historia podczas duzego ekranu dziwnie siię zachowuje gdy chce wybrac jakis element
 class Calculator {
     constructor() {
-        this.addEventListeners();
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
@@ -27,6 +26,13 @@ class Calculator {
         this.history = [];
         this.memory = new Memory();
         this.memoryUse = false;
+        this.historyWindowHandle = document.querySelector('.history-title');
+        this.memoryWindowHandle = document.querySelector('.memory-title');
+        this.historyWindow = document.querySelector('.history-window');
+        this.memoryWindow = document.querySelector('.memory-window');
+        this.wideViewFlag = false;
+        this.addEventListeners();
+        this.startSettings();
     }
 
     addEventListeners() {
@@ -40,24 +46,69 @@ class Calculator {
         [...document.querySelectorAll('.key-memory-spec')].forEach(key => {
             key.addEventListener('click', e => this.memoryPanel(e));
         });
+
+        this.historyWindowHandle.addEventListener('click', e => this.addClassActive(e));
+
+        this.memoryWindowHandle.addEventListener('click', e => this.addClassActive(e));
+        
+        this.historyWindow.addEventListener('mouseenter', () => this.addEventsAllElements());
+
+    }
+
+    startSettings() {
+        if (window.innerWidth >= 555) {
+            this.toggleClassResize();
+            console.log('okno jest większe niż 555px');
+        };
+    }
+
+    addClassActive(event) {
+        const handle = event.target.classList;
+
+        if (!this.historyWindowHandle.classList.contains('active') && handle.contains('history-title')) {
+            this.historyWindow.classList.add('active');
+            this.historyWindowHandle.classList.add('active');
+
+            this.memoryWindow.classList.remove('active');
+            this.memoryWindowHandle.classList.remove('active');
+        } else if (!this.memoryWindowHandle.classList.contains('active') && handle.contains('memory-title')) {
+            this.historyWindow.classList.remove('active');
+            this.historyWindowHandle.classList.remove('active');
+            this.memoryWindow.classList.add('active');
+            this.memoryWindowHandle.classList.add('active');
+        }
+    }
+
+    toggleClassResize() {
+
+        if (this.wideViewFlag) return;
+        // if (this.wideViewFlag) return;
+        this.wideViewFlag = true; 
+
+        this.historyWindowHandle.classList.add('active');
+        this.historyWindow.classList.add('active');
+        this.memoryWindowHandle.classList.remove('active');
+        this.memoryWindow.classList.remove('active');
     }
 
     historyToggleClass() {
-        this.historyWindow = document.querySelector('.history-window');
         this.historyWindow.classList.toggle('active');
-        this.historyElements = [...document.querySelectorAll('.history-element')]
-        this.historyElements.forEach(historyElement => {
-            historyElement.addEventListener('click', e => this.chooseHistory(e));
-        })
+        this.addEventsAllElements();
     }
 
+    addEventsAllElements() {
+        console.log('dziala');
+        this.historyElements = [...document.querySelectorAll('.history-element')]
+        this.historyElements.forEach(historyElement => {
+            historyElement.addEventListener('click', e => this.chooseHistory(e))})
+    } 
+
     memoryToggleClass() {
-        this.memoryWindow = document.querySelector('.memory-window');
         this.memoryWindow.classList.toggle('active');
         this.memoryElements = [...document.querySelectorAll('.memory-element')]
         this.memoryElements.forEach(memortElement => {
-            memortElement.addEventListener('click', e => this.chooseMemory(e));
-        });
+            memortElement.addEventListener('click', e => this.chooseMemory(e))
+        })
 
     }
 
