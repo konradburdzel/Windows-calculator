@@ -535,7 +535,7 @@ class Calculator {
         this.secondValue.value = array[2];
         this.operator.value = array[1];
         this.secondValue.flag = true;
-        this.historyToggleClass();
+        if (window.innerWidth < 555) this.historyToggleClass();
 
         switch (array[1]) {
             case 'x':
