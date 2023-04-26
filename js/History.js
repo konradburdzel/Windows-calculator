@@ -1,24 +1,25 @@
 class History {
     constructor(firstValue, secondValue, operation, result) {
-        this.firstValue = firstValue;
-        this.secondValue = secondValue;
-        this.operation = operation;
-        this.result = result;
         this.historyHandle = document.querySelector('.display-history');
         this.historyElements = document.querySelector('.history-elements');
     }
 
-    addToHistory() {
+    addToHistory(firstValue, secondValue, operation, result) {
+        this.firstValue = firstValue;
+        this.secondValue = secondValue;
+        this.operation = operation;
+        this.result = result;
+        console.log('dodano do historii');
         if (this.historyElements.children[0].textContent === "Nie ma jeszcze żadnej historii") {
             this.changeStyleForElement();
         };
-        const newHitoryElement = document.createElement('li');
-        newHitoryElement.classList.add('history-element');
-        this.historyElements.insertBefore(newHitoryElement, this.historyElements.children[0]);
+        const newHistoryElement = document.createElement('li');
+        newHistoryElement.classList.add('history-element');
+        this.historyElements.insertBefore(newHistoryElement, this.historyElements.children[0]);
 
         const ulInsideHistoryElement = document.createElement('ul');
         ulInsideHistoryElement.classList.add('ul-in-history-element');
-        newHitoryElement.appendChild(ulInsideHistoryElement);
+        newHistoryElement.appendChild(ulInsideHistoryElement);
 
         const liElementOperation = document.createElement('li');
         liElementOperation.classList.add('li-element-operation');

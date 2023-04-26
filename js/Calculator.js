@@ -1,4 +1,4 @@
-//historia podczas duzego ekranu dziwnie siię zachowuje gdy chce wybrac jakis element
+//dynamiczna zmiana aktywnej klasy dla historii w zależności od szerokości okna
 class Calculator {
     constructor() {
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
@@ -31,6 +31,7 @@ class Calculator {
         this.historyWindow = document.querySelector('.history-window');
         this.memoryWindow = document.querySelector('.memory-window');
         this.wideViewFlag = false;
+        this.historyClass = new History();
         this.addEventListeners();
         this.startSettings();
     }
@@ -51,14 +52,15 @@ class Calculator {
 
         this.memoryWindowHandle.addEventListener('click', e => this.addClassActive(e));
         
-        this.historyWindow.addEventListener('mouseenter', () => this.addEventsAllElements());
+        // this.historyWindow.addEventListener('mouseenter', () => this.addEventsAllHistory());
+
+        this.memoryWindow.addEventListener('mouseenter', () => this.addEventsAllMemory());
 
     }
 
     startSettings() {
         if (window.innerWidth >= 555) {
             this.toggleClassResize();
-            console.log('okno jest większe niż 555px');
         };
     }
 
@@ -93,23 +95,25 @@ class Calculator {
 
     historyToggleClass() {
         this.historyWindow.classList.toggle('active');
-        this.addEventsAllElements();
     }
 
-    addEventsAllElements() {
-        console.log('dziala');
-        this.historyElements = [...document.querySelectorAll('.history-element')]
-        this.historyElements.forEach(historyElement => {
-            historyElement.addEventListener('click', e => this.chooseHistory(e))})
+    addEventToHistoryElement() {
+        this.historyElement = document.querySelector('.history-element');
+        console.log(this.historyElement);
+        this.historyElement.addEventListener('click', e => {
+                this.chooseHistory(e);
+        })
     } 
 
     memoryToggleClass() {
         this.memoryWindow.classList.toggle('active');
-        this.memoryElements = [...document.querySelectorAll('.memory-element')]
-        this.memoryElements.forEach(memortElement => {
-            memortElement.addEventListener('click', e => this.chooseMemory(e))
-        })
+        this.addEventsAllMemory();
+    }
 
+    addEventsAllMemory() {
+        this.memoryElements = [...document.querySelectorAll('.memory-element')];
+        this.memoryElements.forEach(memoryElement => {
+            memoryElement.addEventListener('click', e => this.chooseMemory(e))})
     }
 
     buttonCreate(e) {
@@ -523,9 +527,8 @@ class Calculator {
     }
 
     addHistory() {
-        let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
-        saveHistory.addToHistory();
-        this.history.push(saveHistory);
+        this.historyClass.addToHistory(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
+        this.addEventToHistoryElement();
     }
 
     chooseHistory(e) {
@@ -613,12 +616,13 @@ class Calculator {
         const target = e.target;
         const outerText = [...e.target.outerText];
         const value = document.querySelector('.input-data').textContent;
+        console.log(value);
 
         //Click on element which hold number in memory
         if ([...e.target.classList].includes('ul-in-memory-element')) {
             const memoryValue = outerText.slice(0, outerText.indexOf('\n')).join('');
             this.addMemoryToCalculatorValue(memoryValue);
-            this.memoryToggleClass();
+            if (window.innerWidth <555) this.memoryToggleClass();
         }
 
         if (target.textContent === 'MC') {
