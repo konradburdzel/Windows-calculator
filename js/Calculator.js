@@ -1,5 +1,3 @@
-//niepoprawne dodawanie i odejmowanie w panelu pamięci
-//nie działająca pamięć
 class Calculator {
     constructor() {
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
