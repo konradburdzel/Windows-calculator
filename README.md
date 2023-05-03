@@ -24,8 +24,8 @@ The project of Windows 10 Calculator is available on:
 
 ### Screenshot
 
-![Mobile view] (screenshots/Mobile View 2023-03-24 Windows 10 Calculator.png)
-![Wide view] (screenshots/Wide View 2023-05-03 Windows 10 Calculator.png)
+![Mobile view] (/screenshots/Mobile View 2023-03-24 Windows 10 Calculator.png)
+![Wide view] (/screenshots/Wide View 2023-05-03 Windows 10 Calculator.png)
 
 ## Structure of project
 
