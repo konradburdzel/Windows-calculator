@@ -1,4 +1,5 @@
 //niepoprawne dodawanie i odejmowanie w panelu pamięci
+//nie działająca pamięć
 class Calculator {
     constructor() {
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
@@ -54,8 +55,6 @@ class Calculator {
 
         this.memoryWindowHandle.addEventListener('click', e => this.addClassActive(e));
         
-        this.memoryWindow.addEventListener('mouseenter', () => this.addEventsAllMemory());
-
         window.addEventListener('resize', e => {
             this.activeStorageToggleClass(e);
         })
@@ -102,11 +101,7 @@ class Calculator {
     }
 
     toggleClassResize() {
-
-        // if (this.wideViewFlag) return;
-        // if (this.wideViewFlag) return;
         this.wideViewFlag = true; 
-
         this.historyWindowHandle.classList.add('active');
         this.historyWindow.classList.add('active');
         this.memoryWindowHandle.classList.remove('active');
@@ -129,15 +124,8 @@ class Calculator {
 
     memoryToggleClass() {
         this.memoryWindow.classList.toggle('active');
-        this.addEventsAllMemory();
         this.activeStorage = true;
         this.historyWindowHandle.classList.remove('active');
-    }
-
-    addEventsAllMemory() {
-        this.memoryElements = [...document.querySelectorAll('.memory-element')];
-        this.memoryElements.forEach(memoryElement => {
-            memoryElement.addEventListener('click', e => this.chooseMemory(e))})
     }
 
     buttonCreate(e) {
@@ -600,15 +588,18 @@ class Calculator {
         if (memoryKey.includes('mv') && memoryKey.includes('active')) this.memoryToggleClass();
 
         if (!bin && memoryKey.includes('m-plus')) {
-            return this.memory.addToMemory(valueToMemory);
+            return this.addMemory('', valueToMemory); 
+            // this.memory.addToMemory(valueToMemory);
         }
 
         if (!bin && memoryKey.includes('m-minus')) {
-            return this.memory.addToMemory('-' + valueToMemory);
+            return this.addMemory('-', valueToMemory);
+            // this.memory.addToMemory('-' + valueToMemory);
         }
 
         if (memoryKey.includes('ms')) {
-            this.memory.addToMemory(valueToMemory);
+            this.addMemory('', valueToMemory);
+            // this.memory.addToMemory(valueToMemory);
             this.memoryUse = true;
         }
 
@@ -634,6 +625,16 @@ class Calculator {
             this.memoryUse = true;
             this.mv.classList.remove('active');
         }
+    }
+
+    addMemory(sign, valueToMemory) {
+        this.memory.addToMemory(sign + valueToMemory);
+        this.addEventToMemoryElement();
+    }
+
+    addEventToMemoryElement() {
+        this.memoryElement = document.querySelector('.memory-element');
+        this.memoryElement.addEventListener('click', e => this.chooseMemory(e))
     }
 
     chooseMemory(e) {
