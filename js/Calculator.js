@@ -1,7 +1,7 @@
-
+//niepoprawne dodawanie i odejmowanie w panelu pamięci
+//nie działająca pamięć
 class Calculator {
     constructor() {
-        this.addEventListeners();
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
         this.firstValue = {
             value: '',
@@ -27,6 +27,16 @@ class Calculator {
         this.history = [];
         this.memory = new Memory();
         this.memoryUse = false;
+        this.historyWindowHandle = document.querySelector('.history-title');
+        this.memoryWindowHandle = document.querySelector('.memory-title');
+        this.historyWindow = document.querySelector('.history-window');
+        this.memoryWindow = document.querySelector('.memory-window');
+        this.wideViewFlag = false;
+        //if false -> history storage is active
+        this.activeStorage = false;
+        this.historyClass = new History();
+        this.addEventListeners();
+        this.startSettings();
     }
 
     addEventListeners() {
@@ -40,25 +50,82 @@ class Calculator {
         [...document.querySelectorAll('.key-memory-spec')].forEach(key => {
             key.addEventListener('click', e => this.memoryPanel(e));
         });
+
+        this.historyWindowHandle.addEventListener('click', e => this.addClassActive(e));
+
+        this.memoryWindowHandle.addEventListener('click', e => this.addClassActive(e));
+        
+        window.addEventListener('resize', e => {
+            this.activeStorageToggleClass(e);
+        })
+
+    }
+
+    startSettings() {
+        if (window.innerWidth >= 555) {
+            this.toggleClassResize();
+        };
+    }
+
+    //change class active for history and memory when resize window
+    activeStorageToggleClass(event) {
+        const width = event.target.innerWidth;
+        if (width >= 555 && !this.activeStorage) {
+            this.historyWindow.classList.add('active');
+            this.historyWindowHandle.classList.add('active');
+        } else if (width >= 555 && this.activeStorage) {
+            this.memoryWindow.classList.add('active');
+            this.memoryWindowHandle.classList.add('active');
+        } else {
+            this.memoryWindow.classList.remove('active');
+            this.historyWindow.classList.remove('active');
+        }
+    }
+
+    addClassActive(event) {
+        const handle = event.target.classList;
+
+        if (!this.historyWindowHandle.classList.contains('active') && handle.contains('history-title')) {
+            this.historyWindow.classList.add('active');
+            this.historyWindowHandle.classList.add('active');
+            this.activeStorage = false;
+            this.memoryWindow.classList.remove('active');
+            this.memoryWindowHandle.classList.remove('active');
+        } else if (!this.memoryWindowHandle.classList.contains('active') && handle.contains('memory-title')) {
+            this.historyWindow.classList.remove('active');
+            this.historyWindowHandle.classList.remove('active');
+            this.activeStorage = true;
+            this.memoryWindow.classList.add('active');
+            this.memoryWindowHandle.classList.add('active');
+        }
+    }
+
+    toggleClassResize() {
+        this.wideViewFlag = true; 
+        this.historyWindowHandle.classList.add('active');
+        this.historyWindow.classList.add('active');
+        this.memoryWindowHandle.classList.remove('active');
+        this.memoryWindow.classList.remove('active');
     }
 
     historyToggleClass() {
-        this.historyWindow = document.querySelector('.history-window');
         this.historyWindow.classList.toggle('active');
-        this.historyElements = [...document.querySelectorAll('.history-element')]
-        this.historyElements.forEach(historyElement => {
-            historyElement.addEventListener('click', e => this.chooseHistory(e));
-        })
+        this.activeStorage = false;
+        this.memoryWindowHandle.classList.remove('active');
     }
 
-    memoryToggleClass() {
-        this.memoryWindow = document.querySelector('.memory-window');
-        this.memoryWindow.classList.toggle('active');
-        this.memoryElements = [...document.querySelectorAll('.memory-element')]
-        this.memoryElements.forEach(memortElement => {
-            memortElement.addEventListener('click', e => this.chooseMemory(e));
-        });
+    addEventToHistoryElement() {
+        this.historyElement = document.querySelector('.history-element');
+        console.log(this.historyElement);
+        this.historyElement.addEventListener('click', e => {
+                this.chooseHistory(e);
+        })
+    } 
 
+    memoryToggleClass() {
+        this.memoryWindow.classList.toggle('active');
+        this.activeStorage = true;
+        this.historyWindowHandle.classList.remove('active');
     }
 
     buttonCreate(e) {
@@ -112,7 +179,7 @@ class Calculator {
             if (this.firstValue.value.length < 16) {
             
                 if (this.dividePerZeroFlag) {
-                    return this.clear();
+                    this.clear();
                 }
 
                 this.valueOne();
@@ -365,6 +432,14 @@ class Calculator {
     }
 
     reciprocal() {
+        this.results = new Operations();
+
+        if (this.dis.input.textContent === '0') {
+            this.dividePerZeroFlag = true;
+            this.dividePerZero();
+            return this.dis.displayInput(this.results.errorDivideZero());
+        }
+
         if (this.secondValue.flag) {
             this.dis.inputStorage.textContent += ` 1/( ${this.secondValue.value} )`;
             this.secondValue.value = `${this.results.reciprocal(this.secondValue.value)}`;
@@ -446,7 +521,6 @@ class Calculator {
         this.notClickKeys = [...document.querySelectorAll('.zero')];
         if (this.dividePerZeroFlag) {
             this.notClickKeys.forEach(key => {
-                key.addEventListener('click', console.log('test'));
                 key.style.opacity = 0.5;
                 key.classList.remove('number-no-hover');
                 key.classList.remove('no-hover');
@@ -465,9 +539,8 @@ class Calculator {
     }
 
     addHistory() {
-        let saveHistory = new History(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
-        saveHistory.addToHistory();
-        this.history.push(saveHistory);
+        this.historyClass.addToHistory(this.firstValue.value, this.secondValue.value, this.operator.value, `${this.results.choice()}`);
+        this.addEventToHistoryElement();
     }
 
     chooseHistory(e) {
@@ -477,7 +550,7 @@ class Calculator {
         this.secondValue.value = array[2];
         this.operator.value = array[1];
         this.secondValue.flag = true;
-        this.historyToggleClass();
+        if (window.innerWidth < 555) this.historyToggleClass();
 
         switch (array[1]) {
             case 'x':
@@ -515,15 +588,18 @@ class Calculator {
         if (memoryKey.includes('mv') && memoryKey.includes('active')) this.memoryToggleClass();
 
         if (!bin && memoryKey.includes('m-plus')) {
-            return this.memory.addToMemory(valueToMemory);
+            return this.addMemory('', valueToMemory); 
+            // this.memory.addToMemory(valueToMemory);
         }
 
         if (!bin && memoryKey.includes('m-minus')) {
-            return this.memory.addToMemory('-' + valueToMemory);
+            return this.addMemory('-', valueToMemory);
+            // this.memory.addToMemory('-' + valueToMemory);
         }
 
         if (memoryKey.includes('ms')) {
-            this.memory.addToMemory(valueToMemory);
+            this.addMemory('', valueToMemory);
+            // this.memory.addToMemory(valueToMemory);
             this.memoryUse = true;
         }
 
@@ -551,16 +627,28 @@ class Calculator {
         }
     }
 
+    addMemory(sign, valueToMemory) {
+        this.memory.addToMemory(sign + valueToMemory);
+        this.addEventToMemoryElement();
+    }
+
+    addEventToMemoryElement() {
+        this.memoryElement = document.querySelector('.memory-element');
+        this.memoryElement.addEventListener('click', e => this.chooseMemory(e))
+    }
+
     chooseMemory(e) {
         const target = e.target;
         const outerText = [...e.target.outerText];
+        const addAndSubElement = target.parentElement.previousElementSibling;
         const value = document.querySelector('.input-data').textContent;
+        console.log(value);
 
         //Click on element which hold number in memory
         if ([...e.target.classList].includes('ul-in-memory-element')) {
             const memoryValue = outerText.slice(0, outerText.indexOf('\n')).join('');
             this.addMemoryToCalculatorValue(memoryValue);
-            this.memoryToggleClass();
+            if (window.innerWidth < 555) this.memoryToggleClass();
         }
 
         if (target.textContent === 'MC') {
@@ -570,12 +658,12 @@ class Calculator {
         }
 
         if (target.textContent === 'M-') {
-            this.memory.subtractionToMemory(value);
+            this.memory.subtractionToMemory(addAndSubElement, value);
 
         }
 
         if (target.textContent === 'M+') {
-            this.memory.additionToMemory(value);
+            this.memory.additionToMemory(addAndSubElement, value);
         }
         
     }

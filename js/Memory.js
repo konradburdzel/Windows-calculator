@@ -67,9 +67,8 @@ class Memory {
         }
     }
 
-    additionToMemory(value) {
-        let liElementHandle = document.querySelector('.li-element-memory');
-
+    additionToMemory(liElementHandle, value) {
+        
         const variablesHandle = [liElementHandle.textContent, value];
 
         const numberOfDecimal = this.fixedNumberOfDecimal(liElementHandle.textContent, value);        
@@ -86,8 +85,7 @@ class Memory {
         liElementHandle.textContent = `${this.dotToComma(addition)}`;
     }
 
-    subtractionToMemory(value) {
-        let liElementHandle = document.querySelector('.li-element-memory');
+    subtractionToMemory(liElementHandle, value) {
 
         const variablesHandle = [liElementHandle.textContent, value];
 
