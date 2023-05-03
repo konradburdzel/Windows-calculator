@@ -31,6 +31,8 @@ class Calculator {
         this.historyWindow = document.querySelector('.history-window');
         this.memoryWindow = document.querySelector('.memory-window');
         this.wideViewFlag = false;
+        //if false -> history storage is active
+        this.activeStorage = false;
         this.historyClass = new History();
         this.addEventListeners();
         this.startSettings();
@@ -52,9 +54,11 @@ class Calculator {
 
         this.memoryWindowHandle.addEventListener('click', e => this.addClassActive(e));
         
-        // this.historyWindow.addEventListener('mouseenter', () => this.addEventsAllHistory());
-
         this.memoryWindow.addEventListener('mouseenter', () => this.addEventsAllMemory());
+
+        window.addEventListener('resize', e => {
+            this.activeStorageToggleClass(e);
+        })
 
     }
 
@@ -64,18 +68,36 @@ class Calculator {
         };
     }
 
+    //change class active for history and memory when resize window
+    activeStorageToggleClass(event) {
+        const width = event.target.innerWidth;
+        if (width >= 555 && !this.activeStorage) {
+            this.memoryWindowHandle.classList.remove('active');
+            this.historyWindow.classList.add('active');
+            this.historyWindowHandle.classList.add('active');
+        } else if (width >= 555 && this.activeStorage) {
+            this.historyWindowHandle.classList.remove('active');
+            this.memoryWindow.classList.add('active');
+            this.memoryWindowHandle.classList.add('active');
+        } else {
+            this.memoryWindow.classList.remove('active');
+            this.historyWindow.classList.remove('active');
+        }
+    }
+
     addClassActive(event) {
         const handle = event.target.classList;
 
         if (!this.historyWindowHandle.classList.contains('active') && handle.contains('history-title')) {
             this.historyWindow.classList.add('active');
             this.historyWindowHandle.classList.add('active');
-
+            this.activeStorage = false;
             this.memoryWindow.classList.remove('active');
             this.memoryWindowHandle.classList.remove('active');
         } else if (!this.memoryWindowHandle.classList.contains('active') && handle.contains('memory-title')) {
             this.historyWindow.classList.remove('active');
             this.historyWindowHandle.classList.remove('active');
+            this.activeStorage = true;
             this.memoryWindow.classList.add('active');
             this.memoryWindowHandle.classList.add('active');
         }
@@ -83,7 +105,7 @@ class Calculator {
 
     toggleClassResize() {
 
-        if (this.wideViewFlag) return;
+        // if (this.wideViewFlag) return;
         // if (this.wideViewFlag) return;
         this.wideViewFlag = true; 
 
@@ -95,6 +117,7 @@ class Calculator {
 
     historyToggleClass() {
         this.historyWindow.classList.toggle('active');
+        this.activeStorage = false;
     }
 
     addEventToHistoryElement() {
@@ -108,6 +131,7 @@ class Calculator {
     memoryToggleClass() {
         this.memoryWindow.classList.toggle('active');
         this.addEventsAllMemory();
+        this.activeStorage = true;
     }
 
     addEventsAllMemory() {
