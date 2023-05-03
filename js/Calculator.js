@@ -1,4 +1,4 @@
-//dynamiczna zmiana aktywnej klasy dla historii w zależności od szerokości okna
+//niepoprawne dodawanie i odejmowanie w panelu pamięci
 class Calculator {
     constructor() {
         this.basicOperations = ['division', 'multiplication', 'addition', 'subtraction'];
@@ -72,11 +72,9 @@ class Calculator {
     activeStorageToggleClass(event) {
         const width = event.target.innerWidth;
         if (width >= 555 && !this.activeStorage) {
-            this.memoryWindowHandle.classList.remove('active');
             this.historyWindow.classList.add('active');
             this.historyWindowHandle.classList.add('active');
         } else if (width >= 555 && this.activeStorage) {
-            this.historyWindowHandle.classList.remove('active');
             this.memoryWindow.classList.add('active');
             this.memoryWindowHandle.classList.add('active');
         } else {
@@ -118,6 +116,7 @@ class Calculator {
     historyToggleClass() {
         this.historyWindow.classList.toggle('active');
         this.activeStorage = false;
+        this.memoryWindowHandle.classList.remove('active');
     }
 
     addEventToHistoryElement() {
@@ -132,6 +131,7 @@ class Calculator {
         this.memoryWindow.classList.toggle('active');
         this.addEventsAllMemory();
         this.activeStorage = true;
+        this.historyWindowHandle.classList.remove('active');
     }
 
     addEventsAllMemory() {
