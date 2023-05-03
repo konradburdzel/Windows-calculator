@@ -640,6 +640,7 @@ class Calculator {
     chooseMemory(e) {
         const target = e.target;
         const outerText = [...e.target.outerText];
+        const addAndSubElement = target.parentElement.previousElementSibling;
         const value = document.querySelector('.input-data').textContent;
         console.log(value);
 
@@ -647,7 +648,7 @@ class Calculator {
         if ([...e.target.classList].includes('ul-in-memory-element')) {
             const memoryValue = outerText.slice(0, outerText.indexOf('\n')).join('');
             this.addMemoryToCalculatorValue(memoryValue);
-            if (window.innerWidth <555) this.memoryToggleClass();
+            if (window.innerWidth < 555) this.memoryToggleClass();
         }
 
         if (target.textContent === 'MC') {
@@ -657,12 +658,12 @@ class Calculator {
         }
 
         if (target.textContent === 'M-') {
-            this.memory.subtractionToMemory(value);
+            this.memory.subtractionToMemory(addAndSubElement, value);
 
         }
 
         if (target.textContent === 'M+') {
-            this.memory.additionToMemory(value);
+            this.memory.additionToMemory(addAndSubElement, value);
         }
         
     }
