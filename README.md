@@ -25,6 +25,7 @@ The project of Windows 10 Calculator is available on:
 ### Screenshot
 
 ![Mobile view] (screenshots/Mobile View 2023-03-24 Windows 10 Calculator.png)
+![Wide view] (screenshots/Wide View 2023-05-03 Windows 10 Calculator.png)
 
 ## Structure of project
 
@@ -60,7 +61,9 @@ The main section of the home page features an eye-catching Calculator panel repl
 
 ### JavaScript
 
-The calculator use JavaScript to common operation. All logic of calculator wrote in JavaScript programiing language.
+The calculator use JavaScript to all operation. Used OOP in JS. Divide project to parts and added relations between.
+
+Project divide to six parts. Main is app.js which start application. Next step launched Calculator.js. Calculator.js is brain of Windows 10 Calculator.
 
 ## Final Thoughts
 

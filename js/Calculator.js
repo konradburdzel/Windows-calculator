@@ -114,7 +114,6 @@ class Calculator {
 
     addEventToHistoryElement() {
         this.historyElement = document.querySelector('.history-element');
-        console.log(this.historyElement);
         this.historyElement.addEventListener('click', e => {
                 this.chooseHistory(e);
         })
@@ -587,17 +586,14 @@ class Calculator {
 
         if (!bin && memoryKey.includes('m-plus')) {
             return this.addMemory('', valueToMemory); 
-            // this.memory.addToMemory(valueToMemory);
         }
 
         if (!bin && memoryKey.includes('m-minus')) {
             return this.addMemory('-', valueToMemory);
-            // this.memory.addToMemory('-' + valueToMemory);
         }
 
         if (memoryKey.includes('ms')) {
             this.addMemory('', valueToMemory);
-            // this.memory.addToMemory(valueToMemory);
             this.memoryUse = true;
         }
 
@@ -640,7 +636,6 @@ class Calculator {
         const outerText = [...e.target.outerText];
         const addAndSubElement = target.parentElement.previousElementSibling;
         const value = document.querySelector('.input-data').textContent;
-        console.log(value);
 
         //Click on element which hold number in memory
         if ([...e.target.classList].includes('ul-in-memory-element')) {

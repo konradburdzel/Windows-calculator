@@ -1,5 +1,5 @@
 class History {
-    constructor(firstValue, secondValue, operation, result) {
+    constructor() {
         this.historyHandle = document.querySelector('.display-history');
         this.historyElements = document.querySelector('.history-elements');
     }
@@ -9,7 +9,6 @@ class History {
         this.secondValue = secondValue;
         this.operation = operation;
         this.result = result;
-        console.log('dodano do historii');
         if (this.historyElements.children[0].textContent === "Nie ma jeszcze żadnej historii") {
             this.changeStyleForElement();
         };
